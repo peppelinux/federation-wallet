@@ -46,9 +46,7 @@ jobs:
 
           - name: Run the build process with Docker
             run: |     
-                docker run \
-                -v /${{ github.workspace }}:/data danielfett/markdown2rfc \
-                openid-federation-4-wallet-architectures-1_0.md
+                docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-4-wallet-architectures-1_0.md
           - name: rename
             run: |
                 mv ./openid-federation-4-wallet-architectures-1_0*.html ./html/openid-federation-4-wallet-architectures-wg-$BRANCH_NAME.html
