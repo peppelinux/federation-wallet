@@ -53,10 +53,8 @@ jobs:
             run: |
                 mv ./openid-federation-4-wallet-architectures-1_0*.html ./html/openid-federation-4-wallet-architectures-wg-$BRANCH_NAME.html
     
-    publish-to-pages:
       name: Publish to GitHub Pages
-      needs: compile-oidfed4wa
-      runs-on: ubuntu-latest
+      if: success()
       uses: crazy-max/ghaction-github-pages@v2
       with:
         target_branch: gh-pages
