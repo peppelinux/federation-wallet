@@ -9,7 +9,9 @@ Additionally, it provides practical examples of how to apply policies for typica
 
 ### Current WG-Draft
 
-The current WG-Draft version is built automatically from the main branch and can be accessed at: https://peppelinux.github.io/openid-federation-4-wallet-architectures/openid-federation-4-wallet-architectures-1_0-wg-draft.html
+The current WG-Draft version is built automatically from the main branch and can be accessed at: 
+[https://peppelinux.github.io/openid-federation-4-wallet-architectures/openid-federation-4-wallet-architectures-wg-main.html](https://peppelinux.github.io/openid-federation-4-wallet-architectures/openid-federation-4-wallet-architectures-wg-main.html
+)
 
 
 ### Build the HTML ###
