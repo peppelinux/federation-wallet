@@ -55,7 +55,7 @@ jobs:
     
     publish-to-pages:
       name: Publish to GitHub Pages
-      needs: compile-oid4vc
+      needs: compile-oidfed4wa
       runs-on: ubuntu-latest
       uses: crazy-max/ghaction-github-pages@v2
       with:
