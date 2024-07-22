@@ -168,7 +168,7 @@ The transactions primarily involve the transfer or management of Digital Credent
 
 Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Relying Party to authenticate themselves.
 
-## Wallet Instance Types
+# Wallet Instance Types
 
 There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organisational Entity such as a legal person. These two types of users may have different usage and functional requirements.
 
@@ -188,6 +188,7 @@ A Web Wallet where the cryptographic keys are stored and managed on a media in p
 
 **Progressive Web Application Wallet (PWAW)**
 : PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarly using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
+
 
 ## Establishing Trust With The Holder
 
@@ -219,11 +220,11 @@ Since the Holder may not be an Organizational Entity and cannot be registered as
 
 Outside the Trust Chain, we have the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the responsibility of the Wallet Provider.
 
-## Establishing Trust With The Verifier
+# Establishing Trust With The Verifier
 
 TBD: concept of RP instance in the form of verifier app in control of a natural person.
 
-## Metadata
+# Metadata
 
 This section defines the Entity Types used by Organizational Entities in their Entity Configurations according to their roles in the Wallet ecosystem.
 
@@ -238,7 +239,7 @@ This section defines the Entity Types used by Organizational Entities in their E
 
 The Credential Issuer is an OAuth 2.0 protected Resource Server and it not necessarly implements, within the same Entity, also an OAuth 2.0 Authorization Server. According to [OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
 
-### Metadata for OpenID Wallet Provider
+## Metadata for OpenID Wallet Provider
 
 The OpenID Federation Entity Type Identifier for the Wallet Provider is `openid_wallet_provider`.
 
@@ -284,7 +285,7 @@ A non-normative example of `openid_wallet_provider`  metadata in an Entity State
 }
 ~~~
 
-### Metadata for the OpenID Credential Issuer
+## Metadata for the OpenID Credential Issuer
 
 For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to the section *11.2. Credential Issuer Metadata* in the OpenID for Verifiable Credential Issuance [OpenID4VCI] specification.
 
@@ -398,7 +399,7 @@ Below is a non-normative example of a payload of an Credential Issuer Entity Con
 ````
 
 
-### Metadata for OpenID Wallet Relying Party
+## Metadata for OpenID Wallet Relying Party
 
 The OpenID Federation Entity Type Identifier for the Wallet Relying Party is `openid_wallet_relying_party`.
 
@@ -544,7 +545,7 @@ Below a non normative example of the payload of a Wallet Relying Party Entity Co
 }
 ````
 
-#### Security Considerations About The Parameters request_uris And response_uris_supported
+### Security Considerations About The Parameters request_uris And response_uris_supported
 
 There are scenarios where the RP's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Entity not only attests to the RP's metadata but also ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that RP, as defined in the OpenID Federation specification.
 
@@ -554,7 +555,7 @@ To enhance the security of implementations, it is generally recommended that Rel
 
 For this reason the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
 
-#### Security Considerations About The User's Data Protection Using presentation_definitions_supported
+### Security Considerations About The User's Data Protection Using presentation_definitions_supported
 
 The `presentation_definitions_supported` enhance the End-User data protection within OpenID trust framework. By defining the specific presentation definitions that a Relying Party (RP) is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
 
@@ -576,7 +577,8 @@ non norm example 1
 ```
 non norm example 2
 ```
-## Federation Policies
+
+# Federation Policies
 
 Policies refer to a set of rules that govern the operations, security, and interactions within a federation.
 
@@ -585,7 +587,7 @@ Technical implementation of federation policies over participants metadata is ma
 Qualitative aspects of federation entities, including administrative protocols, security measures, and behavioral profiling, are regulated by Trust Marks. These marks provide verifiable assertions of compliance with specific profiles beyond the scope of the application specific metadata.
 
 
-### Using Metadata
+## Using Metadata
 
 Metadata refers to application specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.
 
@@ -601,13 +603,13 @@ TBD: example 3 about problem solved with a Subordinate Statement metadata parame
 
 TBD: example 4 about problem solved with a Subordinate Statement metadata parameter [digital credential configuration supported by a VCI]
 
-### Differences Between metadata and metadata_policies
+## Differences Between metadata and metadata_policies
 
 The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain.
 
 This distinction positions the `metadata` parameter as an ideal tool for federation authorities managing entity registrations and needing to sanitize Leaves configurations in an arbitrary way. The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters.
 
-### Using Metadata Policies
+## Using Metadata Policies
 
 Differently from `metadata`, `metadata_policy` ensures that specific settings can be propagated to all the entities statements contained within a Trust Chain.
 
@@ -616,7 +618,7 @@ TBD: example 1 about problem solved with a Subordinate Statement metadata_policy
 TBD: example 2 about problem solved with a Subordinate Statement metadata_policy parameter [resolve endpoint overwritted to the one provided by the TA]
 
 
-### Using Trust Marks
+## Using Trust Marks
 
 Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happend through auditing or certification processes.
 
@@ -632,15 +634,15 @@ TBD: example 2 about problem solved with a Subordinate Statement trust_marks par
 
 TBD: example 3 about problem solved with a Subordinate Statement trust_marks parameter [disabled user accessibility compliance]
 
-## Federation Trust Discovery Use Cases
+# Federation Trust Discovery Use Cases
 
 The process of trust establishment in federated environments is  illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Relying Parties (RPs).
 
-### Wallet Checking The Non-Revocation Of Its Wallet Provider
+## Wallet Checking The Non-Revocation Of Its Wallet Provider
 
 ...
 
-### Wallet Discovering The Credentials Issuers
+## Wallet Discovering The Credentials Issuers
 
 Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.
 
@@ -701,15 +703,15 @@ sequenceDiagram
     Wallet->>Wallet: Get available Credentials allowed for issuance
 ````
 
-### Credential Issuers Establishing Trust With The Wallet Provider
+## Credential Issuers Establishing Trust With The Wallet Provider
 
 ...
 
-### Credential Issuers Establishing Trust With The Wallet
+## Credential Issuers Establishing Trust With The Wallet
 
 ...
 
-### Wallet Establish Trust With The Relying Party
+## Wallet Establish Trust With The Relying Party
 
 The Federation Entity Discovery starts with the Wallet Instance fetching the Relying Party's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Relying Party. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Relying Party final metadata.
 
@@ -746,26 +748,12 @@ sequenceDiagram
     WalletInstance->>WalletInstance: Derive RP's final metadata
 ````
 
-## Trust Discovery Using X.509 Certificates
 
-In scenarios where interoperability is a key requirement, some implementations may opt to use X.509-based Public Key Infrastructure (PKI) for establishing trust, as defined in [RFC5280], instead of relying solely on the Federation API. This approach allows for a broader compatibility with systems that do not mandate the use of metadata policies typically required by the pure OpenID Federation trust framework.
-
-Therefore, implementations that choose to use X.509 certificates for trust establishment do not require the inclusion of metadata or metadata policies within the Subordinate Statements. Instead, they can utilize OpenID Federation Entity Configurations that incorporate the X.509 Certificate Chain. This X.509 certificate chain MUST include at least the following certificates:
-
-- The Certificate Authority (CA) certificate about the Trust Anchor.
-- The certificate used to validate the signature of the Entity Configuration.
-
-In such setups, when the trust evaluations supports both the Federation API and the X.509-based PKI, the parameter `authority_hints` MUST be included in the Entity Configuration, indicating the support of the traditional OpenID Federation Entity Discovery. When the Entity Configuation cannot be resolved using the OpenID Federation Entity Discovery, the parameter `authority_hints` MUST NOT be included in Entity Configurations where trust is evaluated through other mechanisms, such as X.509 certificates.
-
-For configurations relying on X.509 certificates only, the `x5c` JWT header parameter is used in the Entity Configuration JWT Headers to include the X.509 certificate chain, while the `kid` JWT header parameter SHOULD not be used.
-
-This configuration ensures that the entity's identity and the trustworthiness of its Entity Configuration can be verified using standard PKI mechanisms, enhancing interoperability across different systems and trust frameworks.
-
-## Implementation Considerations for the Offline Flows
+# Implementation Considerations for the Offline Flows
 
 TBD: usage of static trust chain or x.509 ceritifcate chain
 
-## Acknowledgments
+# Acknowledgments
 
 We would like to thank the following individuals for their comments, ideas, and contributions to this implementation profile and to the initial set of implementations.
 

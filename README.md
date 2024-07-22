@@ -2,13 +2,13 @@
 
 This repository contains the OpenID Federation for Wallet Architecture specification.
 
-This project outlines the general architecture of a federated trust infrastructure for wallet ecosystems, identifying participant roles and defining metadata used for those roles. In particular, it defines the metadata for the roles of Wallet Provider and Wallet Relying Party.
+It outlines the general architecture of a federated trust infrastructure for wallet ecosystems, identifying participant roles and defining metadata used for those roles.
+In particular, it defines the metadata for the roles of Wallet Provider and Wallet Relying Party.
 
-Additionally, the document provides practical examples of how to apply policies for typical use cases within wallet ecosystems.
-
-Finally, it offers guidance on defining trust marks for use within wallet ecosystems.
+Additionally, it provides practical examples of how to apply policies for typical use cases within wallet ecosystems and offers guidance on defining trust marks for use within wallet ecosystems.
 
 ## Contact
+
 For further information and to get involved, please visit the [OpenID Connect Working Group website](https://openid.net/wg/connect/).
 
 ### Current WG-Draft
