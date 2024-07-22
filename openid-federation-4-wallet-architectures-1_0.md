@@ -237,7 +237,6 @@ The Credential Issuer is an OAuth 2.0 protected Resource Server and it not neces
 ## Metadata for OpenID Wallet Provider
 
 The OpenID Federation Entity Type Identifier for the Wallet Provider is `openid_wallet_provider`.
-
 The metadata for an OpenID Wallet Provider are listed in the table below.
 
 | **Metadata Parameter** | **Availability** | **Value** |
