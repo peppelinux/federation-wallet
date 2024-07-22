@@ -250,7 +250,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.
 
 A non-normative example of `openid_wallet_provider`  metadata in an Entity Statement is:
 
-~~~
+````
 {
   "token_endpoint": "https://wallet.provider.example/token",
   "jwks": {
@@ -277,7 +277,7 @@ A non-normative example of `openid_wallet_provider`  metadata in an Entity State
       "private_key_jwt"
   ]
 }
-~~~
+````
 
 ## Metadata for the OpenID Credential Issuer
 
@@ -291,6 +291,7 @@ Since one of the key scopes of OpenID Federation 1.0 is to provide consistency i
 
 Below is a non-normative example of a payload of an Credential Issuer Entity Configuration:
 
+````
 {
     "iat": 1718207217,
     "exp": 1749743216,
