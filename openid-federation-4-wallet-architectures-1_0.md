@@ -187,8 +187,7 @@ Cloud Wallets that have dependency on a cloud infrastructure, not necessarily ho
 A Web Wallet where the cryptographic keys are stored and managed on a media in possession by the End-User and the Digital Credentials can only be used by the End-User, e.g. using a FIDO enabled security hardware token, no matter whether the Credentials are stored locally in a Personal Device or in cloud storage.
 
 **Progressive Web Application Wallet (PWAW)**
-: PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarly using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
-
+: PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
 
 ## Establishing Trust With The Holder
 
