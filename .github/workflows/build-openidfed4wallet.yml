@@ -29,34 +29,50 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-    compile-oidfed4wa:
-        name: Compile site assets
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v3
-          
-          - name: Create html folder
-            run: mkdir html
-    
-          - name: Show folders
-            run: ls -al
-    
-          - name: Show branch name
-            run: echo "$BRANCH_NAME"
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    env:
+        BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-          - name: Run the build process with Docker
-            run: |     
-                docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-4-wallet-architectures-1_0.md
-          - name: rename
-            run: |
-                mv ./openid-federation-4-wallet-architectures-1_0*.html ./html/openid-federation-4-wallet-architectures-wg-$BRANCH_NAME.html
+      - name: install xml2rfc
+        run: |
+          pip install --upgrade pip
+          pip install xml2rfc
+
+      - name: Show env
+        run: echo "$GITHUB_CONTEXT"
+      
+      - name: Create html folder
+        run: mkdir html
+
+      - name: Show folders
+        run: ls -al
+
+      - name: Show branch name
+        run: echo "$BRANCH_NAME"
+
+      - name: Run the build process with Docker
+        run: |     
+            docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-4-wallet-architectures-1_0.md
+      - name: rename
+        run: |
+            mv ./openid-federation-4-wallet-architectures-1_0*.html ./html/openid-federation-4-wallet-architectures-wg-$BRANCH_NAME.html
+
+      - name: Deploy to GitHub Pages
+        if: success()
+        uses: crazy-max/ghaction-github-pages@v2
+        with:
+          target_branch: gh-pages
+          build_dir: html
+          keep_history: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
     
-      name: Publish to GitHub Pages
-      if: success()
-      uses: crazy-max/ghaction-github-pages@v2
-      with:
-        target_branch: gh-pages
-        build_dir: html
-        keep_history: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
