@@ -174,16 +174,16 @@ There are many ways to technically implement Wallet Instances to manage Digital 
 
 Below a non-exhaustive list of the different Wallet Instance types.
 
-; Mobile Wallet Native Application
-  : Also known as Mobile Wallet only, is an application that runs natively on a Personal Device under the sole control of an End-User and provided through a platform vendor specific app-store, on behalf of the Wallet Solution. In some cases the End-User as natural person uses the Mobile Wallet representing a legal person.
+Mobile Wallet Native Application
+: Also known as Mobile Wallet only, is an application that runs natively on a Personal Device under the sole control of an End-User and provided through a platform vendor specific app-store, on behalf of the Wallet Solution. In some cases the End-User as natural person uses the Mobile Wallet representing a legal person.
 
-; Web Wallet Native Application
-  : Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organisational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:
-    * **Custodial Web Wallet**: Cloud Wallets that have dependency on a cloud infrastructure, not necessarily hosted by the Wallet Provider, are typically classified as Custodial Web Wallets; in this case, the cryptographic keys used and the Digital Credentials are stored in the cloud infrastructure.
-    * **Non-Custodial Web Wallet**: A Web Wallet where the cryptographic keys are stored and managed on a media in possession by the End-User and the Digital Credentials can only be used by the End-User, e.g. using a FIDO enabled security hardware token, no matter whether the Credentials are stored locally in a Personal Device or in cloud storage.
+Web Wallet Native Application
+: Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organisational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:
+    - **Custodial Web Wallet**: Cloud Wallets that have dependency on a cloud infrastructure, not necessarily hosted by the Wallet Provider, are typically classified as Custodial Web Wallets; in this case, the cryptographic keys used and the Digital Credentials are stored in the cloud infrastructure.
+    - **Non-Custodial Web Wallet**: A Web Wallet where the cryptographic keys are stored and managed on a media in possession by the End-User and the Digital Credentials can only be used by the End-User, e.g. using a FIDO enabled security hardware token, no matter whether the Credentials are stored locally in a Personal Device or in cloud storage.
 
-; Progressive Web Application Wallet (PWAW)
-  : PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
+Progressive Web Application Wallet (PWAW)
+: PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
 
 ## Establishing Trust With The Holder
 
@@ -228,9 +228,9 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Trust Anchor          | `federation_entity`                                        | [OpenIDFed](#)                       |
 | Intermediate          | `federation_entity`                                        | [OpenIDFed](#)                       |
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
-| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [OpenID4VCI](#)                     |
-| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [OpenID4VCI](#) |
-| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [OpenIDFed](#), [OpenID4VP](#)       |
+| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [OpenID4VCI](#), [RFC8414](#)                    |
+| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [OpenID4VCI](#), this specification |
+| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [OpenIDFed](#), [OpenID4VP](#), this specification       |
 
 The Credential Issuer is an OAuth 2.0 protected Resource Server and it not necessarly implements, within the same Entity, also an OAuth 2.0 Authorization Server. According to [OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
 
@@ -248,7 +248,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.
 | token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint.|
 | token_endpoint_auth_signing_alg_values_supported          | REQUIRED | Supported signature algorithms for the token endpoint.|
 
-A non-normative example of `openid_wallet_provider`  metadata in an Entity Statement is:
+Below a non-normative example of `openid_wallet_provider` metadata:
 
 ````
 {
@@ -542,9 +542,9 @@ Below a non normative example of the payload of a Wallet Relying Party Entity Co
 
 ### Security Considerations About The Parameters request_uris And response_uris_supported
 
-There are scenarios where the RP's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Entity not only attests to the RP's metadata but also ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that RP, as defined in the OpenID Federation specification.
+There are scenarios where the Relying Party's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Relying Party's metadata and ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that Relying Party, as defined in the OpenID Federation specification.
 
-In these cases, the RP is restricted from altering its URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.
+In these cases, the RP is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.
 
 To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as https://rp.example.org/request-uri#random-value. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.
 
@@ -552,16 +552,14 @@ For this reason the parameters `metadata` or `metadata_policy` SHOULD fix the su
 
 ### Security Considerations About The User's Data Protection Using presentation_definitions_supported
 
-The `presentation_definitions_supported` enhance the End-User data protection within OpenID trust framework. By defining the specific presentation definitions that a Relying Party (RP) is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
+The `presentation_definitions_supported` enhance the End-User data protection within OpenID trust framework. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
 
-The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the RP. This approach not only protects End-User privacy but also builds trust in the federation system by ensuring that all data collection practices are transparent and compliant with established policies.
+The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.
 
 
 ### Metadata for the Authentic Sources
 
-The Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers robust security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in [OAuth 2.0 Protected Resource Metadata](https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/).
-
-The Authentic Source provides reliable and accurate data about resources or information about a subject. It's up to the implementers to decide if the Authentic Source is implemented using the OAuth 2.0 framework. In these cases, the Authentic Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in OAuth 2.0 Protected Resource Metadata. This approach ensures that the Authentic Source can securely manage access to resources, leveraging the robust security mechanisms provided by OAuth 2.0.
+The Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in [OAuth 2.0 Protected Resource Metadata](https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/).
 
 This section provides some common configurations for ...
 
