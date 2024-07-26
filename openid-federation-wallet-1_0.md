@@ -1,13 +1,13 @@
 %%%
-title = "OpenID Federation for Wallet Architectures"
-abbrev = "openid-federation-4-wallet-architectures"
+title = "OpenID Federation Wallet Architectures"
+abbrev = "openid-federation-wallet"
 ipr = "none"
 workgroup = "OpenID Connect A/B"
 keyword = ["security", "openid", "ssi"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid-federation-4-wallet-architectures-1_0-00"
+value = "openid-federation-wallet-00"
 status = "standard"
 
 [[author]]
