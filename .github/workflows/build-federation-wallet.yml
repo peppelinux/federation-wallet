@@ -57,7 +57,7 @@ jobs:
             docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-wallet-1_0.md
       - name: rename
         run: |
-            mv ./openid-federation-wallet*.html ./html/openid-federation-wallet-$BRANCH_NAME.html
+            mv ./openid-federation-wallet*.html ./html/$BRANCH_NAME.html
 
       - name: Deploy to GitHub Pages
         if: success()
