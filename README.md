@@ -10,11 +10,11 @@ Additionally, it provides practical examples of how to apply policies for typica
 ### Current WG-Draft
 
 The current WG-Draft version is built automatically from the main branch and can be accessed at: 
-[https://peppelinux.github.io/openid-federation-wallet/main.html](https://peppelinux.github.io/openid-federation-wallet/main.html)
+[https://peppelinux.github.io/federation-wallet/main.html](https://peppelinux.github.io/federation-wallet/main.html)
 
 other branches will be build and deployed as well, using the branch name within the html filename, as shown below:
 
-- https://peppelinux.github.io/openid-federation-wallet/$BRANCH-NAME.html
+- https://peppelinux.github.io/federation-wallet/$BRANCH-NAME.html
 
 
 ### Build the HTML ###
