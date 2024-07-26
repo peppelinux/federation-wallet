@@ -40,11 +40,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      - name: install xml2rfc
-        run: |
-          pip install --upgrade pip
-          pip install xml2rfc
-
       - name: Show env
         run: echo "$GITHUB_CONTEXT"
       
