@@ -742,7 +742,7 @@ sequenceDiagram
 
 # Implementation Considerations for the Offline Flows
 
-TBD: usage of static trust chain having at least a trust anchor in vommcommon  the requestor
+TBD: usage of static trust chain having at least a Trust Anchor in common with the requestor
 
 # Acknowledgments
 
