@@ -621,7 +621,7 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
 
 TBD: example 1 about problem solved with a Subordinate Statement trust_marks parameter [under age user]
 
-TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter [eIDAS trust list registration]
+TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter
 
 TBD: example 3 about problem solved with a Subordinate Statement trust_marks parameter [disabled user accessibility compliance]
 
