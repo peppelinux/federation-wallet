@@ -225,12 +225,12 @@ This section defines the Entity Types used by Organizational Entities in their E
 
 | Entity         | Entity Type Identifiers                                              | References                          |
 |-----------------------|------------------------------------------------------------|-------------------------------------|
-| Trust Anchor          | `federation_entity`                                        | [@!OpenID.Federation](#)                       |
-| Intermediate          | `federation_entity`                                        | [@!OpenID.Federation](#)                       |
+| Trust Anchor          | `federation_entity`                                        | [@!OpenID.Federation]                       |
+| Intermediate          | `federation_entity`                                        | [@!OpenID.Federation]                       |
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
-| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@OpenID4VCI](#), [@RFC8414](#)                    |
-| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [@OpenID4VCI](#), this specification |
-| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation](#), [@OpenID4VP](#), this specification       |
+| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@OpenID4VCI], [@RFC8414]                    |
+| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [@OpenID4VCI], this specification |
+| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation], [@OpenID4VP], this specification       |
 
 The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, also an OAuth 2.0 Authorization Server. According to [@OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
 
