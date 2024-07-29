@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Federation Wallet Architectures</title>
+<title>OpenID Federation Wallet Architectures 1.0</title>
 <meta content="Giuseppe De Marco" name="author">
 <meta content="Roland Hedberg" name="author">
 <meta content="Michael B. Jones" name="author">
 <meta content="John Bradley" name="author">
 <meta content="
-       This specification defines the openid federation entity types for the
+       This specification defines the OpenID Federation entity types for
 digital wallet architectures. 
     " name="description">
 <meta content="xml2rfc 3.16.0" name="generator">
@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-26" class="published">26 July 2024</time>
+<time datetime="2024-07-29" class="published">29 July 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1247,10 +1247,10 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Federation Wallet Architectures</h1>
+<h1 id="title">OpenID Federation Wallet Architectures 1.0</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This specification defines the openid federation entity types for the
+<p id="section-abstract-1">This specification defines the OpenID Federation entity types for
 digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="toc">
@@ -1305,10 +1305,10 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
                     <p id="section-toc.1-1.6.2.3.2.1.1"><a href="#section-6.3.1" class="auto internal xref">6.3.1</a>.  <a href="#name-security-considerations-abo" class="internal xref">Security Considerations About The Parameters request_uris And response_uris_supported</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.2">
-                    <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="auto internal xref">6.3.2</a>.  <a href="#name-security-considerations-abou" class="internal xref">Security Considerations About The User's Data Protection Using presentation_definitions_supported</a></p>
+                    <p id="section-toc.1-1.6.2.3.2.2.1"><a href="#section-6.3.2" class="auto internal xref">6.3.2</a>.  <a href="#name-security-considerations-abou" class="internal xref">Security Considerations About The End-User's Data Protection Using presentation_definitions_supported</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.3.2.3">
-                    <p id="section-toc.1-1.6.2.3.2.3.1"><a href="#section-6.3.3" class="auto internal xref">6.3.3</a>.  <a href="#name-metadata-for-the-authentic-" class="internal xref">Metadata for the Authentic Sources</a></p>
+                    <p id="section-toc.1-1.6.2.3.2.3.1"><a href="#section-6.3.3" class="auto internal xref">6.3.3</a>.  <a href="#name-metadata-for-authentic-sour" class="internal xref">Metadata for Authentic Sources</a></p>
 </li>
                 </ul>
 </li>
@@ -1338,16 +1338,16 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-wallet-checking-the-non-rev" class="internal xref">Wallet Checking The Non-Revocation Of Its Wallet Provider</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-wallet-discovering-the-cred" class="internal xref">Wallet Discovering The Credentials Issuers</a></p>
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-wallet-discovering-credenti" class="internal xref">Wallet Discovering Credentials Issuers</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
-                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-credential-issuers-establis" class="internal xref">Credential Issuers Establishing Trust With The Wallet Provider</a></p>
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-credential-issuers-establis" class="internal xref">Credential Issuers Establishing Trust in the Wallet Provider</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
-                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-credential-issuers-establish" class="internal xref">Credential Issuers Establishing Trust With The Wallet</a></p>
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-credential-issuers-establish" class="internal xref">Credential Issuers Establishing Trust in the Wallet</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.5">
-                <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.  <a href="#name-wallet-establish-trust-with" class="internal xref">Wallet Establish Trust With The Relying Party</a></p>
+                <p id="section-toc.1-1.8.2.5.1"><a href="#section-8.5" class="auto internal xref">8.5</a>.  <a href="#name-wallet-establishing-trust-i" class="internal xref">Wallet Establishing Trust in the Relying Party</a></p>
 </li>
             </ul>
 </li>
@@ -1379,10 +1379,10 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1">As digital wallets become increasingly deployed for managing identity credentials,
-establishing an  architecture  for trusted communication is required to allow each
-of the participant in the ecosystem to evaluate their compliance with trust frameworks
+establishing an architecture for trusted communication is required to allow each
+participant in the ecosystem to evaluate other participants' compliance with mutual trust frameworks
 and accomplish secure and trusted transactions.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">This specification defines how to use OpenID Federation 1.0 to enhance the
+<p id="section-1-2">This specification defines how to use OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> to enhance the
 security and interoperability of wallet ecosystems, facilitating trust establishment
 among the parties and enabling secure metadata exchange and policy
 application across large scale deployments.<a href="#section-1-2" class="pilcrow">¶</a></p>
@@ -1391,9 +1391,9 @@ infrastructure for wallet ecosystems, identifying participant roles and defining
 metadata used for those roles. In particular, it defines the metadata for
 the roles of Wallet Provider and Wallet Relying Party.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Additionally, this specification provides practical examples of how to apply
-policies for typical use cases within wallet ecosystems.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">Finally, it offers guidance on defining trust marks for use within
-wallet ecosystems.<a href="#section-1-5" class="pilcrow">¶</a></p>
+policies for typical use cases within wallet ecosystems.
+Finally, it offers guidance on defining trust marks for use within
+wallet ecosystems.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <div id="requirements-notation-and-conventions">
 <section id="section-1.1">
         <h3 id="name-requirements-notation-and-c">
@@ -1412,14 +1412,15 @@ this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2
       <h2 id="name-terminology">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
       </h2>
-<p id="section-2-1">This specification uses the terms "End-User" and "Entity" as defined by
-OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)" defined
-by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined
-in {{RFC8392}}, "Client" as defined {{RFC6749}}, the terms
+<p id="section-2-1">This specification uses the terms
+"End-User" and "Entity" as defined by OpenID Connect Core <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>,
+"JSON Web Token (JWT)" defined by JSON Web Token (JWT) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
+"CBOR Web Token (CWT)" defined by CBOR Web Token (CWT) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>,
+"Client" as defined by <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>,
 "Verifiable Presentation" and "Wallet Attestation" defined in <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>,
-the terms "Holder" and "Credential Issuer" defined in [OpenID4VCI],
-and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
-"Intermediate", and "Subordinate Statement" defined in [OpenIDFed].<a href="#section-2-1" class="pilcrow">¶</a></p>
+"Holder" and "Credential Issuer" defined in <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>,
+and "Trust Mark", "Federation Entity", "Trust Anchor",
+"Intermediate", and "Subordinate Statement" defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">This specification also defines the following terms:<a href="#section-2-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-2-3">
         <dt id="section-2-3.1">Organizational Entity:</dt>
@@ -1439,7 +1440,7 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
 </dd>
         <dd class="break"></dd>
 <dt id="section-2-3.9">Wallet Solution:</dt>
-        <dd style="margin-left: 1.5em" id="section-2-3.10">The Wallet Solution is a product offered by a Wallet Provider to enable Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service. It may also utilize services and web services for the exchange of data between the Wallet Provider and its Wallet Instances.<a href="#section-2-3.10" class="pilcrow">¶</a>
+        <dd style="margin-left: 1.5em" id="section-2-3.10">The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service. It may also utilize services and web services for the exchange of data between the Wallet Provider and its Wallet Instances.<a href="#section-2-3.10" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 <dt id="section-2-3.11">Authentic Source:</dt>
@@ -1467,8 +1468,8 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
         </ul>
 <p id="section-2.1-4"><strong>Third-Party Trust</strong> is the focus of this specification, although the <strong>Web of Trust</strong> model is not excluded if multiple trusted third parties (trust anchors) are supported by the participants.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 <p id="section-2.1-5">A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
-<p id="section-2.1-6">In the scopes of this specification, only the technical and procedural aspects are considered and fully covered.<a href="#section-2.1-6" class="pilcrow">¶</a></p>
-<p id="section-2.1-7">OpenID Federation is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
+<p id="section-2.1-6">In the scope of this specification, only the technical and procedural aspects are considered and fully covered.<a href="#section-2.1-6" class="pilcrow">¶</a></p>
+<p id="section-2.1-7">OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1615,7 +1616,7 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
               <code>federation_entity</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#">OpenIDFed</a>
+              <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
 </td>
           </tr>
           <tr>
@@ -1624,7 +1625,7 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
               <code>federation_entity</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#">OpenIDFed</a>
+              <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
 </td>
           </tr>
           <tr>
@@ -1640,7 +1641,7 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
               <code>federation_entity</code>, <code>oauth_authorization_server</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#">OpenID4VCI</a>, <a href="#">RFC8414</a>
+              <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
 </td>
           </tr>
           <tr>
@@ -1648,7 +1649,7 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
             <td class="text-left" rowspan="1" colspan="1">
               <code>federation_entity</code>, <code>openid_credential_issuer</code>, [<code>oauth_authorization_server</code>]</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#">OpenID4VCI</a>, this specification</td>
+              <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, this specification</td>
           </tr>
           <tr>
             <td class="text-left" rowspan="1" colspan="1">Relying Party</td>
@@ -1656,11 +1657,11 @@ and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
               <code>federation_entity</code>, <code>openid_wallet_relying_party</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
-              <a href="#">OpenIDFed</a>, <a href="#">OpenID4VP</a>, this specification</td>
+              <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>, this specification</td>
           </tr>
         </tbody>
       </table>
-<p id="section-6-3">The Credential Issuer is an OAuth 2.0 protected Resource Server and it not necessarly implements, within the same Entity, also an OAuth 2.0 Authorization Server. According to [OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential endpoint, therefore the use of [<code>oauth_authorization_server</code>] is OPTIONAL.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-3">The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, also an OAuth 2.0 Authorization Server. According to <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of [<code>oauth_authorization_server</code>] is OPTIONAL.<a href="#section-6-3" class="pilcrow">¶</a></p>
 <div id="metadata-for-openid-wallet-provider">
 <section id="section-6.1">
         <h3 id="name-metadata-for-openid-wallet-">
@@ -1716,7 +1717,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
             </tr>
           </tbody>
         </table>
-<p id="section-6.1-3">Below a non-normative example of <code>openid_wallet_provider</code> metadata:<a href="#section-6.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Below is a non-normative example of <code>openid_wallet_provider</code> metadata:<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.1-4">
 <pre>{
   "token_endpoint": "https://wallet.provider.example/token",
@@ -1753,8 +1754,8 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
         <h3 id="name-metadata-for-the-openid-cre">
 <a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-metadata-for-the-openid-cre" class="section-name selfRef">Metadata for the OpenID Credential Issuer</a>
         </h3>
-<p id="section-6.2-1">For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to the section <em>11.2. Credential Issuer Metadata</em> in the OpenID for Verifiable Credential Issuance [OpenID4VCI] specification.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
-<p id="section-6.2-2">Since one of the key scopes of OpenID Federation 1.0 is to provide consistency in the metadata of the participants described in the Entity Statements, be this Entity Configurations or Subordinate Statements, this specification requires the cryptographic material used for the Credential issuance operation be consistent and verifiable using the Trust Chain. For this reason the following metadata parameters are added:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to Section <em>11.2. Credential Issuer Metadata</em> in the OpenID for Verifiable Credential Issuance <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span> specification.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-2">Since one of the key scopes of OpenID Federation is to provide consistency in the metadata of the participants described in the Entity Statements, be this Entity Configurations or Subordinate Statements, this specification requires the cryptographic material used for the Credential issuance operation be consistent and verifiable using the Trust Chain. For this reason the following metadata parameters are added:<a href="#section-6.2-2" class="pilcrow">¶</a></p>
 <table class="center" id="table-3">
           <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
 <thead>
@@ -1898,17 +1899,20 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
             <tr>
               <td class="text-left" rowspan="1" colspan="1">client_id</td>
               <td class="text-left" rowspan="1" colspan="1">It MUST contain an HTTPS URL that uniquely identifies the RP.</td>
-              <td class="text-left" rowspan="1" colspan="1">RFC 7591 Section 3.2.1 and OpenID Connect Dynamic Client Registration 1.0 Section 3.2</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, Section 3.2.1 and <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, Section 3.2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">client_name</td>
               <td class="text-left" rowspan="1" colspan="1">Human-readable string name of the RP.</td>
-              <td class="text-left" rowspan="1" colspan="1">RFC 7591 Section 2</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, Section 2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">request_uris</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme.</td>
-              <td class="text-left" rowspan="1" colspan="1">OpenID Connect Dynamic Client Registration 1.0 Section 2</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, Section 2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">response_uris_supported</td>
@@ -1918,26 +1922,30 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
             <tr>
               <td class="text-left" rowspan="1" colspan="1">authorization_signed_response_alg</td>
               <td class="text-left" rowspan="1" colspan="1">String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm <code>none</code> MUST NOT be used.</td>
-              <td class="text-left" rowspan="1" colspan="1">RFC 7515 and oauth-v2-jarm Section 3</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> and <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>, Section 3</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">vp_formats</td>
               <td class="text-left" rowspan="1" colspan="1">JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports.</td>
-              <td class="text-left" rowspan="1" colspan="1">OpenID4VC-HAIP Draft 00 Section 7.2.7 and OpenID4VP Draft 20 Section 9.1</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span>, Section 7.2.7 and OpenID4VP, Section 9.1</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">presentation_definitions_supported</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined.</td>
-              <td class="text-left" rowspan="1" colspan="1">this specification, DIF.PresentationExchange Section 5 and OpenID4VC-HAIP Draft 00 Section 7.2.8</td>
+              <td class="text-left" rowspan="1" colspan="1">this specification, <span>[<a href="#DIF.PresentationExchange" class="cite xref">DIF.PresentationExchange</a>]</span>, Section 5 and <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span>, Section 7.2.8</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">jwks</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party.</td>
-              <td class="text-left" rowspan="1" colspan="1">oauth-v2-jarm Section 3, OpenIDFed Draft 36 Section 5.2.1, and JWK</td>
+              <td class="text-left" rowspan="1" colspan="1">
+                <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>, Section 3, <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, Section 5.2.1, and JWK <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>
+</td>
             </tr>
           </tbody>
         </table>
-<p id="section-6.3-5">Below a non normative example of the payload of a Wallet Relying Party Entity Configuration:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
+<p id="section-6.3-5">Below is a non-normative example of the payload of a Wallet Relying Party Entity Configuration:<a href="#section-6.3-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3-6">
 <pre>{
     "iat": 1718207217,
@@ -2071,31 +2079,31 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 <p id="section-6.3.1-1">There are scenarios where the Relying Party's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Relying Party's metadata and ensures its integrity and authenticity by utilizing <code>metadata</code> and the <code>metadata_policy</code> in the Subordinate Statement about that Relying Party, as defined in the OpenID Federation specification.<a href="#section-6.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.1-2">In these cases, the RP is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.<a href="#section-6.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-6.3.1-3">To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as <a href="https://rp.example.org/request-uri#random-value">https://rp.example.org/request-uri#random-value</a>. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.<a href="#section-6.3.1-3" class="pilcrow">¶</a></p>
-<p id="section-6.3.1-4">For this reason the parameters <code>metadata</code> or <code>metadata_policy</code> SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.<a href="#section-6.3.1-4" class="pilcrow">¶</a></p>
+<p id="section-6.3.1-4">For this reason, the parameters <code>metadata</code> or <code>metadata_policy</code> SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.<a href="#section-6.3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="security-considerations-about-the-user-s-data-protection-using-presentation-definitions-supported">
+<div id="security-considerations-about-the-end-user-s-data-protection-using-presentation-definitions-supported">
 <section id="section-6.3.2">
           <h4 id="name-security-considerations-abou">
-<a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-security-considerations-abou" class="section-name selfRef">Security Considerations About The User's Data Protection Using presentation_definitions_supported</a>
+<a href="#section-6.3.2" class="section-number selfRef">6.3.2. </a><a href="#name-security-considerations-abou" class="section-name selfRef">Security Considerations About The End-User's Data Protection Using presentation_definitions_supported</a>
           </h4>
-<p id="section-6.3.2-1">The <code>presentation_definitions_supported</code> enhance the End-User data protection within OpenID trust framework. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.2-1">The <code>presentation_definitions_supported</code> enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.<a href="#section-6.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.2-2">The <code>metadata</code> and <code>metadata_policy</code> parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.<a href="#section-6.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="metadata-for-the-authentic-sources">
+<div id="metadata-for-authentic-sources">
 <section id="section-6.3.3">
-          <h4 id="name-metadata-for-the-authentic-">
-<a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-metadata-for-the-authentic-" class="section-name selfRef">Metadata for the Authentic Sources</a>
+          <h4 id="name-metadata-for-authentic-sour">
+<a href="#section-6.3.3" class="section-number selfRef">6.3.3. </a><a href="#name-metadata-for-authentic-sour" class="section-name selfRef">Metadata for Authentic Sources</a>
           </h4>
-<p id="section-6.3.3-1">The Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is <code>oauth_protected_resource</code>, as defined in <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/">OAuth 2.0 Protected Resource Metadata</a>.<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
+<p id="section-6.3.3-1">An Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is <code>oauth_protected_resource</code>, as defined in <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/">OAuth 2.0 Protected Resource Metadata</a>.<a href="#section-6.3.3-1" class="pilcrow">¶</a></p>
 <p id="section-6.3.3-2">This section provides some common configurations for ...<a href="#section-6.3.3-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-6.3.3-3">
-<pre>non norm example 1
+<pre>non-normative example 1
 </pre><a href="#section-6.3.3-3" class="pilcrow">¶</a>
 </div>
 <div class="alignLeft art-text artwork" id="section-6.3.3-4">
-<pre>non norm example 2
+<pre>non-normative example 2
 </pre><a href="#section-6.3.3-4" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2111,15 +2119,15 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
       </h2>
 <p id="section-7-1">Policies refer to a set of rules that govern the operations, security, and interactions within a federation.<a href="#section-7-1" class="pilcrow">¶</a></p>
 <p id="section-7-2">Technical implementation of federation policies over participants metadata is managed with the use of <code>metadata</code> and <code>metadata_policy</code> parameters in Subordinate Statements. These parameters allow for the configuration enforcement of application-specific metadata changes for each subject (Leaf).<a href="#section-7-2" class="pilcrow">¶</a></p>
-<p id="section-7-3">Qualitative aspects of federation entities, including administrative protocols, security measures, and behavioral profiling, are regulated by Trust Marks. These marks provide verifiable assertions of compliance with specific profiles beyond the scope of the application specific metadata.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-3">Qualitative aspects of federation entities, including administrative protocols, security measures, and behavioral profiling, are regulated by Trust Marks. These marks provide verifiable assertions of compliance with specific profiles beyond the scope of the application-specific metadata.<a href="#section-7-3" class="pilcrow">¶</a></p>
 <div id="using-metadata">
 <section id="section-7.1">
         <h3 id="name-using-metadata">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-using-metadata" class="section-name selfRef">Using Metadata</a>
         </h3>
-<p id="section-7.1-1">Metadata refers to application specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
-<p id="section-7.1-2">OpenID Federation allows the definition of any custom metadata schema, since it doesn't limit the implementation to OAuth 2.0 and OpenID Connect only.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
-<p id="section-7.1-3">Metadata within a Subordinate Statement allows for arbitrary modifications to the metadata published in a Leaf's Entity Configuration.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
+<p id="section-7.1-1">Metadata refers to application-specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> allows the definition of custom metadata schemas, since it does not limit implementations to using OAuth 2.0 and/or OpenID Connect.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1-3">Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.<a href="#section-7.1-3" class="pilcrow">¶</a></p>
 <p id="section-7.1-4">TBD: example 1 about problem solved with a Subordinate Statement metadata parameter [sanitize endpoints]<a href="#section-7.1-4" class="pilcrow">¶</a></p>
 <p id="section-7.1-5">TBD: example 2 about problem solved with a Subordinate Statement metadata parameter [name of the organization]<a href="#section-7.1-5" class="pilcrow">¶</a></p>
 <p id="section-7.1-6">TBD: example 3 about problem solved with a Subordinate Statement metadata parameter [data that can be requested by an RP]<a href="#section-7.1-6" class="pilcrow">¶</a></p>
@@ -2131,7 +2139,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
         <h3 id="name-differences-between-metadat">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-differences-between-metadat" class="section-name selfRef">Differences Between metadata and metadata_policies</a>
         </h3>
-<p id="section-7.2-1">The key difference between <code>metadata</code> and <code>metadata_policy</code> is that metadata directly affects only the Immediate Subordinate Entity, while <code>metadata_policy</code> impacts the configuration of all Subordinate Entities along a Trust Chain.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">The key difference between <code>metadata</code> and <code>metadata_policy</code> is that metadata directly affects only the Immediate Subordinate Entity, while <code>metadata_policy</code> impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.2-2">This distinction positions the <code>metadata</code> parameter as an ideal tool for federation authorities managing entity registrations and needing to sanitize Leaves configurations in an arbitrary way. The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2155,7 +2163,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 <p id="section-7.4-3">This verification process involves checking the digital signature against the public key of the Trust Mark Issuer to ensure the Trust Mark has not been forged, and its check to the Trust Mark Status endpoint to check it against any revocation.<a href="#section-7.4-3" class="pilcrow">¶</a></p>
 <p id="section-7.4-4">Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.<a href="#section-7.4-4" class="pilcrow">¶</a></p>
 <p id="section-7.4-5">TBD: example 1 about problem solved with a Subordinate Statement trust_marks parameter [under age user]<a href="#section-7.4-5" class="pilcrow">¶</a></p>
-<p id="section-7.4-6">TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter [eidas trust list registration]<a href="#section-7.4-6" class="pilcrow">¶</a></p>
+<p id="section-7.4-6">TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter<a href="#section-7.4-6" class="pilcrow">¶</a></p>
 <p id="section-7.4-7">TBD: example 3 about problem solved with a Subordinate Statement trust_marks parameter [disabled user accessibility compliance]<a href="#section-7.4-7" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2175,10 +2183,10 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 <p id="section-8.1-1">...<a href="#section-8.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="wallet-discovering-the-credentials-issuers">
+<div id="wallet-discovering-credentials-issuers">
 <section id="section-8.2">
-        <h3 id="name-wallet-discovering-the-cred">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-wallet-discovering-the-cred" class="section-name selfRef">Wallet Discovering The Credentials Issuers</a>
+        <h3 id="name-wallet-discovering-credenti">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-wallet-discovering-credenti" class="section-name selfRef">Wallet Discovering Credentials Issuers</a>
         </h3>
 <p id="section-8.2-1">Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
 <p id="section-8.2-2">In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
@@ -2203,7 +2211,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 </pre><a href="#section-8.2-3" class="pilcrow">¶</a>
 </div>
 <p id="section-8.2-4">The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
-<p id="section-8.2-5">The diagram below illustrates how a Wallet establishes trust with a CI by verifying its link (even if indirect) to a Trust Anchor and validating which credentials it's authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
+<p id="section-8.2-5">The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.<a href="#section-8.2-5" class="pilcrow">¶</a></p>
 <div class="lang-mermaid sourcecode" id="section-8.2-6">
 <pre>sequenceDiagram
     participant Wallet
@@ -2237,29 +2245,29 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 </div>
 </section>
 </div>
-<div id="credential-issuers-establishing-trust-with-the-wallet-provider">
+<div id="credential-issuers-establishing-trust-in-the-wallet-provider">
 <section id="section-8.3">
         <h3 id="name-credential-issuers-establis">
-<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-credential-issuers-establis" class="section-name selfRef">Credential Issuers Establishing Trust With The Wallet Provider</a>
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-credential-issuers-establis" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet Provider</a>
         </h3>
 <p id="section-8.3-1">...<a href="#section-8.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="credential-issuers-establishing-trust-with-the-wallet">
+<div id="credential-issuers-establishing-trust-in-the-wallet">
 <section id="section-8.4">
         <h3 id="name-credential-issuers-establish">
-<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-credential-issuers-establish" class="section-name selfRef">Credential Issuers Establishing Trust With The Wallet</a>
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-credential-issuers-establish" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet</a>
         </h3>
 <p id="section-8.4-1">...<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="wallet-establish-trust-with-the-relying-party">
+<div id="wallet-establishing-trust-in-the-relying-party">
 <section id="section-8.5">
-        <h3 id="name-wallet-establish-trust-with">
-<a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-wallet-establish-trust-with" class="section-name selfRef">Wallet Establish Trust With The Relying Party</a>
+        <h3 id="name-wallet-establishing-trust-i">
+<a href="#section-8.5" class="section-number selfRef">8.5. </a><a href="#name-wallet-establishing-trust-i" class="section-name selfRef">Wallet Establishing Trust in the Relying Party</a>
         </h3>
 <p id="section-8.5-1">The Federation Entity Discovery starts with the Wallet Instance fetching the Relying Party's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Relying Party. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Relying Party final metadata.<a href="#section-8.5-1" class="pilcrow">¶</a></p>
-<p id="section-8.5-2">Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it's important to understand that this approach can be applied to every kind of entity type within the federation.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
+<p id="section-8.5-2">Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.<a href="#section-8.5-2" class="pilcrow">¶</a></p>
 <div class="lang-mermaid sourcecode" id="section-8.5-3">
 <pre>sequenceDiagram
     participant WalletInstance as Wallet Instance
@@ -2300,7 +2308,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
       <h2 id="name-implementation-consideratio">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations for the Offline Flows</a>
       </h2>
-<p id="section-9-1">TBD: usage of static trust chain or x.509 ceritifcate chain<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">TBD: usage of static trust chain or X.509 ceritifcate chain<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="acknowledgments">
@@ -2326,13 +2334,61 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
+<dt id="DIF.PresentationExchange">[DIF.PresentationExchange]</dt>
+      <dd>
+<span class="refAuthor">Buchner, D.</span>, <span class="refAuthor">Zundel, B.</span>, <span class="refAuthor">Riedel, M.</span>, and <span class="refAuthor">K. H. Duffy</span>, <span class="refTitle">"Presentation Exchange 2.0.0"</span>, <span>&lt;<a href="https://identity.foundation/presentation-exchange/spec/v2.0.0/">https://identity.foundation/presentation-exchange/spec/v2.0.0/</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OAuth.JARM">[OAuth.JARM]</dt>
+      <dd>
+<span class="refAuthor">Lodderstedt, T.</span> and <span class="refAuthor">B. Brian</span>, <span class="refTitle">"JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)"</span>, <time datetime="2022-11-09" class="refDate">9 November 2022</time>, <span>&lt;<a href="https://openid.net/specs/oauth-v2-jarm.html">https://openid.net/specs/oauth-v2-jarm.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID.Core">[OpenID.Core]</dt>
+      <dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 incorporating errata set 2"</span>, <time datetime="2023-12-15" class="refDate">15 December 2023</time>, <span>&lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html">http://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID.Federation">[OpenID.Federation]</dt>
+      <dd>
+<span class="refAuthor">Ed., R. H.</span>, <span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Solberg, A.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Marco, G. D.</span>, and <span class="refAuthor">V. Dzhuvinov</span>, <span class="refTitle">"OpenID Federation 1.0"</span>, <time datetime="2024-05-31" class="refDate">31 May 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid-federation-1_0.html">https://openid.net/specs/openid-federation-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID.Registration">[OpenID.Registration]</dt>
+      <dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">M.B. Jones</span>, <span class="refTitle">"OpenID Connect Dynamic Client Registration 1.0"</span>, <time datetime="2023-12-15" class="refDate">15 December 2023</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-registration-1_0.html">https://openid.net/specs/openid-connect-registration-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID4VC-HAIP">[OpenID4VC-HAIP]</dt>
+      <dd>
+<span class="refAuthor">Yasuda, K.</span> and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"OpenID4VC High Assurance Interoperability Profile with SD-JWT VC"</span>, <time datetime="2024-01-09" class="refDate">9 January 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html">https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
       <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+      <dd>
+<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7515">[RFC7515]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7517">[RFC7517]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Key (JWK)"</span>, <span class="seriesInfo">RFC 7517</span>, <span class="seriesInfo">DOI 10.17487/RFC7517</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7517">https://www.rfc-editor.org/info/rfc7517</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7591">[RFC7591]</dt>
+      <dd>
+<span class="refAuthor">Richer, J., Ed.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Machulak, M.</span>, and <span class="refAuthor">P. Hunt</span>, <span class="refTitle">"OAuth 2.0 Dynamic Client Registration Protocol"</span>, <span class="seriesInfo">RFC 7591</span>, <span class="seriesInfo">DOI 10.17487/RFC7591</span>, <time datetime="2015-07" class="refDate">July 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7591">https://www.rfc-editor.org/info/rfc7591</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
-    <dd>
+      <dd>
 <span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8392">[RFC8392]</dt>
+    <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8392">https://www.rfc-editor.org/info/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2341,9 +2397,17 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 <a href="#section-12" class="section-number selfRef">12. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
       </h2>
 <dl class="references">
+<dt id="OpenID4VCI">[OpenID4VCI]</dt>
+      <dd>
+<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">T. Looker</span>, <span class="refTitle">"OpenID for Verifiable Credential Issuance"</span>, <time datetime="2024-02-08" class="refDate">8 February 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="OpenID4VP">[OpenID4VP]</dt>
+      <dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">T. Looker</span>, <span class="refTitle">"OpenID for Verifiable Presentations"</span>, <time datetime="2023-11-29" class="refDate">29 November 2023</time>, <span>&lt;<a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">https://openid.net/specs/openid-4-verifiable-presentations-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8414">[RFC8414]</dt>
     <dd>
-<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">T. Looker</span>, <span class="refTitle">"OpenID for Verifiable Presentations"</span>, <time datetime="2022-11-29" class="refDate">29 November 2022</time>, <span>&lt;<a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">https://openid.net/specs/openid-4-verifiable-presentations-1_0.html</a>&gt;</span>. </dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
@@ -2355,7 +2419,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.<a href
 <p id="appendix-A-1">[[ To be removed from the final specification ]]<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 <p id="appendix-A-2">-00<a href="#appendix-A-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-A-3.1">initial revision<a href="#appendix-A-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-A-3.1">Initial version<a href="#appendix-A-3.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
