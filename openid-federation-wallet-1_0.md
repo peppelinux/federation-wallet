@@ -1,5 +1,5 @@
 %%%
-title = "OpenID Federation Wallet Architectures"
+title = "OpenID Federation Wallet Architectures 1.0"
 abbrev = "openid-federation-wallet"
 ipr = "none"
 workgroup = "OpenID Connect A/B"
@@ -46,7 +46,7 @@ organization="Yubico"
 
 .# Abstract
 
-This specification defines the openid federation entity types for the
+This specification defines the OpenID Federation entity types for
 digital wallet architectures.
 
 {mainmatter}
@@ -54,11 +54,11 @@ digital wallet architectures.
 # Introduction
 
 As digital wallets become increasingly deployed for managing identity credentials,
-establishing an  architecture  for trusted communication is required to allow each
-of the participant in the ecosystem to evaluate their compliance with trust frameworks
+establishing an architecture for trusted communication is required to allow each
+participant in the ecosystem to evaluate other participants' compliance with mutual trust frameworks
 and accomplish secure and trusted transactions.
 
-This specification defines how to use OpenID Federation 1.0 to enhance the
+This specification defines how to use OpenID Federation 1.0 [@!OpenID.Federation] to enhance the
 security and interoperability of wallet ecosystems, facilitating trust establishment
 among the parties and enabling secure metadata exchange and policy
 application across large scale deployments.
@@ -70,7 +70,6 @@ the roles of Wallet Provider and Wallet Relying Party.
 
 Additionally, this specification provides practical examples of how to apply
 policies for typical use cases within wallet ecosystems.
-
 Finally, it offers guidance on defining trust marks for use within
 wallet ecosystems.
 
@@ -83,14 +82,15 @@ this document are to be interpreted as described in BCP 14 [@!RFC2119]
 
 # Terminology
 
-This specification uses the terms "End-User" and "Entity" as defined by
-OpenID Connect Core [OpenID.Core], the term "JSON Web Token (JWT)" defined
-by JSON Web Token (JWT) {{RFC7519}}, the term "CBOR Web Token (CWT)" defined
-in {{RFC8392}}, "Client" as defined {{RFC6749}}, the terms
+This specification uses the terms
+"End-User" and "Entity" as defined by OpenID Connect Core [@!OpenID.Core],
+"JSON Web Token (JWT)" defined by JSON Web Token (JWT) [@!RFC7519],
+"CBOR Web Token (CWT)" defined by CBOR Web Token (CWT) [@!RFC8392],
+"Client" as defined by [@!RFC6749],
 "Verifiable Presentation" and "Wallet Attestation" defined in [@OpenID4VP],
-the terms "Holder" and "Credential Issuer" defined in [OpenID4VCI],
-and the terms "Trust Mark", "Federation Entity", "Trust Anchor",
-"Intermediate", and "Subordinate Statement" defined in [OpenIDFed].
+"Holder" and "Credential Issuer" defined in [@OpenID4VCI],
+and "Trust Mark", "Federation Entity", "Trust Anchor",
+"Intermediate", and "Subordinate Statement" defined in [@!OpenID.Federation].
 
 This specification also defines the following terms:
 
@@ -107,7 +107,7 @@ Wallet Instance:
 : Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.
 
 Wallet Solution:
-: The Wallet Solution is a product offered by a Wallet Provider to enable Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service. It may also utilize services and web services for the exchange of data between the Wallet Provider and its Wallet Instances.
+: The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service. It may also utilize services and web services for the exchange of data between the Wallet Provider and its Wallet Instances.
 
 Authentic Source:
 : A protected Resource Server, not necessarly an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.
@@ -126,9 +126,9 @@ The Trust Model defines the relationships and mechanisms through which trust is 
 
 A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects.
 
-In the scopes of this specification, only the technical and procedural aspects are considered and fully covered.
+In the scope of this specification, only the technical and procedural aspects are considered and fully covered.
 
-OpenID Federation is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.
+OpenID Federation [@!OpenID.Federation] is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.
 
 # The Four Party Model
 
@@ -225,14 +225,14 @@ This section defines the Entity Types used by Organizational Entities in their E
 
 | Entity         | Entity Type Identifiers                                              | References                          |
 |-----------------------|------------------------------------------------------------|-------------------------------------|
-| Trust Anchor          | `federation_entity`                                        | [OpenIDFed](#)                       |
-| Intermediate          | `federation_entity`                                        | [OpenIDFed](#)                       |
+| Trust Anchor          | `federation_entity`                                        | [@!OpenID.Federation](#)                       |
+| Intermediate          | `federation_entity`                                        | [@!OpenID.Federation](#)                       |
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
-| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [OpenID4VCI](#), [RFC8414](#)                    |
-| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [OpenID4VCI](#), this specification |
-| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [OpenIDFed](#), [OpenID4VP](#), this specification       |
+| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@OpenID4VCI](#), [@RFC8414](#)                    |
+| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [@OpenID4VCI](#), this specification |
+| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation](#), [@OpenID4VP](#), this specification       |
 
-The Credential Issuer is an OAuth 2.0 protected Resource Server and it not necessarly implements, within the same Entity, also an OAuth 2.0 Authorization Server. According to [OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
+The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, also an OAuth 2.0 Authorization Server. According to [@OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
 
 ## Metadata for OpenID Wallet Provider
 
@@ -248,7 +248,7 @@ The metadata for an OpenID Wallet Provider are listed in the table below.
 | token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint.|
 | token_endpoint_auth_signing_alg_values_supported          | REQUIRED | Supported signature algorithms for the token endpoint.|
 
-Below a non-normative example of `openid_wallet_provider` metadata:
+Below is a non-normative example of `openid_wallet_provider` metadata:
 
 ````
 {
@@ -281,9 +281,9 @@ Below a non-normative example of `openid_wallet_provider` metadata:
 
 ## Metadata for the OpenID Credential Issuer
 
-For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to the section *11.2. Credential Issuer Metadata* in the OpenID for Verifiable Credential Issuance [OpenID4VCI] specification.
+For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to Section *11.2. Credential Issuer Metadata* in the OpenID for Verifiable Credential Issuance [@OpenID4VCI] specification.
 
-Since one of the key scopes of OpenID Federation 1.0 is to provide consistency in the metadata of the participants described in the Entity Statements, be this Entity Configurations or Subordinate Statements, this specification requires the cryptographic material used for the Credential issuance operation be consistent and verifiable using the Trust Chain. For this reason the following metadata parameters are added:
+Since one of the key scopes of OpenID Federation is to provide consistency in the metadata of the participants described in the Entity Statements, be this Entity Configurations or Subordinate Statements, this specification requires the cryptographic material used for the Credential issuance operation be consistent and verifiable using the Trust Chain. For this reason the following metadata parameters are added:
 
 | Metadata Parameter | Status | Description |
 |------|----------|---------------------------------------------------------------------------------------------------------------------|
@@ -404,16 +404,16 @@ The metadata parameters for an OpenID Wallet Relying Party are defined below:
 
 | Metadata Parameter | Description | Reference |
 |----------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------|
-| client_id | It MUST contain an HTTPS URL that uniquely identifies the RP. | RFC 7591 Section 3.2.1 and OpenID Connect Dynamic Client Registration 1.0 Section 3.2 |
-| client_name | Human-readable string name of the RP. | RFC 7591 Section 2 |
-| request_uris | JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme. | OpenID Connect Dynamic Client Registration 1.0 Section 2 |
+| client_id | It MUST contain an HTTPS URL that uniquely identifies the RP. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
+| client_name | Human-readable string name of the RP. | [@!RFC7591], Section 2 |
+| request_uris | JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
 | response_uris_supported | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
-| authorization_signed_response_alg | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | RFC 7515 and oauth-v2-jarm Section 3 |
-| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports. | OpenID4VC-HAIP Draft 00 Section 7.2.7 and OpenID4VP Draft 20 Section 9.1 |
-| presentation_definitions_supported | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, DIF.PresentationExchange Section 5 and OpenID4VC-HAIP Draft 00 Section 7.2.8 |
-| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party. | oauth-v2-jarm Section 3, OpenIDFed Draft 36 Section 5.2.1, and JWK |
+| authorization_signed_response_alg | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
+| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
+| presentation_definitions_supported | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
+| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
 
-Below a non normative example of the payload of a Wallet Relying Party Entity Configuration:
+Below is a non-normative example of the payload of a Wallet Relying Party Entity Configuration:
 
 ````
 {
@@ -548,27 +548,26 @@ In these cases, the RP is restricted from altering its endpoint URIs due to the 
 
 To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as https://rp.example.org/request-uri#random-value. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.
 
-For this reason the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
+For this reason, the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
 
-### Security Considerations About The User's Data Protection Using presentation_definitions_supported
+### Security Considerations About The End-User's Data Protection Using presentation_definitions_supported
 
-The `presentation_definitions_supported` enhance the End-User data protection within OpenID trust framework. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
+The `presentation_definitions_supported` enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
 
 The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.
 
+### Metadata for Authentic Sources
 
-### Metadata for the Authentic Sources
-
-The Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in [OAuth 2.0 Protected Resource Metadata](https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/).
+An Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in [OAuth 2.0 Protected Resource Metadata](https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/).
 
 This section provides some common configurations for ...
 
 ```
-non norm example 1
+non-normative example 1
 ```
 
 ```
-non norm example 2
+non-normative example 2
 ```
 
 # Federation Policies
@@ -577,16 +576,15 @@ Policies refer to a set of rules that govern the operations, security, and inter
 
 Technical implementation of federation policies over participants metadata is managed with the use of `metadata` and `metadata_policy` parameters in Subordinate Statements. These parameters allow for the configuration enforcement of application-specific metadata changes for each subject (Leaf).
 
-Qualitative aspects of federation entities, including administrative protocols, security measures, and behavioral profiling, are regulated by Trust Marks. These marks provide verifiable assertions of compliance with specific profiles beyond the scope of the application specific metadata.
-
+Qualitative aspects of federation entities, including administrative protocols, security measures, and behavioral profiling, are regulated by Trust Marks. These marks provide verifiable assertions of compliance with specific profiles beyond the scope of the application-specific metadata.
 
 ## Using Metadata
 
-Metadata refers to application specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.
+Metadata refers to application-specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.
 
-OpenID Federation allows the definition of any custom metadata schema, since it doesn't limit the implementation to OAuth 2.0 and OpenID Connect only.
+OpenID Federation [@!OpenID.Federation] allows the definition of custom metadata schemas, since it does not limit implementations to using OAuth 2.0 and/or OpenID Connect.
 
-Metadata within a Subordinate Statement allows for arbitrary modifications to the metadata published in a Leaf's Entity Configuration.
+Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.
 
 TBD: example 1 about problem solved with a Subordinate Statement metadata parameter [sanitize endpoints]
 
@@ -598,7 +596,7 @@ TBD: example 4 about problem solved with a Subordinate Statement metadata parame
 
 ## Differences Between metadata and metadata_policies
 
-The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain.
+The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of [@!OpenID.Federation].
 
 This distinction positions the `metadata` parameter as an ideal tool for federation authorities managing entity registrations and needing to sanitize Leaves configurations in an arbitrary way. The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters.
 
@@ -623,7 +621,7 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
 
 TBD: example 1 about problem solved with a Subordinate Statement trust_marks parameter [under age user]
 
-TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter [eidas trust list registration]
+TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter
 
 TBD: example 3 about problem solved with a Subordinate Statement trust_marks parameter [disabled user accessibility compliance]
 
@@ -635,7 +633,7 @@ The process of trust establishment in federated environments is  illustrated in 
 
 ...
 
-## Wallet Discovering The Credentials Issuers
+## Wallet Discovering Credentials Issuers
 
 Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.
 
@@ -663,7 +661,7 @@ sequenceDiagram
 ````
 The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.
 
-The diagram below illustrates how a Wallet establishes trust with a CI by verifying its link (even if indirect) to a Trust Anchor and validating which credentials it's authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.
+The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.
 
 ````mermaid
 sequenceDiagram
@@ -696,19 +694,19 @@ sequenceDiagram
     Wallet->>Wallet: Get available Credentials allowed for issuance
 ````
 
-## Credential Issuers Establishing Trust With The Wallet Provider
+## Credential Issuers Establishing Trust in the Wallet Provider
 
 ...
 
-## Credential Issuers Establishing Trust With The Wallet
+## Credential Issuers Establishing Trust in the Wallet
 
 ...
 
-## Wallet Establish Trust With The Relying Party
+## Wallet Establishing Trust in the Relying Party
 
 The Federation Entity Discovery starts with the Wallet Instance fetching the Relying Party's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Relying Party. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Relying Party final metadata.
 
-Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it's important to understand that this approach can be applied to every kind of entity type within the federation.
+Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.
 
 ````mermaid
 sequenceDiagram
@@ -744,7 +742,7 @@ sequenceDiagram
 
 # Implementation Considerations for the Offline Flows
 
-TBD: usage of static trust chain or x.509 ceritifcate chain
+TBD: usage of static trust chain or X.509 ceritifcate chain
 
 # Acknowledgments
 
@@ -756,112 +754,6 @@ We would like to thank the following individuals for their comments, ideas, and 
 - Giada Sciarretta
 
 {backmatter}
-
-
-<reference anchor="VC_DATA" target="https://www.w3.org/TR/vc-data-model">
-  <front>
-    <title>Verifiable Credentials Data Model 1.1</title>
-    <author fullname="Manu Sporny">
-      <organization>Digital Bazaar</organization>
-    </author>
-    <author fullname="Grant Noble">
-      <organization>ConsenSys</organization>
-    </author>
-    <author fullname="Dave Longley">
-      <organization>Digital Bazaar</organization>
-    </author>
-    <author fullname="Daniel C. Burnett">
-      <organization>ConsenSys</organization>
-    </author>
-    <author fullname="Brent Zundel">
-      <organization>Evernym</organization>
-    </author>
-    <author fullname="Kyle Den Hartog">
-      <organization>Mattr</organization>
-    </author>
-   <date day="3" month="March" year="2022"/>
-  </front>
-</reference>
-
-<reference anchor="VC_DATA_2.0" target="https://www.w3.org/TR/vc-data-model-2.0">
-  <front>
-    <title>Verifiable Credentials Data Model 2.0</title>
-    <author fullname="Manu Sporny">
-      <organization>Digital Bazaar</organization>
-    </author>
-    <author fullname="Ted Thibodeau Jr">
-      <organization>OpenLink Software</organization>
-    </author>
-    <author fullname="Ivan Herman">
-      <organization>W3C</organization>
-    </author>
-    <author fullname="Michael B. Jones">
-      <organization>Invited Expert</organization>
-    </author>
-    <author fullname="Gabe Cohen">
-      <organization>Block</organization>
-    </author>
-   <date day="27" month="December" year="2023"/>
-  </front>
-</reference>
-
-<reference anchor="VC_Data_Integrity" target="https://w3c.github.io/vc-data-integrity/">
-  <front>
-    <title>Verifiable Credential Data Integrity 1.0</title>
-    <author fullname="Manu Sporny">
-      <organization>Digital Bazaar</organization>
-    </author>
-    <author fullname="Dave Longley">
-      <organization>Digital Bazaar</organization>
-    </author>
-    <author fullname="Greg Bernstein">
-      <organization>Invited Expert</organization>
-    </author>
-    <author fullname="Dmitri Zagidulin">
-      <organization>Invited Expert</organization>
-    </author>
-    <author fullname="Sebastian Crane">
-      <organization>Invited Expert</organization>
-    </author>
-   <date day="14" month="November" year="2023"/>
-  </front>
-</reference>
-
-<reference anchor="USASCII">
-        <front>
-          <title>Coded Character Set -- 7-bit American Standard Code for Information Interchange</title>
-          <author>
-            <organization>American National Standards Institute</organization>
-          </author>
-          <date year="1986"/>
-        </front>
-</reference>
-
-<reference anchor="SIOPv2" target="https://openid.net/specs/openid-connect-self-issued-v2-1_0.html">
-  <front>
-    <title>Self-Issued OpenID Provider V2</title>
-    <author fullname="Kristina Yasuda">
-      <organization>Microsoft</organization>
-    </author>
-    <author fullname="Michael B. Jones">
-      <organization>Self-Issued Consulting</organization>
-    </author>
-    <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-      <organization>sprind.org</organization>
-    </author>
-   <date day="28" month="November" year="2023"/>
-  </front>
-</reference>
-
-<reference anchor="BCP195" target="https://www.rfc-editor.org/info/bcp195">
-        <front>
-          <title>BCP195</title>
-          <author>
-            <organization>IETF</organization>
-          </author>
-          <date month="November" year="2022"/>
-        </front>
-</reference>
 
 <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
   <front>
@@ -885,82 +777,24 @@ We would like to thank the following individuals for their comments, ideas, and 
   </front>
 </reference>
 
-<reference anchor="DIF.Well-Known_DID" target="https://identity.foundation/specs/did-configuration/">
-        <front>
-          <title>Well Known DID Configuration</title>
-      <author fullname="Daniel Buchner">
-            <organization>Microsoft</organization>
-          </author>
-          <author fullname="Orie Steele">
-            <organization>Transmute</organization>
-          </author>
-          <author fullname="Tobias Looker">
-            <organization>Mattr</organization>
-          </author>
-        </front>
-</reference>
+<reference anchor="OpenID.Registration" target="https://openid.net/specs/openid-connect-registration-1_0.html">
+  <front>
+    <title>OpenID Connect Dynamic Client Registration 1.0</title>
 
-<reference anchor="CSS-Color" target="https://www.w3.org/TR/css-color-3">
-      <front>
-        <title>CSS Color Module Level 3</title>
-        <author initials="T." surname="Çelik" fullname="Tantek Çelik">
-         <organization>Mozilla Corporation</organization>
-        </author>
-        <author initials="C." surname="Lilley" fullname="Chris Lilley">
-          <organization>W3C</organization>
-        </author>
-        <author initials="D." surname="Baron" fullname="L. David Baron">
-          <organization>W3C Invited Expert</organization>
-       </author>
-       <date day="18" month="January" year="2022"/>
-      </front>
-</reference>
+    <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+      <organization abbrev="NAT.Consulting (was at NRI)">NAT.Consulting</organization>
+    </author>
 
-<reference anchor="JSON-LD" target="https://www.w3.org/TR/json-ld11/">
-      <front>
-        <title>JSON-LD 1.1: A JSON-based Serialization for Linked Data.</title>
-        <author fullname="Gregg Kellogg">
-        </author>
-        <author fullname="Manu Sporny">
-        </author>
-        <author fullname="Dave Longley">
-       </author>
-       <author fullname="Markus Lanthaler">
-       </author>
-       <author fullname="Pierre-Antoine Champin">
-       </author>
-       <author fullname="Niklas Lindström">
-       </author>
-       <date day="16" month="July" year="2020"/>
-      </front>
-</reference>
+    <author fullname="John Bradley" initials="J." surname="Bradley">
+      <organization abbrev="Yubico (was at Ping Identity)">Yubico</organization>
+    </author>
 
-<reference anchor="ISO.18013-5" target="https://www.iso.org/standard/69084.html">
-        <front>
-          <title>ISO/IEC 18013-5:2021 Personal identification — ISO-compliant driving licence — Part 5: Mobile driving licence (mDL)  application</title>
-          <author>
-            <organization> ISO/IEC JTC 1/SC 17 Cards and security devices for personal identification</organization>
-          </author>
-          <date Month="September" year="2021"/>
-        </front>
-</reference>
+    <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+      <organization abbrev="Self-Issued Consulting (was at Microsoft)">Self-Issued Consulting</organization>
+    </author>
 
-<reference anchor="IANA.JOSE.ALGS" target="https://www.iana.org/assignments/jose/jose.xhtml#web-signature-encryption-algorithms">
-        <front>
-          <title>JSON Web Signature and Encryption Algorithms</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-        </front>
-</reference>
-
-<reference anchor="IANA.COSE.ALGS" target="https://www.iana.org/assignments/cose/cose.xhtml#algorithms">
-        <front>
-          <title>COSE Algorithms</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-        </front>
+    <date day="15" month="December" year="2023"/>
+  </front>
 </reference>
 
 <reference anchor="OpenID4VP" target="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">
@@ -978,37 +812,68 @@ We would like to thank the following individuals for their comments, ideas, and 
         <author initials="T." surname="Looker" fullname="Tobias Looker">
           <organization>Mattr</organization>
         </author>
-       <date day="29" month="November" year="2022"/>
+       <date day="29" month="November" year="2023"/>
       </front>
 </reference>
 
-<reference anchor="DID_Specification_Registries" target="https://www.w3.org/TR/did-spec-registries/">
+<reference anchor="OpenID4VCI" target="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">
         <front>
-          <title>DID Specification Registries</title>
-      <author fullname="Orie Steele">
-            <organization>Transmute</organization>
+          <title>OpenID for Verifiable Credential Issuance</title>
+          <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+            <organization>German Federal Agency for Disruptive Innovation (SPRIND)</organization>
           </author>
-          <author fullname="Manu Sporny">
-            <organization>Digital Bazaar</organization>
+          <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
+            <organization>German Federal Agency for Disruptive Innovation (SPRIND)</organization>
           </author>
-         <date day="11" month="September" year="2023"/>
+          <author initials="T." surname="Looker" fullname="Tobias Looker">
+            <organization>Mattr</organization>
+          </author>
+          <date day="8" month="February" year="2024"/>
         </front>
 </reference>
 
-<reference anchor="LD_Suite_Registry" target="https://w3c-ccg.github.io/ld-cryptosuite-registry/">
+<reference anchor="OpenID4VC-HAIP" target="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html">
         <front>
-          <title>Linked Data Cryptographic Suite Registry</title>
-          <author fullname="Manu Sporny">
-            <organization>Digital Bazaar</organization>
+          <title>OpenID4VC High Assurance Interoperability Profile with SD-JWT VC</title>
+          <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
+            <organization>Microsoft</organization>
           </author>
-          <author fullname="Drummond Reed">
+          <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+            <organization>German Federal Agency for Disruptive Innovation (SPRIND)</organization>
+          </author>
+          <date day="9" month="January" year="2024"/>
+        </front>
+</reference>
+
+<reference anchor="DIF.PresentationExchange" target="https://identity.foundation/presentation-exchange/spec/v2.0.0/">
+        <front>
+          <title>Presentation Exchange 2.0.0</title>
+		  <author fullname="Daniel Buchner">
+            <organization>Microsoft</organization>
+          </author>
+          <author fullname="Brent Zundel">
             <organization>Evernym</organization>
           </author>
-          <author fullname="Orie Steele">
-            <organization>Transmute</organization>
+          <author fullname="Martin Riedel">
+            <organization>Consensys Mesh</organization>
           </author>
-         <date day="29" month="December" year="2020"/>
+          <author fullname="Kim Hamilton Duffy">
+            <organization>Centre Consortium</organization>
+          </author>
         </front>
+</reference>
+
+<reference anchor="OAuth.JARM" target="https://openid.net/specs/oauth-v2-jarm.html">
+  <front>
+    <title>JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)</title>
+    <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
+      <organization>yes.com</organization>
+    </author>
+    <author initials="B." surname="Brian" fullname="Brian Campbell">
+      <organization>Ping Identity</organization>
+    </author>
+   <date day="9" month="November" year="2022"/>
+  </front>
 </reference>
 
 <reference anchor="OpenID.Federation" target="https://openid.net/specs/openid-federation-1_0.html">
@@ -1032,28 +897,8 @@ We would like to thank the following individuals for their comments, ideas, and 
           <author fullname="Vladimir Dzhuvinov">
             <organization>Connect2id</organization>
           </author>
-          <date day="4" month="December" year="2023"/>
+          <date day="31" month="May" year="2024"/>
         </front>
-</reference>
-
-<reference anchor="IANA.OAuth.Parameters" target="https://www.iana.org/assignments/oauth-parameters">
-  <front>
-    <title>OAuth Parameters</title>
-    <author>
-      <organization>IANA</organization>
-    </author>
-    <date/>
-  </front>
-</reference>
-
-<reference anchor="IANA.MediaTypes" target="https://www.iana.org/assignments/media-types">
-  <front>
-    <title>Media Types</title>
-    <author>
-      <organization>IANA</organization>
-    </author>
-    <date/>
-  </front>
 </reference>
 
 <reference anchor="eIDAS" target="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32014R0910">
@@ -1066,17 +911,10 @@ We would like to thank the following individuals for their comments, ideas, and 
   </front>
 </reference>
 
-<reference anchor="ISO.29100" target="https://standards.iso.org/ittf/PubliclyAvailableStandards/index.html">
-  <front>
-    <author fullname="ISO"></author>
-    <title>ISO/IEC 29100:2011 Information technology — Security techniques — Privacy framework</title>
-  </front>
-</reference>
-
 # Document History
 
    [[ To be removed from the final specification ]]
 
    -00 
 
-   *  initial revision
+   *  Initial version
