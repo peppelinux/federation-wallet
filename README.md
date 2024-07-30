@@ -7,20 +7,18 @@ In particular, it defines the metadata for the roles of Wallet Provider and Wall
 
 Additionally, it provides practical examples of how to apply policies for typical use cases within wallet ecosystems and offers guidance on defining trust marks for use within wallet ecosystems.
 
-### Current WG-Draft
+## Builds
 
-The current WG-Draft version is built automatically from the main branch and can be accessed at: 
-[https://peppelinux.github.io/federation-wallet/main.html](https://peppelinux.github.io/federation-wallet/main.html)
-
-other branches will be build and deployed as well, using the branch name within the html filename, as shown below:
+Previews for each branch are automatically built and published.
+You can view the preview of the main branch at [https://peppelinux.github.io/federation-wallet/main.html](https://peppelinux.github.io/federation-wallet/main.html).
+Other branches are built and deployed as well, using the branch name as the html filename, as shown below:
 
 - https://peppelinux.github.io/federation-wallet/$BRANCH-NAME.html
 
-
-### Build the HTML ###
+## Build the HTML ##
 
 ```docker run -v `pwd`:/data danielfett/markdown2rfc openid-federation-wallet-1_0.md```
 
 ## Contact
 
-For further information and to get involved, please visit the [OpenID Connect Working Group website](https://openid.net/wg/connect/).
+For further information and to get involved, please contact the authors.
