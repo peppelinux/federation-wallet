@@ -124,7 +124,7 @@ The Trust Model defines the relationships and mechanisms through which trust is 
 
 **Third-Party Trust** is the focus of this specification, although the **Web of Trust** model is not excluded if multiple trusted third parties (trust anchors) are supported by the participants.
 
-A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects.
+A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way. 
 
 In the scope of this specification, only the technical and procedural aspects are considered and fully covered.
 
