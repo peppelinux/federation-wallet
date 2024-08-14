@@ -1209,7 +1209,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-wallet</td>
-<td class="right">July 2024</td>
+<td class="right">August 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">De Marco, et al.</td>
@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-29" class="published">29 July 2024</time>
+<time datetime="2024-08-14" class="published">14 August 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1467,7 +1467,7 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 </li>
         </ul>
 <p id="section-2.1-4"><strong>Third-Party Trust</strong> is the focus of this specification, although the <strong>Web of Trust</strong> model is not excluded if multiple trusted third parties (trust anchors) are supported by the participants.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
-<p id="section-2.1-5">A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
+<p id="section-2.1-5">A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way.<a href="#section-2.1-5" class="pilcrow">¶</a></p>
 <p id="section-2.1-6">In the scope of this specification, only the technical and procedural aspects are considered and fully covered.<a href="#section-2.1-6" class="pilcrow">¶</a></p>
 <p id="section-2.1-7">OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
 </section>
@@ -1491,7 +1491,7 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
           <strong>Relying Party</strong>: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Relying Parties rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Relying Party uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.<a href="#section-3-2.3" class="pilcrow">¶</a>
 </li>
         <li id="section-3-2.4">
-          <strong>Trust Anchor</strong>: and its Intermediates, issues Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.<a href="#section-3-2.4" class="pilcrow">¶</a>
+          <strong>Trust Anchor</strong>: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.<a href="#section-3-2.4" class="pilcrow">¶</a>
 </li>
       </ol>
 <div class="alignLeft art-text artwork" id="section-3-3">
@@ -1515,7 +1515,7 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 </pre><a href="#section-3-3" class="pilcrow">¶</a>
 </div>
 <p id="section-3-4"><strong>Figure 1</strong>: The relationships and interactions within a Wallet ecosystem.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Relying Party. The Credential Issuer provides Digital Credentials to the Holder, while the Relying Party relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Holder, and Relying Party, are underpinned by the Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-5">The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Relying Party. The Credential Issuer provides Digital Credentials to the Holder, while the Relying Party relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Holder, and Relying Party, are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.<a href="#section-3-5" class="pilcrow">¶</a></p>
 <p id="section-3-6">In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.<a href="#section-3-6" class="pilcrow">¶</a></p>
 <p id="section-3-7">The transactions primarily involve the transfer or management of Digital Credentials rather than granting access to services based on identity verification.<a href="#section-3-7" class="pilcrow">¶</a></p>
 <p id="section-3-8">Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Relying Party to authenticate themselves.<a href="#section-3-8" class="pilcrow">¶</a></p>
