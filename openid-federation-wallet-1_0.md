@@ -27,7 +27,7 @@ organization="Catalogix"
     email = "roland@catalogix.se"
 
 [[author]]
-initials="M."
+initials="M.B."
 surname="Jones"
 fullname="Michael B. Jones"
 organization="Self-Issued Consulting"
@@ -87,8 +87,8 @@ This specification uses the terms
 "JSON Web Token (JWT)" defined by JSON Web Token (JWT) [@!RFC7519],
 "CBOR Web Token (CWT)" defined by CBOR Web Token (CWT) [@!RFC8392],
 "Client" as defined by [@!RFC6749],
-"Verifiable Presentation" and "Wallet Attestation" defined in [@OpenID4VP],
-"Holder" and "Credential Issuer" defined in [@OpenID4VCI],
+"Verifiable Presentation" and "Wallet Attestation" defined in [@!OpenID4VP],
+"Holder" and "Credential Issuer" defined in [@!OpenID4VCI],
 and "Trust Mark", "Federation Entity", "Trust Anchor",
 "Intermediate", and "Subordinate Statement" defined in [@!OpenID.Federation].
 
@@ -228,11 +228,11 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Trust Anchor          | `federation_entity`                                        | [@!OpenID.Federation]                       |
 | Intermediate          | `federation_entity`                                        | [@!OpenID.Federation]                       |
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
-| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@OpenID4VCI], [@RFC8414]                    |
-| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [@OpenID4VCI], this specification |
-| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation], [@OpenID4VP], this specification       |
+| Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
+| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [@!OpenID4VCI], this specification |
+| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
 
-The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, also an OAuth 2.0 Authorization Server. According to [@OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
+The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, also an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
 
 ## Metadata for OpenID Wallet Provider
 
@@ -281,7 +281,7 @@ Below is a non-normative example of `openid_wallet_provider` metadata:
 
 ## Metadata for the OpenID Credential Issuer
 
-For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to Section *11.2. Credential Issuer Metadata* in the OpenID for Verifiable Credential Issuance [@OpenID4VCI] specification.
+For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to Section *11.2. Credential Issuer Metadata* in the OpenID for Verifiable Credential Issuance [@!OpenID4VCI] specification.
 
 Since one of the key scopes of OpenID Federation is to provide consistency in the metadata of the participants described in the Entity Statements, be this Entity Configurations or Subordinate Statements, this specification requires the cryptographic material used for the Credential issuance operation be consistent and verifiable using the Trust Chain. For this reason the following metadata parameters are added:
 
@@ -752,6 +752,7 @@ We would like to thank the following individuals for their comments, ideas, and 
 - Stefan Liström
 - Francesco Antonio Marino
 - Giada Sciarretta
+- Niels Vandijk
 
 {backmatter}
 
@@ -804,15 +805,15 @@ We would like to thank the following individuals for their comments, ideas, and 
          <organization>Mattr</organization>
         </author>
         <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-          <organization>sprind.org</organization>
+          <organization>SPRIND</organization>
         </author>
         <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
-          <organization>Microsoft</organization>
+          <organization>SPRIND</organization>
         </author>
         <author initials="T." surname="Looker" fullname="Tobias Looker">
           <organization>Mattr</organization>
         </author>
-       <date day="29" month="November" year="2023"/>
+       <date day="9" month="August" year="2024"/>
       </front>
 </reference>
 
@@ -820,15 +821,15 @@ We would like to thank the following individuals for their comments, ideas, and 
         <front>
           <title>OpenID for Verifiable Credential Issuance</title>
           <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-            <organization>German Federal Agency for Disruptive Innovation (SPRIND)</organization>
+            <organization>SPRIND</organization>
           </author>
           <author initials="K." surname="Yasuda" fullname="Kristina Yasuda">
-            <organization>German Federal Agency for Disruptive Innovation (SPRIND)</organization>
+            <organization>SPRIND</organization>
           </author>
           <author initials="T." surname="Looker" fullname="Tobias Looker">
             <organization>Mattr</organization>
           </author>
-          <date day="8" month="February" year="2024"/>
+          <date day="9" month="August" year="2024"/>
         </front>
 </reference>
 
@@ -839,7 +840,7 @@ We would like to thank the following individuals for their comments, ideas, and 
             <organization>Microsoft</organization>
           </author>
           <author initials="T." surname="Lodderstedt" fullname="Torsten Lodderstedt">
-            <organization>German Federal Agency for Disruptive Innovation (SPRIND)</organization>
+            <organization>sprind.org</organization>
           </author>
           <date day="9" month="January" year="2024"/>
         </front>
