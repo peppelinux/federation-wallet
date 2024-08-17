@@ -638,7 +638,8 @@ The table and examples below use metadata parameters defined by
 | **Metadata Parameter** | **Availability** | **Value** |
 |----------|----------- | ------|
 | jwks | REQUIRED | A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys. |
-| token_endpoint | REQUIRED | Endpoint for obtaining the Wallet Instance Attestation. |
+| authorization_endpoint | REQUIRED | Endpoint for obtaining the authorization for the issuance of the Wallet Attestation. |
+| token_endpoint | REQUIRED | Endpoint for obtaining the Wallet Attestation. |
 | aal_values_supported | OPTIONAL | List of supported values for the Authenticator Assurance Level, as defined in [ NIST Special Publication 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html#sec4). These values specify the security level of the app. Values are trust framework specific. |
 | grant_types_supported | REQUIRED | The grant types supported by the token endpoint.|
 | token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint.|
