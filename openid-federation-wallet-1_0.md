@@ -1,5 +1,5 @@
 %%%
-title = "OpenID Federation Wallet Architectures 1.0"
+title = "OpenID Federation Wallet Architectures 1.0 - draft 01"
 abbrev = "openid-federation-wallet"
 ipr = "none"
 workgroup = "OpenID Connect A/B"
@@ -7,7 +7,7 @@ keyword = ["security", "openid", "ssi"]
 
 [seriesInfo]
 name = "Internet-Draft"
-value = "openid-federation-wallet-00"
+value = "openid-federation-wallet"
 status = "standard"
 
 [[author]]
@@ -62,11 +62,9 @@ This specification defines how to use OpenID Federation 1.0 [@!OpenID.Federation
 security and interoperability of wallet ecosystems, facilitating trust establishment
 among the parties and enabling secure metadata exchange and policy
 application across large scale deployments.
-
-This specification also outlines the general architecture of a federated trust
-infrastructure for wallet ecosystems, identifying participant roles and defining
-metadata used for those roles. In particular, it defines the metadata for
-the roles of Wallet Provider and Wallet Relying Party.
+It outlines the general architecture of a federated trust
+infrastructure for wallet ecosystems, identifying participant roles and describing
+the use of those roles.
 
 Additionally, this specification provides practical examples of how to apply
 policies for typical use cases within wallet ecosystems.
@@ -79,6 +77,20 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in
 this document are to be interpreted as described in BCP 14 [@!RFC2119]
 [@!RFC8174] when, and only when, they appear in all capitals, as shown here.
+
+# Scope
+
+This specification is a profile of [@!OpenID.Federation] for wallet ecosystems.
+It defines Entity Types for entities participating in those ecosystems.
+It describes technical trust evaluation mechanisms for those entities.
+It uses applicable metadata parameters defined by other specifications
+for wallet entities.
+
+Collaboration Note: When a metadata parameter is needed for an Entity Type
+defined by ths specification that does not currently exist and
+that would be usable by wallet ecosystems both using and not using OpenID Federation,
+it is the editors' intent to work with the working groups creating
+general-purpose wallet specifications to define those new parameters there.
 
 # Terminology
 
@@ -101,7 +113,7 @@ Personal Device:
 : Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations.
 
 Wallet Provider:
-: An Organizational Entity responsible for the develoment, publication, and management of a Wallet Solution. 
+: An Organizational Entity responsible for the develoment, publication, and management of a Wallet Solution.
 
 Wallet Instance:
 : Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.
@@ -114,7 +126,7 @@ Authentic Source:
 
 ## Trust Models and Trust Frameworks
 
-The terms "trust model" and "trust framework" are often used in the context of security, identity management, and federation systems. 
+The terms "trust model" and "trust framework" are often used in the context of security, identity management, and federation systems.
 
 The Trust Model defines the relationships and mechanisms through which trust is established and maintained between entities in a system. It outlines how entities interact, the basis on which they can trust each other, and the roles they play within the system. Trust Models can be simple or complex, depending on the number of parties involved and the nature of their interactions. Common examples include:
 
@@ -124,18 +136,23 @@ The Trust Model defines the relationships and mechanisms through which trust is 
 
 **Third-Party Trust** is the focus of this specification, although the **Web of Trust** model is not excluded if multiple trusted third parties (trust anchors) are supported by the participants.
 
-A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way. 
+A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way.
 
 In the scope of this specification, only the technical and procedural aspects are considered and fully covered.
 
 OpenID Federation [@!OpenID.Federation] is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.
 
-# The Four Party Model
+# The Four-Party Model
 
-The Four Party Model is a framework involving four key participants: the Holder, the Credential Issuer, the Relying Party and an Entity trusted by the other Entities called the Trust Anchor. These Entities interact with each other as described below:
+The Four-Party Model is a framework involving four key participants:
+the Holder, the Credential Issuer, the Relying Party,
+and an Entity trusted by the other Entities called the Trust Anchor.
+This is an extension of the three-party Issuer-Holder-Verifier Model described in
+[@!OpenID4VCI] and [@!OpenID4VP] that adds a fourth party: the Trust Anchor.
+The four Entities interact with each other as described below:
 
 1. **Holder**: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Relying Parties recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.
-2. **Credential Issuer**: This Entity issues Digital Credentials to the Holder, after having evaluated the trust in the Wallet Solution and the security of the Holder. 
+2. **Credential Issuer**: This Entity issues Digital Credentials to the Holder, after having evaluated the trust in the Wallet Solution and the security of the Holder.
 3. **Relying Party**: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Relying Parties rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Relying Party uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.
 4. **Trust Anchor**: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.
 
@@ -144,9 +161,9 @@ The Four Party Model is a framework involving four key participants: the Holder,
 | Authentic Source |     | Wallet Provider |
 |                  |     |                 |
 +------------------+     +-----------------+
-         |                       |    
-         |                       |       
-         V                       V       
+         |                       |
+         |                       |
+         V                       V
 +-------------------+    +---------------+    +----------------+
 | Credential Issuer |    |    Holder     |    |  Relying Party |
 |                   |<-->|               |<-->|                |
@@ -158,9 +175,9 @@ The Four Party Model is a framework involving four key participants: the Holder,
 |                          Trust Anchor                        |
 +--------------------------------------------------------------+
 ````
-**Figure 1**: The relationships and interactions within a Wallet ecosystem.
+**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model
 
-The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Relying Party. The Credential Issuer provides Digital Credentials to the Holder, while the Relying Party relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Holder, and Relying Party, are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
+The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Relying Party. The Credential Issuer provides Digital Credentials to the Holder, while the Relying Party relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Relying Party, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
 
 In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.
 
@@ -219,7 +236,7 @@ Outside the Trust Chain, we have the Wallet Attestation, where the Wallet Provid
 
 TBD: concept of RP instance in the form of verifier app in control of a natural person.
 
-# Metadata
+# Wallet Architecture Entity Types
 
 This section defines the Entity Types used by Organizational Entities in their Entity Configurations according to their roles in the Wallet ecosystem.
 
@@ -229,346 +246,36 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Intermediate          | `federation_entity`                                        | [@!OpenID.Federation]                       |
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
-| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, [`oauth_authorization_server`] | [@!OpenID4VCI], this specification |
+| Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
 | Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
 
-The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, also an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of [`oauth_authorization_server`] is OPTIONAL.
+The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of `oauth_authorization_server` is OPTIONAL.
 
-## Metadata for OpenID Wallet Provider
+## OpenID Wallet Provider Entity Type
 
 The OpenID Federation Entity Type Identifier for the Wallet Provider is `openid_wallet_provider`.
-The metadata for an OpenID Wallet Provider are listed in the table below.
 
-| **Metadata Parameter** | **Availability** | **Value** |
-|----------|----------- | ------|
-| jwks | REQUIRED | A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys. |
-| token_endpoint | REQUIRED | Endpoint for obtaining the Wallet Instance Attestation. |
-| aal_values_supported | OPTIONAL | List of supported values for the Authenticator Assurance Level, as defined in [ NIST Special Publication 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html#sec4). These values specify the security level of the app. Values are trust framework specific. |
-| grant_types_supported | REQUIRED | The grant types supported by the token endpoint.|
-| token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint.|
-| token_endpoint_auth_signing_alg_values_supported          | REQUIRED | Supported signature algorithms for the token endpoint.|
+For information on metadata parameters specific to OpenID Wallets,
+refer to Section *8. Wallet Metadata (Authorization Server Metadata)* of
+the OpenID for Verifiable Presentations [@!OpenID4VP] specification.
 
-Below is a non-normative example of `openid_wallet_provider` metadata:
+## OpenID Credential Issuer Entity Type
 
-````
-{
-  "token_endpoint": "https://wallet.provider.example/token",
-  "jwks": {
-      "keys": [
-        {
-          "crv": "P-256",
-          "kty": "EC",
-          "x": "qrJrj3Af_B57sbOIRrcBM7br7wOc8ynj7lHFPTeffUk",
-          "y": "1H0cWDyGgvU8w-kPKU_xycOCUNT2o0bwslIQtnPU6iM",
-          "kid": "5t5YYpBhN-EgIEEI5iUzr6r0MR02LnVQ0OmekmNKcjY"
-        }
-      ]
-  },
-  "aal_values_supported": [
-      "https://trust-framework.example.org/LoA/basic",
-      "https://trust-framework.example.org/LoA/medium",
-      "https://trust-framework.example.org/LoA/high"
-  ],
-  "grant_types_supported": [
-      "urn:ietf:params:oauth:client-assertion-type:jwt-client-attestation"
-  ],
-  "token_endpoint_auth_signing_alg_values_supported": ["RS256", "ES256"],
-  "token_endpoint_auth_methods_supported": [
-      "private_key_jwt"
-  ]
-}
-````
+The OpenID Federation Entity Type Identifier for the Credential Issuer is `openid_credential_issuer`.
 
-## Metadata for the OpenID Credential Issuer
+For information on metadata parameters specific to OpenID Credential Issuers,
+refer to Section *10.2. Credential Issuer Metadata* of
+the OpenID for Verifiable Credential Issuance [@!OpenID4VCI] specification.
 
-For detailed information on the metadata parameters specific to OpenID Credential Issuers, refer to Section *11.2. Credential Issuer Metadata* in the OpenID for Verifiable Credential Issuance [@!OpenID4VCI] specification.
-
-Since one of the key scopes of OpenID Federation is to provide consistency in the metadata of the participants described in the Entity Statements, be this Entity Configurations or Subordinate Statements, this specification requires the cryptographic material used for the Credential issuance operation be consistent and verifiable using the Trust Chain. For this reason the following metadata parameters are added:
-
-| Metadata Parameter | Status | Description |
-|------|----------|---------------------------------------------------------------------------------------------------------------------|
-| jwks | REQUIRED | JSON Web Key Set directly embeds the public keys used by the Credential Issuer for its signature operations, such as signing Digital Credentials. |
-
-Below is a non-normative example of a payload of an Credential Issuer Entity Configuration:
-
-````
-{
-    "iat": 1718207217,
-    "exp": 1749743216,
-    "iss": "https://eaa-provider.example.org",
-    "sub": "https://eaa-provider.example.org",
-    "authority_hints": [
-        "https://trust-anchor.example.org"
-    ],
-    "jwks": {
-        "keys": [
-            {
-                "kid": "FANFS3YnC9tjiCaivhWLVUJ3AxwGGz_98uRFaqMEEs",
-                "kty": "EC",
-                "crv": "P-256",
-                "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-            }
-        ]
-    },
-    "metadata": {
-        "federation_entity": {
-            "homepage_uri": "https://eaa-provider.example.org/",
-            "organization_name": "Organization Name",
-            "contacts": [
-                "informazioni@example.it",
-                "protocollo@pec.example.it"
-            ],
-            "tos_uri": "https://eaa-provider.example.org/public/info_policy.html",
-            "policy_uri": "https://eaa-provider.example.org/public/privacy_policy.html",
-            "logo_uri": "https://eaa-provider.example.org/public/logo.svg"
-        },
-        "oauth_authorization_server": {
-            "issuer": "https://eaa-provider.example.org",
-            "pushed_authorization_request_endpoint": "https://eaa-provider.example.org/as/par",
-            "authorization_endpoint": "https://eaa-provider.example.org/authorize",
-            "token_endpoint": "https://eaa-provider.example.org/token",
-            "client_registration_types_supported": [
-                "automatic"
-            ],
-            "code_challenge_methods_supported": [
-                "S256"
-            ],
-            "scopes_supported": [
-                "EuropeanDisabilityCard",
-                "EuropeanHealthInsuranceCard",
-                "MDL"
-            ],
-            "response_modes_supported": [
-                "form_post.jwt",
-                "query"
-            ],
-            "authorization_signing_alg_values_supported": [
-                "ES256",
-                "ES384",
-                "ES512"
-            ],
-            "grant_types_supported": [
-                "authorization_code"
-            ],
-            "token_endpoint_auth_methods_supported": [
-                "attest_jwt_client_auth"
-            ],
-            "token_endpoint_auth_signing_alg_values_supported": [
-                "ES256",
-                "ES384",
-                "ES512"
-            ],
-            "request_object_signing_alg_values_supported": [
-                "ES256",
-                "ES384",
-                "ES512"
-            ],
-            "jwks": {
-                "keys": [
-                    {
-                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
-                        "kty": "EC",
-                        "crv": "P-256",
-                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-                    }
-                ]
-            }
-        },
-        "openid_credential_issuer": {
-            // ... parameters defined in OpenID4VCI ...
-            "jwks": {
-                "keys": [
-                    {
-                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
-                        "kty": "EC",
-                        "crv": "P-256",
-                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-                    }
-                ]
-            }
-        }
-}
-````
-
-
-## Metadata for OpenID Wallet Relying Party
+## OpenID Wallet Relying Party Entity Type
 
 The OpenID Federation Entity Type Identifier for the Wallet Relying Party is `openid_wallet_relying_party`.
 
 This specification introduces a distinct Entity Type Identifier for the OpenID Wallet Relying Party to clearly differentiate it from a traditional OpenID Connect Relying Party (`openid_relying_party`). This distinction highlights the unique characteristics and functionalities of the Wallet ecosystem and its Wallet Relying Party.
 
-The metadata parameters for an OpenID Wallet Relying Party are defined below:
-
-| Metadata Parameter | Description | Reference |
-|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------|
-| client_id | It MUST contain an HTTPS URL that uniquely identifies the RP. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
-| client_name | Human-readable string name of the RP. | [@!RFC7591], Section 2 |
-| request_uris | JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
-| response_uris_supported | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
-| authorization_signed_response_alg | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
-| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
-| presentation_definitions_supported | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
-| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
-
-Below is a non-normative example of the payload of a Wallet Relying Party Entity Configuration:
-
-````
-{
-    "iat": 1718207217,
-    "exp": 1749743216,
-    "iss": "https://relying-party.example.org",
-    "sub": "https://relying-party.example.org",
-    "authority_hints": [
-        "https://trust-anchor.example.org"
-    ],
-    "jwks": {
-        "keys": [
-            {
-                "kid": "FANFS3YnC9tjiCaivhWLVUJ3AxwGGz_98uRFaqMEEs",
-                "kty": "EC",
-                "crv": "P-256",
-                "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-            }
-        ]
-    },
-    "metadata": {
-        "federation_entity": {
-            "homepage_uri": "https://relying-party.example.org",
-            "organization_name": "Organization Name",
-            "contacts": [
-                "informazioni@example.it",
-                "protocollo@pec.example.it"
-            ],
-            "tos_uri": "https://relying-party.example.org/public/info_policy.html",
-            "policy_uri": "https://relying-party.example.org/public/privacy_policy.html",
-            "logo_uri": "https://relying-party.example.org/public/logo.svg"
-        },
-        "openid_wallet_relying_party": {
-            "application_type": "web",
-            "client_id": "https://relying-party.example.org",
-            "client_name": "Organization Name",
-            "contacts": [
-                "informazioni@example.it"
-            ],
-            "request_uris": [
-                "https://relying-party.example.org/request_uri"
-            ],
-            "response_uris_supported": [
-                "https://relying-party.example.org/response_uri"
-            ],
-            "authorization_signed_response_alg": "ES256",
-            "vp_formats": {
-                "vc+sd-jwt": {
-                    "sd-jwt_alg_values": [
-                        "ES256",
-                        "ES384",
-                        "ES512"
-                    ]
-                }
-            },
-            "presentation_definitions_supported": [
-                {
-                    "id": "d76c51b7-ea90-49bb-8368-6b3d194fc131",
-                    "input_descriptors": [
-                        {
-                            "id": "PersonIdentificationData",
-                            "name": "Person Identification Data",
-                            "purpose": "User Authentication",
-                            "format": {
-                                "vc+sd-jwt": {
-                                    "alg": [
-                                        "ES256",
-                                        "ES384",
-                                        "ES512"
-                                    ]
-                                }
-                            },
-                            "constraints": {
-                                "limit_disclosure": "required",
-                                "fields": [
-                                    {
-                                        "filter": {
-                                            "const": "PersonIdentificationData",
-                                            "type": "string"
-                                        },
-                                        "path": [
-                                            "$.vct"
-                                        ]
-                                    },
-                                    {
-                                        "filter": {
-                                            "type": "object"
-                                        },
-                                        "path": [
-                                            "$.cnf.jwk"
-                                        ]
-                                    },
-                                    {
-                                        "path": [
-                                            "$.first_name"
-                                        ]
-                                    },
-                                    {
-                                        "path": [
-                                            "$.family_name"
-                                        ]
-                                    }
-                                ]
-                            }
-                        
-                        }
-                    ]
-                } 
-            ],
-            "jwks": {
-                "keys": [
-                    {
-                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
-                        "kty": "EC",
-                        "crv": "P-256",
-                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-                    }
-                ]
-            }
-        }
-    }
-}
-````
-
-### Security Considerations About The Parameters request_uris And response_uris_supported
-
-There are scenarios where the Relying Party's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Relying Party's metadata and ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that Relying Party, as defined in the OpenID Federation specification.
-
-In these cases, the RP is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.
-
-To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as https://rp.example.org/request-uri#random-value. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.
-
-For this reason, the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
-
-### Security Considerations About The End-User's Data Protection Using presentation_definitions_supported
-
-The `presentation_definitions_supported` enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
-
-The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.
-
-### Metadata for Authentic Sources
-
-An Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in [OAuth 2.0 Protected Resource Metadata](https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/).
-
-This section provides some common configurations for ...
-
-```
-non-normative example 1
-```
-
-```
-non-normative example 2
-```
+For information on metadata parameters specific to OpenID Credential Verifiers,
+refer to Section *9. Verifier Metadata (Client Metadata)* of
+the OpenID for Verifiable Presentations [@!OpenID4VP] specification.
 
 # Federation Policies
 
@@ -582,8 +289,6 @@ Qualitative aspects of federation entities, including administrative protocols, 
 
 Metadata refers to application-specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.
 
-OpenID Federation [@!OpenID.Federation] allows the definition of custom metadata schemas, since it does not limit implementations to using OAuth 2.0 and/or OpenID Connect.
-
 Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.
 
 TBD: example 1 about problem solved with a Subordinate Statement metadata parameter [sanitize endpoints]
@@ -594,7 +299,7 @@ TBD: example 3 about problem solved with a Subordinate Statement metadata parame
 
 TBD: example 4 about problem solved with a Subordinate Statement metadata parameter [digital credential configuration supported by a VCI]
 
-## Differences Between metadata and metadata_policies
+## Differences Between `metadata` and `metadata_policy`
 
 The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of [@!OpenID.Federation].
 
@@ -613,7 +318,7 @@ TBD: example 2 about problem solved with a Subordinate Statement metadata_policy
 
 Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happend through auditing or certification processes.
 
-Trust Marks are typically implemented as signed assertions that can be verified by other entities. 
+Trust Marks are typically implemented as signed assertions that can be verified by other entities.
 
 This verification process involves checking the digital signature against the public key of the Trust Mark Issuer to ensure the Trust Mark has not been forged, and its check to the Trust Mark Status endpoint to check it against any revocation.
 
@@ -740,7 +445,7 @@ sequenceDiagram
 ````
 
 
-# Implementation Considerations for the Offline Flows
+# Implementation Considerations for Offline Flows
 
 TBD: usage of static trust chain having at least a Trust Anchor in common with the requestor
 
@@ -912,9 +617,381 @@ We would like to thank the following individuals for their comments, ideas, and 
   </front>
 </reference>
 
+# Possible Use of Metadata Parameters by Wallet Entities
+
+This non-normative appendix speculates about metadata parameters that might be used
+by the Entity Types defined by this specification.
+Some of these are already defined by other specifications.
+Some are yet to be defined, and may be defined in the future by other specifications.
+Some are likely to change.
+Please read this illustrative content with these caveats in mind.
+
+## Possible OpenID Wallet Provider Metadata Usage
+
+Possible metadata parameters that could be used by
+OpenID Wallet Providers with the `openid_wallet_provider` Entity Type Identifier
+are listed in the table below.
+
+The table and examples below use metadata parameters defined by
+[@!OpenID.Federation], [@!RFC8414], and [@!OpenID4VP].
+
+| **Metadata Parameter** | **Availability** | **Value** |
+|----------|----------- | ------|
+| jwks | REQUIRED | A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys. |
+| authorization_endpoint | REQUIRED | Endpoint for obtaining the authorization for the issuance of the Wallet Attestation. |
+| token_endpoint | REQUIRED | Endpoint for obtaining the Wallet Attestation. |
+| aal_values_supported | OPTIONAL | List of supported values for the Authenticator Assurance Level, as defined in [ NIST Special Publication 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html#sec4). These values specify the security level of the app. Values are trust framework specific. |
+| grant_types_supported | REQUIRED | The grant types supported by the token endpoint.|
+| token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint.|
+| token_endpoint_auth_signing_alg_values_supported          | REQUIRED | Supported signature algorithms for the token endpoint.|
+
+Below is a non-normative example of `openid_wallet_provider` metadata:
+
+````
+{
+  "authorization_endpoint": "https://wallet.provider.example/authorization",
+  "token_endpoint": "https://wallet.provider.example/token",
+  "jwks": {
+      "keys": [
+        {
+          "crv": "P-256",
+          "kty": "EC",
+          "x": "qrJrj3Af_B57sbOIRrcBM7br7wOc8ynj7lHFPTeffUk",
+          "y": "1H0cWDyGgvU8w-kPKU_xycOCUNT2o0bwslIQtnPU6iM",
+          "kid": "5t5YYpBhN-EgIEEI5iUzr6r0MR02LnVQ0OmekmNKcjY"
+        }
+      ]
+  },
+  "aal_values_supported": [
+      "https://trust-framework.example.org/LoA/basic",
+      "https://trust-framework.example.org/LoA/medium",
+      "https://trust-framework.example.org/LoA/high"
+  ],
+  "grant_types_supported": [
+      "urn:ietf:params:oauth:client-assertion-type:jwt-client-attestation"
+  ],
+  "token_endpoint_auth_signing_alg_values_supported": ["RS256", "ES256"],
+  "token_endpoint_auth_methods_supported": [
+      "private_key_jwt"
+  ]
+}
+````
+
+## Possible OpenID Credential Issuer Metadata Usage
+
+Possible metadata parameters that could be used by
+OpenID Credential Issuers with the `openid_credential_issuer` Entity Type Identifier
+are listed in the table below.
+
+The table and examples below use metadata parameters defined by
+[@!OpenID.Federation], [@!RFC8414], and [@!OpenID4VCI].
+
+The usage described below is intended to enable
+the cryptographic material used for the Credential issuance operation be consistent
+and verifiable using the Trust Chain.
+
+| Metadata Parameter | Status | Description |
+|------|----------|---------------------------------------------------------------------------------------------------------------------|
+| jwks | REQUIRED | JSON Web Key Set directly embeds the public keys used by the Credential Issuer for its signature operations, such as signing Digital Credentials. |
+
+Below is a non-normative example of a payload of an Credential Issuer Entity Configuration:
+
+````
+{
+    "iat": 1718207217,
+    "exp": 1749743216,
+    "iss": "https://eaa-provider.example.org",
+    "sub": "https://eaa-provider.example.org",
+    "authority_hints": [
+        "https://trust-anchor.example.org"
+    ],
+    "jwks": {
+        "keys": [
+            {
+                "kid": "FANFS3YnC9tjiCaivhWLVUJ3AxwGGz_98uRFaqMEEs",
+                "kty": "EC",
+                "crv": "P-256",
+                "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
+                "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
+            }
+        ]
+    },
+    "metadata": {
+        "federation_entity": {
+            "homepage_uri": "https://eaa-provider.example.org/",
+            "organization_name": "Organization Name",
+            "contacts": [
+                "informazioni@example.it",
+                "protocollo@pec.example.it"
+            ],
+            "tos_uri": "https://eaa-provider.example.org/public/info_policy.html",
+            "policy_uri": "https://eaa-provider.example.org/public/privacy_policy.html",
+            "logo_uri": "https://eaa-provider.example.org/public/logo.svg"
+        },
+        "oauth_authorization_server": {
+            "issuer": "https://eaa-provider.example.org",
+            "pushed_authorization_request_endpoint": "https://eaa-provider.example.org/as/par",
+            "authorization_endpoint": "https://eaa-provider.example.org/authorize",
+            "token_endpoint": "https://eaa-provider.example.org/token",
+            "client_registration_types_supported": [
+                "automatic"
+            ],
+            "code_challenge_methods_supported": [
+                "S256"
+            ],
+            "scopes_supported": [
+                "EuropeanDisabilityCard",
+                "EuropeanHealthInsuranceCard",
+                "MDL"
+            ],
+            "response_modes_supported": [
+                "form_post.jwt",
+                "query"
+            ],
+            "authorization_signing_alg_values_supported": [
+                "ES256",
+                "ES384",
+                "ES512"
+            ],
+            "grant_types_supported": [
+                "authorization_code"
+            ],
+            "token_endpoint_auth_methods_supported": [
+                "attest_jwt_client_auth"
+            ],
+            "token_endpoint_auth_signing_alg_values_supported": [
+                "ES256",
+                "ES384",
+                "ES512"
+            ],
+            "request_object_signing_alg_values_supported": [
+                "ES256",
+                "ES384",
+                "ES512"
+            ],
+            "jwks": {
+                "keys": [
+                    {
+                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
+                        "kty": "EC",
+                        "crv": "P-256",
+                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
+                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
+                    }
+                ]
+            }
+        },
+        "openid_credential_issuer": {
+            // ... parameters defined in OpenID4VCI ...
+            "jwks": {
+                "keys": [
+                    {
+                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
+                        "kty": "EC",
+                        "crv": "P-256",
+                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
+                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
+                    }
+                ]
+            }
+        }
+}
+````
+
+
+## Possible OpenID Wallet Relying Party Metadata Usage
+
+Possible metadata parameters that could be used by
+OpenID Wallet Relying Parties with the `openid_wallet_relying_party` Entity Type Identifier
+are listed in the table below.
+
+The table and examples below use metadata parameters defined by
+[@!OpenID.Federation], [@!RFC7591] and [@!OpenID4VP].
+
+| Metadata Parameter | Description | Reference |
+|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------|
+| client_id | It MUST contain an HTTPS URL that uniquely identifies the RP. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
+| client_name | Human-readable string name of the RP. | [@!RFC7591], Section 2 |
+| request_uris | JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
+| response_uris_supported | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
+| authorization_signed_response_alg | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
+| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
+| presentation_definitions_supported | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
+| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
+
+Below is a non-normative example of the payload of a Wallet Relying Party Entity Configuration:
+
+````
+{
+    "iat": 1718207217,
+    "exp": 1749743216,
+    "iss": "https://relying-party.example.org",
+    "sub": "https://relying-party.example.org",
+    "authority_hints": [
+        "https://trust-anchor.example.org"
+    ],
+    "jwks": {
+        "keys": [
+            {
+                "kid": "FANFS3YnC9tjiCaivhWLVUJ3AxwGGz_98uRFaqMEEs",
+                "kty": "EC",
+                "crv": "P-256",
+                "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
+                "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
+            }
+        ]
+    },
+    "metadata": {
+        "federation_entity": {
+            "homepage_uri": "https://relying-party.example.org",
+            "organization_name": "Organization Name",
+            "contacts": [
+                "informazioni@example.it",
+                "protocollo@pec.example.it"
+            ],
+            "tos_uri": "https://relying-party.example.org/public/info_policy.html",
+            "policy_uri": "https://relying-party.example.org/public/privacy_policy.html",
+            "logo_uri": "https://relying-party.example.org/public/logo.svg"
+        },
+        "openid_wallet_relying_party": {
+            "application_type": "web",
+            "client_id": "https://relying-party.example.org",
+            "client_name": "Organization Name",
+            "contacts": [
+                "informazioni@example.it"
+            ],
+            "request_uris": [
+                "https://relying-party.example.org/request_uri"
+            ],
+            "response_uris_supported": [
+                "https://relying-party.example.org/response_uri"
+            ],
+            "authorization_signed_response_alg": "ES256",
+            "vp_formats": {
+                "vc+sd-jwt": {
+                    "sd-jwt_alg_values": [
+                        "ES256",
+                        "ES384",
+                        "ES512"
+                    ]
+                }
+            },
+            "presentation_definitions_supported": [
+                {
+                    "id": "d76c51b7-ea90-49bb-8368-6b3d194fc131",
+                    "input_descriptors": [
+                        {
+                            "id": "PersonIdentificationData",
+                            "name": "Person Identification Data",
+                            "purpose": "User Authentication",
+                            "format": {
+                                "vc+sd-jwt": {
+                                    "alg": [
+                                        "ES256",
+                                        "ES384",
+                                        "ES512"
+                                    ]
+                                }
+                            },
+                            "constraints": {
+                                "limit_disclosure": "required",
+                                "fields": [
+                                    {
+                                        "filter": {
+                                            "const": "PersonIdentificationData",
+                                            "type": "string"
+                                        },
+                                        "path": [
+                                            "$.vct"
+                                        ]
+                                    },
+                                    {
+                                        "filter": {
+                                            "type": "object"
+                                        },
+                                        "path": [
+                                            "$.cnf.jwk"
+                                        ]
+                                    },
+                                    {
+                                        "path": [
+                                            "$.first_name"
+                                        ]
+                                    },
+                                    {
+                                        "path": [
+                                            "$.family_name"
+                                        ]
+                                    }
+                                ]
+                            }
+
+                        }
+                    ]
+                }
+            ],
+            "jwks": {
+                "keys": [
+                    {
+                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
+                        "kty": "EC",
+                        "crv": "P-256",
+                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
+                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
+                    }
+                ]
+            }
+        }
+    }
+}
+````
+
+### Security Considerations About The Parameters request_uris And response_uris_supported
+
+There are scenarios where the Relying Party's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Relying Party's metadata and ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that Relying Party, as defined in the OpenID Federation specification.
+
+In these cases, the RP is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.
+
+To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as https://rp.example.org/request-uri#random-value. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.
+
+For this reason, the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
+
+### Security Considerations About The End-User's Data Protection Using presentation_definitions_supported
+
+The `presentation_definitions_supported` enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
+
+The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.
+
+### Authentic Sources
+
+An Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is `oauth_protected_resource`, as defined in [OAuth 2.0 Protected Resource Metadata](https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/).
+
+This section provides some common configurations for ...
+
+```
+non-normative example 1
+```
+
+```
+non-normative example 2
+```
+
+# Notices
+
+Copyright (c) 2024 The OpenID Foundation.
+
+The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.
+
+The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that MAY cover technology that MAY be required to practice this specification.
+
 # Document History
 
    [[ To be removed from the final specification ]]
+
+   -01
+
+   * Created Scope section describing the purpose of the document and collaboration with other working groups.
+   * Moved metadata tables and examples to an informative appendix on possible usage.
 
    -00 
 
