@@ -236,7 +236,7 @@ Outside the Trust Chain, we have the Wallet Attestation, where the Wallet Provid
 
 TBD: concept of RP instance in the form of verifier app in control of a natural person.
 
-# Wallet Entity Types
+# Wallet Architecture Entity Types
 
 This section defines the Entity Types used by Organizational Entities in their Entity Configurations according to their roles in the Wallet ecosystem.
 
