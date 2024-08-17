@@ -649,6 +649,7 @@ Below is a non-normative example of `openid_wallet_provider` metadata:
 
 ````
 {
+  "authorization_endpoint": "https://wallet.provider.example/authorization",
   "token_endpoint": "https://wallet.provider.example/token",
   "jwks": {
       "keys": [
