@@ -624,7 +624,6 @@ by the Entity Types defined by this specification.
 Some of these are already defined by other specifications.
 Some are yet to be defined, and may be defined in the future by other specifications.
 Some are likely to change.
-Some may end up not being used at all.
 Please read this illustrative content with these caveats in mind.
 
 ## Possible OpenID Wallet Provider Metadata Usage
