@@ -82,7 +82,7 @@ this document are to be interpreted as described in BCP 14 [@!RFC2119]
 
 This specification is a profile of [@!OpenID.Federation] for wallet ecosystems.
 It defines Entity Types for entities participating in those ecosystems.
-It describes trust evaluation for those entities.
+It describes technical trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.
 
