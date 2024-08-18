@@ -81,7 +81,7 @@ this document are to be interpreted as described in BCP 14 [@!RFC2119]
 # Scope
 
 This specification is a profile of [@!OpenID.Federation] for wallet ecosystems.
-It defines Entity Types for entities participating in those ecosystems.
+It defines entity types for entities participating in those ecosystems.
 It describes trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.
@@ -659,7 +659,7 @@ are listed in the table below.
 The table and examples below use metadata parameters defined by
 [@!OpenID.Federation], [@!RFC8414], and [@!OpenID4VP].
 
-| **Metadata Parameter** | **Availability** | **Value** |
+| **Metadata Parameter** | **Status** | **Value** |
 |----------|----------- | ------|
 | jwks | REQUIRED | A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys. |
 | authorization_endpoint | REQUIRED | Endpoint for obtaining the authorization for the issuance of the Wallet Attestation. |
@@ -832,16 +832,16 @@ are listed in the table below.
 The table and examples below use metadata parameters defined by
 [@!OpenID.Federation], [@!RFC7591], [@!OpenID.Registration], [@!OAuth.JARM], and [@!OpenID4VP].
 
-| Metadata Parameter | Description | Reference |
-|----------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------|
-| client_id | It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
-| client_name | Human-readable string name of the Credential Verifier. | [@!RFC7591], Section 2 |
-| request_uris | JSON Array of request_uri values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
-| response_uris_supported | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
-| authorization_signed_response_alg | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
-| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
-| presentation_definitions_supported | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
-| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
+| Metadata Parameter | Status | Description | Reference |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------|---------------|-----------|
+| client_id | REQUIRED | It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
+| client_name | REQUIRED | Human-readable string name of the Credential Verifier used for representing the Credential Verifier to the User. | [@!RFC7591], Section 2 |
+| request_uris | OPTIONAL | JSON Array of `request_uri` values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
+| response_uris_supported | OPTIONAL | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
+| authorization_signed_response_alg | OPTIONAL | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
+| vp_formats | OPTIONAL | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
+| presentation_definitions_supported | OPTIONAL | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
+| jwks | REQUIRED | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
 
 Below is a non-normative example of the payload of a Credential Verifier Entity Configuration:
 
