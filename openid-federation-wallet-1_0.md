@@ -202,7 +202,7 @@ Web Wallet Native Application
 Progressive Web Application Wallet (PWAW)
 : PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
 
-## Establishing Trust With The Holder
+## Establishing Trust with the Holder
 
 Since the Holder may not be an Organizational Entity and cannot be registered as an Organization through registration services, it is not represented within a Trust Chain and does not qualify as a Federation Entity. This context sets the stage for understanding the unique position of the Holder in relation to the Trust Chain and Federation Entities.
 
@@ -334,7 +334,7 @@ TBD: example 3 about problem solved with a Subordinate Statement trust_marks par
 
 The process of trust establishment in federated environments is illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Credential Verifiers (CVs).
 
-## Wallet Checking The Non-Revocation Of Its Wallet Provider
+## Wallet Checking the Non-Revocation of its Wallet Provider
 
 ...
 
@@ -659,15 +659,15 @@ are listed in the table below.
 The table and examples below use metadata parameters defined by
 [@!OpenID.Federation], [@!RFC8414], and [@!OpenID4VP].
 
-| **Metadata Parameter** | **Status** | **Value** |
-|----------|----------- | ------|
-| jwks | REQUIRED | A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys. |
-| authorization_endpoint | REQUIRED | Endpoint for obtaining the authorization for the issuance of the Wallet Attestation. |
-| token_endpoint | REQUIRED | Endpoint for obtaining the Wallet Attestation. |
-| aal_values_supported | OPTIONAL | List of supported values for the Authenticator Assurance Level, as defined in [ NIST Special Publication 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html#sec4). These values specify the security level of the app. Values are trust framework specific. |
-| grant_types_supported | REQUIRED | The grant types supported by the token endpoint.|
-| token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint.|
-| token_endpoint_auth_signing_alg_values_supported          | REQUIRED | Supported signature algorithms for the token endpoint.|
+| Metadata Parameter | Status | Description | Reference|
+|----------|---------|---------------|---------|
+| jwks | REQUIRED | A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys | Section 5.2.1 of [@!OpenID.Federation] and JWK [@!RFC7517] |
+| authorization_endpoint | REQUIRED | Endpoint for obtaining the authorization for the issuance of the Wallet Attestation | Section 2 of [@!RFC8414] |
+| token_endpoint | REQUIRED | Endpoint for obtaining the Wallet Attestation | Section 2 of [@!RFC8414] |
+| aal_values_supported | OPTIONAL | List of supported values for the Authenticator Assurance Level, as defined in [ NIST Special Publication 800-63B](https://pages.nist.gov/800-63-3/sp800-63b.html#sec4). These values specify the security level of the app. Values are trust framework specific | this specification |
+| grant_types_supported | REQUIRED | Grant types supported by the token endpoint | Section 2 of [@!RFC8414] |
+| token_endpoint_auth_methods_supported | REQUIRED | Supported authentication methods for the token endpoint | Section 2 of [@!RFC8414] |
+| token_endpoint_auth_signing_alg_values_supported | REQUIRED | Supported signature algorithms for the token endpoint | Section 2 of [@!RFC8414] |
 
 Below is a non-normative example of `openid_wallet_provider` metadata:
 
@@ -708,15 +708,15 @@ OpenID Credential Issuers with the `openid_credential_issuer` Entity Type Identi
 are listed in the table below.
 
 The table and examples below use metadata parameters defined by
-[@!OpenID.Federation], [@!RFC8414]], [@!RFC9126], [@OpenID.Discovery], and [@!OpenID4VCI].
+[@!OpenID.Federation], [@!RFC8414]], [@!RFC9126], [@!OpenID.Discovery], and [@!OpenID4VCI].
 
 The usage described below is intended to enable
 the cryptographic material used for the Credential issuance operation be consistent
 and verifiable using the Trust Chain.
 
-| Metadata Parameter | Status | Description |
-|------|----------|---------------------------------------------------------------------------------------------------------------------|
-| jwks | REQUIRED | JSON Web Key Set directly embeds the public keys used by the Credential Issuer for its signature operations, such as signing Digital Credentials. |
+| Metadata Parameter | Status | Description | Reference |
+|----------|---------|---------------|---------|
+| jwks | REQUIRED | JSON Web Key Set directly embeds the public keys used by the Credential Issuer for its signature operations, such as signing Digital Credentials | Section 5.2.1 of [@!OpenID.Federation] and JWK [@!RFC7517] |
 
 Below is a non-normative example of a payload of an Credential Issuer Entity Configuration:
 
@@ -833,15 +833,15 @@ The table and examples below use metadata parameters defined by
 [@!OpenID.Federation], [@!RFC7591], [@!OpenID.Registration], [@!OAuth.JARM], and [@!OpenID4VP].
 
 | Metadata Parameter | Status | Description | Reference |
-|----------------------------------------|------------------------------------------------------------------------------------------------------------|---------------|-----------|
-| client_id | REQUIRED | It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
-| client_name | REQUIRED | Human-readable string name of the Credential Verifier used for representing the Credential Verifier to the User. | [@!RFC7591], Section 2 |
-| request_uris | OPTIONAL | JSON Array of `request_uri` values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
-| response_uris_supported | OPTIONAL | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
-| authorization_signed_response_alg | OPTIONAL | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
-| vp_formats | OPTIONAL | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
-| presentation_definitions_supported | OPTIONAL | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
-| jwks | REQUIRED | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
+|----------|---------|---------------|---------|
+| client_id | REQUIRED | It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier | Section 3.2.1 of [@!RFC7591] and Section 3.2 of [@!OpenID.Registration] |
+| client_name | REQUIRED | Human-readable string name of the Credential Verifier used for representing the Credential Verifier to the User | Section 2 of [@!RFC7591] |
+| request_uris | OPTIONAL | JSON Array of `request_uri` values that are pre-registered by the Credential Verifier. These URLs MUST use the `https` scheme. | Section 2 of [@!OpenID.Registration] |
+| response_uris_supported | OPTIONAL | JSON Array of `response_uri` strings, as specified by [@!OpenID4VP], to which the Wallet Instance MAY send the Authorization Response using an HTTP POST request | this specification |
+| authorization_signed_response_alg | OPTIONAL | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and Section 3 of [@!OAuth.JARM] |
+| vp_formats | OPTIONAL | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports | Section 7.2.7 of [@!OpenID4VC-HAIP] and Section 9.1 of [@!OpenID4VP] |
+| presentation_definitions_supported | OPTIONAL | JSON Array of supported `presentation_definition` objects | this specification, Section 5 of [@!DIF.PresentationExchange], and Section 7.2.8 of [@!OpenID4VC-HAIP] |
+| jwks | REQUIRED | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier | Section 5.2.1 of [@!OpenID.Federation] and JWK [@!RFC7517] |
 
 Below is a non-normative example of the payload of a Credential Verifier Entity Configuration:
 
@@ -970,7 +970,7 @@ Below is a non-normative example of the payload of a Credential Verifier Entity 
 }
 ````
 
-### Security Considerations About The Parameters request_uris And response_uris_supported
+### Security Considerations about the Parameters `request_uris` and `response_uris_supported`
 
 There are scenarios where the Credential Verifier's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Credential Verifier's metadata and ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that Credential Verifier, as defined in the OpenID Federation specification.
 
@@ -980,7 +980,7 @@ To enhance the security of implementations, it is generally recommended that Cre
 
 For this reason, the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
 
-### Security Considerations About The End-User's Data Protection Using presentation_definitions_supported
+### Security Considerations about the End-User's Data Protection Using `presentation_definitions_supported`
 
 The `presentation_definitions_supported` enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Credential Verifier is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
 
