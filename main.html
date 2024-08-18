@@ -1429,7 +1429,7 @@ this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
       </h2>
 <p id="section-2-1">This specification is a profile of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> for wallet ecosystems.
-It defines Entity Types for entities participating in those ecosystems.
+It defines entity types for entities participating in those ecosystems.
 It describes trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.<a href="#section-2-1" class="pilcrow">¶</a></p>
@@ -2059,7 +2059,7 @@ are listed in the table below.<a href="#appendix-A.1-1" class="pilcrow">¶</a></
                 <strong>Metadata Parameter</strong>
 </th>
               <th class="text-left" rowspan="1" colspan="1">
-                <strong>Availability</strong>
+                <strong>Status</strong>
 </th>
               <th class="text-left" rowspan="1" colspan="1">
                 <strong>Value</strong>
@@ -2287,6 +2287,7 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
 <thead>
             <tr>
               <th class="text-left" rowspan="1" colspan="1">Metadata Parameter</th>
+              <th class="text-left" rowspan="1" colspan="1">Status</th>
               <th class="text-left" rowspan="1" colspan="1">Description</th>
               <th class="text-left" rowspan="1" colspan="1">Reference</th>
             </tr>
@@ -2294,46 +2295,54 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
           <tbody>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">client_id</td>
+              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
               <td class="text-left" rowspan="1" colspan="1">It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, Section 3.2.1 and <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, Section 3.2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">client_name</td>
-              <td class="text-left" rowspan="1" colspan="1">Human-readable string name of the Credential Verifier.</td>
+              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
+              <td class="text-left" rowspan="1" colspan="1">Human-readable string name of the Credential Verifier used for representing the Credential Verifier to the User.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, Section 2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">request_uris</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Array of request_uri values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme.</td>
+              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
+              <td class="text-left" rowspan="1" colspan="1">JSON Array of <code>request_uri</code> values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, Section 2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">response_uris_supported</td>
+              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request.</td>
               <td class="text-left" rowspan="1" colspan="1">this specification</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">authorization_signed_response_alg</td>
+              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm <code>none</code> MUST NOT be used.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> and <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>, Section 3</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">vp_formats</td>
+              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span>, Section 7.2.7 and OpenID4VP, Section 9.1</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">presentation_definitions_supported</td>
+              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined.</td>
               <td class="text-left" rowspan="1" colspan="1">this specification, <span>[<a href="#DIF.PresentationExchange" class="cite xref">DIF.PresentationExchange</a>]</span>, Section 5 and <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span>, Section 7.2.8</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">jwks</td>
+              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
               <td class="text-left" rowspan="1" colspan="1">JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>, Section 3, <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, Section 5.2.1, and JWK <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>
