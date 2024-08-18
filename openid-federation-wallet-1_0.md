@@ -483,6 +483,30 @@ We would like to thank the following individuals for their comments, ideas, and 
   </front>
 </reference>
 
+<reference anchor="OpenID.Discovery" target="https://openid.net/specs/openid-connect-discovery-1_0.html">
+  <front>
+    <title>OpenID Connect Discovery 1.0</title>
+
+    <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
+      <organization abbrev="NAT.Consulting (was at NRI)">NAT.Consulting</organization>
+    </author>
+
+    <author fullname="John Bradley" initials="J." surname="Bradley">
+      <organization abbrev="Yubico (was at Ping Identity)">Yubico</organization>
+    </author>
+
+    <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+      <organization abbrev="Self-Issued Consulting (was at Microsoft)">Self-Issued Consulting</organization>
+    </author>
+
+    <author fullname="Edmund Jay" initials="E." surname="Jay">
+      <organization abbrev="Illumila">Illumila</organization>
+    </author>
+
+    <date day="15" month="December" year="2023"/>
+  </front>
+</reference>
+
 <reference anchor="OpenID.Registration" target="https://openid.net/specs/openid-connect-registration-1_0.html">
   <front>
     <title>OpenID Connect Dynamic Client Registration 1.0</title>
@@ -684,7 +708,7 @@ OpenID Credential Issuers with the `openid_credential_issuer` Entity Type Identi
 are listed in the table below.
 
 The table and examples below use metadata parameters defined by
-[@!OpenID.Federation], [@!RFC8414], and [@!OpenID4VCI].
+[@!OpenID.Federation], [@!RFC8414]], [@!RFC9126], [@OpenID.Discovery], and [@!OpenID4VCI].
 
 The usage described below is intended to enable
 the cryptographic material used for the Credential issuance operation be consistent
@@ -806,7 +830,7 @@ OpenID Wallet Credential Verifiers with the `openid_credential_verifier` Entity 
 are listed in the table below.
 
 The table and examples below use metadata parameters defined by
-[@!OpenID.Federation], [@!RFC7591] and [@!OpenID4VP].
+[@!OpenID.Federation], [@!RFC7591], [@!OpenID.Registration], [@!OAuth.JARM], and [@!OpenID4VP].
 
 | Metadata Parameter | Description | Reference |
 |----------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------|
