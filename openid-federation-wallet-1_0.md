@@ -82,7 +82,7 @@ this document are to be interpreted as described in BCP 14 [@!RFC2119]
 
 This specification is a profile of [@!OpenID.Federation] for wallet ecosystems.
 It defines Entity Types for entities participating in those ecosystems.
-It describes technical trust evaluation mechanisms for those entities.
+It describes trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.
 
@@ -145,15 +145,15 @@ OpenID Federation [@!OpenID.Federation] is a building block for assembling and u
 # The Four-Party Model
 
 The Four-Party Model is a framework involving four key participants:
-the Holder, the Credential Issuer, the Relying Party,
+the Holder, the Credential Issuer, the Credential Verifier,
 and an Entity trusted by the other Entities called the Trust Anchor.
 This is an extension of the three-party Issuer-Holder-Verifier Model described in
 [@!OpenID4VCI] and [@!OpenID4VP] that adds a fourth party: the Trust Anchor.
 The four Entities interact with each other as described below:
 
-1. **Holder**: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Relying Parties recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.
+1. **Holder**: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Credential Verifiers recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.
 2. **Credential Issuer**: This Entity issues Digital Credentials to the Holder, after having evaluated the trust in the Wallet Solution and the security of the Holder.
-3. **Relying Party**: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Relying Parties rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Relying Party uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.
+3. **Credential Verifier**: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Credential Verifiers rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Credential Verifier uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.
 4. **Trust Anchor**: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.
 
 ````
@@ -164,10 +164,10 @@ The four Entities interact with each other as described below:
          |                       |
          |                       |
          V                       V
-+-------------------+    +---------------+    +----------------+
-| Credential Issuer |    |    Holder     |    |  Relying Party |
-|                   |<-->|               |<-->|                |
-+-------------------+    +---------------+    +----------------+
++-------------------+    +---------------+    +---------------------+
+| Credential Issuer |<-->|    Holder     |<-->| Credential Verifier |
+|                   |    |               |    |                     |
++-------------------+    +---------------+    +---------------------+
          |                       |                     |
          |                       |                     |
          V                       V                     V
@@ -177,13 +177,13 @@ The four Entities interact with each other as described below:
 ````
 **Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model
 
-The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Relying Party. The Credential Issuer provides Digital Credentials to the Holder, while the Relying Party relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Relying Party, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
+The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Credential Verifier. The Credential Issuer provides Digital Credentials to the Holder, while the Credential Verifier relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Credential Verifier, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
 
 In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.
 
 The transactions primarily involve the transfer or management of Digital Credentials rather than granting access to services based on identity verification.
 
-Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Relying Party to authenticate themselves.
+Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Credential Verifier to authenticate themselves.
 
 # Wallet Instance Types
 
@@ -232,9 +232,9 @@ Since the Holder may not be an Organizational Entity and cannot be registered as
 
 Outside the Trust Chain, we have the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the responsibility of the Wallet Provider.
 
-# Establishing Trust With The Verifier
+# Establishing Trust with the Credential Verifier
 
-TBD: concept of RP instance in the form of verifier app in control of a natural person.
+TBD: concept of Credential Verifier instance in the form of verifier app in control of a natural person.
 
 # Wallet Architecture Entity Types
 
@@ -247,7 +247,7 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
-| Relying Party         | `federation_entity`, `openid_wallet_relying_party`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
+| Credential Verifier         | `federation_entity`, `openid_credential_verifier`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
 
 The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of `oauth_authorization_server` is OPTIONAL.
 
@@ -267,11 +267,11 @@ For information on metadata parameters specific to OpenID Credential Issuers,
 refer to Section *10.2. Credential Issuer Metadata* of
 the OpenID for Verifiable Credential Issuance [@!OpenID4VCI] specification.
 
-## OpenID Wallet Relying Party Entity Type
+## OpenID Credential Verifier Entity Type
 
-The OpenID Federation Entity Type Identifier for the Wallet Relying Party is `openid_wallet_relying_party`.
+The OpenID Federation Entity Type Identifier for the Credential Verifier is `openid_credential_verifier`.
 
-This specification introduces a distinct Entity Type Identifier for the OpenID Wallet Relying Party to clearly differentiate it from a traditional OpenID Connect Relying Party (`openid_relying_party`). This distinction highlights the unique characteristics and functionalities of the Wallet ecosystem and its Wallet Relying Party.
+This specification introduces a distinct Entity Type Identifier for the OpenID Credential Verifier to clearly differentiate it from a traditional OpenID Connect Relying Party (`openid_relying_party`). This distinction highlights the unique characteristics and functionalities of the Wallet ecosystem and its Credential Verifier.
 
 For information on metadata parameters specific to OpenID Credential Verifiers,
 refer to Section *9. Verifier Metadata (Client Metadata)* of
@@ -295,7 +295,7 @@ TBD: example 1 about problem solved with a Subordinate Statement metadata parame
 
 TBD: example 2 about problem solved with a Subordinate Statement metadata parameter [name of the organization]
 
-TBD: example 3 about problem solved with a Subordinate Statement metadata parameter [data that can be requested by an RP]
+TBD: example 3 about problem solved with a Subordinate Statement metadata parameter [data that can be requested by a Credential Verifier]
 
 TBD: example 4 about problem solved with a Subordinate Statement metadata parameter [digital credential configuration supported by a VCI]
 
@@ -332,7 +332,7 @@ TBD: example 3 about problem solved with a Subordinate Statement trust_marks par
 
 # Federation Trust Discovery Use Cases
 
-The process of trust establishment in federated environments is  illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Relying Parties (RPs).
+The process of trust establishment in federated environments is illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Credential Verifiers (CVs).
 
 ## Wallet Checking The Non-Revocation Of Its Wallet Provider
 
@@ -350,7 +350,7 @@ sequenceDiagram
     participant Wallet
     participant TA as Trust Anchor
     participant IM as Intermediate
-    participant CI as Credential Issuer (CI)
+    participant CI as Credential Issuer
 
     Wallet->>TA: Fetch the list of all Intermediates and CIs
     loop for each Intermediate
@@ -407,24 +407,24 @@ sequenceDiagram
 
 ...
 
-## Wallet Establishing Trust in the Relying Party
+## Wallet Establishing Trust in the Credential Verifier
 
-The Federation Entity Discovery starts with the Wallet Instance fetching the Relying Party's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Relying Party. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Relying Party final metadata.
+The Federation Entity Discovery starts with the Wallet Instance fetching the Credential Verifier's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Credential Verifier. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Credential Verifier final metadata.
 
 Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.
 
 ````mermaid
 sequenceDiagram
     participant WalletInstance as Wallet Instance
-    participant RP as Relying Party
+    participant CV as Credential Verifier
     participant IE as Intermediate
     participant TA as Trust Anchor
 
-    WalletInstance->>RP: Fetch RP's Entity Configuration
-    RP->>WalletInstance: Return Entity Configuration
+    WalletInstance->>CV: Fetch CV's Entity Configuration
+    CV->>WalletInstance: Return Entity Configuration
 
-    WalletInstance->>RP: Extract Authority Hints from RP's Configuration
-    RP->>WalletInstance: Provide Authority Hints
+    WalletInstance->>CV: Extract Authority Hints from CV's Configuration
+    CV->>WalletInstance: Provide Authority Hints
 
     loop for each Authority Hint
         WalletInstance->>IE: Fetch Entity Configuration -> get federation_fetch_api URL
@@ -441,7 +441,7 @@ sequenceDiagram
     end
 
     WalletInstance->>WalletInstance: Applies Policies
-    WalletInstance->>WalletInstance: Derive RP's final metadata
+    WalletInstance->>WalletInstance: Derive CV's final metadata
 ````
 
 
@@ -649,8 +649,8 @@ Below is a non-normative example of `openid_wallet_provider` metadata:
 
 ````
 {
-  "authorization_endpoint": "https://wallet.provider.example/authorization",
-  "token_endpoint": "https://wallet.provider.example/token",
+  "authorization_endpoint": "https://wallet-provider.example/authorization",
+  "token_endpoint": "https://wallet-provider.example/token",
   "jwks": {
       "keys": [
         {
@@ -799,10 +799,10 @@ Below is a non-normative example of a payload of an Credential Issuer Entity Con
 ````
 
 
-## Possible OpenID Wallet Relying Party Metadata Usage
+## Possible OpenID Credential Verifier Metadata Usage
 
 Possible metadata parameters that could be used by
-OpenID Wallet Relying Parties with the `openid_wallet_relying_party` Entity Type Identifier
+OpenID Wallet Credential Verifiers with the `openid_credential_verifier` Entity Type Identifier
 are listed in the table below.
 
 The table and examples below use metadata parameters defined by
@@ -810,23 +810,23 @@ The table and examples below use metadata parameters defined by
 
 | Metadata Parameter | Description | Reference |
 |----------------------------------------|---------------------------------------------------------------------------------------------------------------------------|-----------|
-| client_id | It MUST contain an HTTPS URL that uniquely identifies the RP. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
-| client_name | Human-readable string name of the RP. | [@!RFC7591], Section 2 |
-| request_uris | JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
+| client_id | It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier. | [@!RFC7591], Section 3.2.1 and [@!OpenID.Registration], Section 3.2 |
+| client_name | Human-readable string name of the Credential Verifier. | [@!RFC7591], Section 2 |
+| request_uris | JSON Array of request_uri values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme. | [@!OpenID.Registration], Section 2 |
 | response_uris_supported | JSON Array of response URI strings to which the Wallet Instance MUST send the Authorization Response using an HTTP POST request. | this specification |
 | authorization_signed_response_alg | String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm `none` MUST NOT be used. | [@!RFC7515] and [@!OAuth.JARM], Section 3 |
-| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
+| vp_formats | JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports. | [@!OpenID4VC-HAIP], Section 7.2.7 and OpenID4VP, Section 9.1 |
 | presentation_definitions_supported | JSON Array of supported presentation_definition objects that MUST be compliant to the syntax defined. | this specification, [@!DIF.PresentationExchange], Section 5 and [@!OpenID4VC-HAIP], Section 7.2.8 |
-| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
+| jwks | JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier. | [@!OAuth.JARM], Section 3, [@!OpenID.Federation], Section 5.2.1, and JWK [@!RFC7517] |
 
-Below is a non-normative example of the payload of a Wallet Relying Party Entity Configuration:
+Below is a non-normative example of the payload of a Credential Verifier Entity Configuration:
 
 ````
 {
     "iat": 1718207217,
     "exp": 1749743216,
-    "iss": "https://relying-party.example.org",
-    "sub": "https://relying-party.example.org",
+    "iss": "https://verifier.example.org",
+    "sub": "https://verifier.example.org",
     "authority_hints": [
         "https://trust-anchor.example.org"
     ],
@@ -843,28 +843,28 @@ Below is a non-normative example of the payload of a Wallet Relying Party Entity
     },
     "metadata": {
         "federation_entity": {
-            "homepage_uri": "https://relying-party.example.org",
+            "homepage_uri": "https://verifier.example.org",
             "organization_name": "Organization Name",
             "contacts": [
                 "informazioni@example.it",
                 "protocollo@pec.example.it"
             ],
-            "tos_uri": "https://relying-party.example.org/public/info_policy.html",
-            "policy_uri": "https://relying-party.example.org/public/privacy_policy.html",
-            "logo_uri": "https://relying-party.example.org/public/logo.svg"
+            "tos_uri": "https://verifier.example.org/public/info_policy.html",
+            "policy_uri": "https://verifier.example.org/public/privacy_policy.html",
+            "logo_uri": "https://verifier.example.org/public/logo.svg"
         },
-        "openid_wallet_relying_party": {
+        "openid_credential_verifier": {
             "application_type": "web",
-            "client_id": "https://relying-party.example.org",
+            "client_id": "https://verifier.example.org",
             "client_name": "Organization Name",
             "contacts": [
                 "informazioni@example.it"
             ],
             "request_uris": [
-                "https://relying-party.example.org/request_uri"
+                "https://verifier.example.org/request_uri"
             ],
             "response_uris_supported": [
-                "https://relying-party.example.org/response_uri"
+                "https://verifier.example.org/response_uri"
             ],
             "authorization_signed_response_alg": "ES256",
             "vp_formats": {
@@ -948,19 +948,19 @@ Below is a non-normative example of the payload of a Wallet Relying Party Entity
 
 ### Security Considerations About The Parameters request_uris And response_uris_supported
 
-There are scenarios where the Relying Party's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Relying Party's metadata and ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that Relying Party, as defined in the OpenID Federation specification.
+There are scenarios where the Credential Verifier's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Credential Verifier's metadata and ensures its integrity and authenticity by utilizing `metadata` and the `metadata_policy` in the Subordinate Statement about that Credential Verifier, as defined in the OpenID Federation specification.
 
-In these cases, the RP is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.
+In these cases, the Credential Verifier is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.
 
-To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as https://rp.example.org/request-uri#random-value. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.
+To enhance the security of implementations, it is generally recommended that Credential Verifiers randomize their endpoints. This strategy involves appending random fragments to the URIs, such as https://verifier.example.org/request-uri#random-value. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.
 
 For this reason, the parameters `metadata` or `metadata_policy` SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.
 
 ### Security Considerations About The End-User's Data Protection Using presentation_definitions_supported
 
-The `presentation_definitions_supported` enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
+The `presentation_definitions_supported` enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Credential Verifier is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.
 
-The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.
+The `metadata` and `metadata_policy` parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Credential Verifier. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.
 
 ### Authentic Sources
 
@@ -992,6 +992,7 @@ The technology described in this specification was made available from contribut
 
    * Created Scope section describing the purpose of the document and collaboration with other working groups.
    * Moved metadata tables and examples to an informative appendix on possible usage.
+   * Fixed #10: Renamed `openid_wallet_relying_party` to `openid_credential_verifier`.
 
    -00 
 
