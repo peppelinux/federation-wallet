@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-17" class="published">17 August 2024</time>
+<time datetime="2024-08-18" class="published">18 August 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1290,7 +1290,7 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-establishing-trust-with-the-" class="internal xref">Establishing Trust With The Verifier</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-establishing-trust-with-the-" class="internal xref">Establishing Trust with the Credential Verifier</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-wallet-architecture-entity-" class="internal xref">Wallet Architecture Entity Types</a></p>
@@ -1302,7 +1302,7 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-openid-credential-issuer-en" class="internal xref">OpenID Credential Issuer Entity Type</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
-                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-openid-wallet-relying-party" class="internal xref">OpenID Wallet Relying Party Entity Type</a></p>
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-openid-credential-verifier-" class="internal xref">OpenID Credential Verifier Entity Type</a></p>
 </li>
             </ul>
 </li>
@@ -1339,7 +1339,7 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
                 <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.  <a href="#name-credential-issuers-establish" class="internal xref">Credential Issuers Establishing Trust in the Wallet</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
-                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-wallet-establishing-trust-i" class="internal xref">Wallet Establishing Trust in the Relying Party</a></p>
+                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-wallet-establishing-trust-i" class="internal xref">Wallet Establishing Trust in the Credential Verifier</a></p>
 </li>
             </ul>
 </li>
@@ -1362,7 +1362,7 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
                 <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-possible-openid-credential-" class="internal xref">Possible OpenID Credential Issuer Metadata Usage</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
-                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-possible-openid-wallet-rely" class="internal xref">Possible OpenID Wallet Relying Party Metadata Usage</a></p>
+                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-possible-openid-credential-v" class="internal xref">Possible OpenID Credential Verifier Metadata Usage</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3.2.1">
                     <p id="section-toc.1-1.13.2.3.2.1.1"><a href="#appendix-A.3.1" class="auto internal xref">A.3.1</a>.  <a href="#name-security-considerations-abo" class="internal xref">Security Considerations About The Parameters request_uris And response_uris_supported</a></p>
@@ -1430,7 +1430,7 @@ this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2
       </h2>
 <p id="section-2-1">This specification is a profile of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> for wallet ecosystems.
 It defines Entity Types for entities participating in those ecosystems.
-It describes technical trust evaluation mechanisms for those entities.
+It describes trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.<a href="#section-2-1" class="pilcrow">¶</a></p>
 <p id="section-2-2">Collaboration Note: When a metadata parameter is needed for an Entity Type
@@ -1513,20 +1513,20 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-four-party-model" class="section-name selfRef">The Four-Party Model</a>
       </h2>
 <p id="section-4-1">The Four-Party Model is a framework involving four key participants:
-the Holder, the Credential Issuer, the Relying Party,
+the Holder, the Credential Issuer, the Credential Verifier,
 and an Entity trusted by the other Entities called the Trust Anchor.
 This is an extension of the three-party Issuer-Holder-Verifier Model described in
 <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span> and <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span> that adds a fourth party: the Trust Anchor.
 The four Entities interact with each other as described below:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ol start="1" type="1" class="compact type-1" id="section-4-2">
 <li id="section-4-2.1">
-          <strong>Holder</strong>: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Relying Parties recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.<a href="#section-4-2.1" class="pilcrow">¶</a>
+          <strong>Holder</strong>: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Credential Verifiers recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.<a href="#section-4-2.1" class="pilcrow">¶</a>
 </li>
         <li id="section-4-2.2">
           <strong>Credential Issuer</strong>: This Entity issues Digital Credentials to the Holder, after having evaluated the trust in the Wallet Solution and the security of the Holder.<a href="#section-4-2.2" class="pilcrow">¶</a>
 </li>
         <li id="section-4-2.3">
-          <strong>Relying Party</strong>: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Relying Parties rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Relying Party uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.<a href="#section-4-2.3" class="pilcrow">¶</a>
+          <strong>Credential Verifier</strong>: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Credential Verifiers rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Credential Verifier uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.<a href="#section-4-2.3" class="pilcrow">¶</a>
 </li>
         <li id="section-4-2.4">
           <strong>Trust Anchor</strong>: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.<a href="#section-4-2.4" class="pilcrow">¶</a>
@@ -1540,10 +1540,10 @@ The four Entities interact with each other as described below:<a href="#section-
          |                       |
          |                       |
          V                       V
-+-------------------+    +---------------+    +----------------+
-| Credential Issuer |    |    Holder     |    |  Relying Party |
-|                   |&lt;--&gt;|               |&lt;--&gt;|                |
-+-------------------+    +---------------+    +----------------+
++-------------------+    +---------------+    +---------------------+
+| Credential Issuer |&lt;--&gt;|    Holder     |&lt;--&gt;| Credential Verifier |
+|                   |    |               |    |                     |
++-------------------+    +---------------+    +---------------------+
          |                       |                     |
          |                       |                     |
          V                       V                     V
@@ -1553,10 +1553,10 @@ The four Entities interact with each other as described below:<a href="#section-
 </pre><a href="#section-4-3" class="pilcrow">¶</a>
 </div>
 <p id="section-4-4"><strong>Figure 1</strong>: The relationships and interactions within a Wallet ecosystem using the Four-Party Model<a href="#section-4-4" class="pilcrow">¶</a></p>
-<p id="section-4-5">The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Relying Party. The Credential Issuer provides Digital Credentials to the Holder, while the Relying Party relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Relying Party, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-5">The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Credential Verifier. The Credential Issuer provides Digital Credentials to the Holder, while the Credential Verifier relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Credential Verifier, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.<a href="#section-4-6" class="pilcrow">¶</a></p>
 <p id="section-4-7">The transactions primarily involve the transfer or management of Digital Credentials rather than granting access to services based on identity verification.<a href="#section-4-7" class="pilcrow">¶</a></p>
-<p id="section-4-8">Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Relying Party to authenticate themselves.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-8">Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Credential Verifier to authenticate themselves.<a href="#section-4-8" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="wallet-instance-types">
@@ -1624,12 +1624,12 @@ The four Entities interact with each other as described below:<a href="#section-
 </div>
 </section>
 </div>
-<div id="establishing-trust-with-the-verifier">
+<div id="establishing-trust-with-the-credential-verifier">
 <section id="section-6">
       <h2 id="name-establishing-trust-with-the-">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-establishing-trust-with-the-" class="section-name selfRef">Establishing Trust With The Verifier</a>
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-establishing-trust-with-the-" class="section-name selfRef">Establishing Trust with the Credential Verifier</a>
       </h2>
-<p id="section-6-1">TBD: concept of RP instance in the form of verifier app in control of a natural person.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">TBD: concept of Credential Verifier instance in the form of verifier app in control of a natural person.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="wallet-architecture-entity-types">
@@ -1691,9 +1691,9 @@ The four Entities interact with each other as described below:<a href="#section-
               <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, this specification</td>
           </tr>
           <tr>
-            <td class="text-left" rowspan="1" colspan="1">Relying Party</td>
+            <td class="text-left" rowspan="1" colspan="1">Credential Verifier</td>
             <td class="text-left" rowspan="1" colspan="1">
-              <code>federation_entity</code>, <code>openid_wallet_relying_party</code>
+              <code>federation_entity</code>, <code>openid_credential_verifier</code>
 </td>
             <td class="text-left" rowspan="1" colspan="1">
               <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>, this specification</td>
@@ -1723,13 +1723,13 @@ refer to Section <em>10.2. Credential Issuer Metadata</em> of
 the OpenID for Verifiable Credential Issuance <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span> specification.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="openid-wallet-relying-party-entity-type">
+<div id="openid-credential-verifier-entity-type">
 <section id="section-7.3">
-        <h3 id="name-openid-wallet-relying-party">
-<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-openid-wallet-relying-party" class="section-name selfRef">OpenID Wallet Relying Party Entity Type</a>
+        <h3 id="name-openid-credential-verifier-">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-openid-credential-verifier-" class="section-name selfRef">OpenID Credential Verifier Entity Type</a>
         </h3>
-<p id="section-7.3-1">The OpenID Federation Entity Type Identifier for the Wallet Relying Party is <code>openid_wallet_relying_party</code>.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
-<p id="section-7.3-2">This specification introduces a distinct Entity Type Identifier for the OpenID Wallet Relying Party to clearly differentiate it from a traditional OpenID Connect Relying Party (<code>openid_relying_party</code>). This distinction highlights the unique characteristics and functionalities of the Wallet ecosystem and its Wallet Relying Party.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-1">The OpenID Federation Entity Type Identifier for the Credential Verifier is <code>openid_credential_verifier</code>.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">This specification introduces a distinct Entity Type Identifier for the OpenID Credential Verifier to clearly differentiate it from a traditional OpenID Connect Relying Party (<code>openid_relying_party</code>). This distinction highlights the unique characteristics and functionalities of the Wallet ecosystem and its Credential Verifier.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
 <p id="section-7.3-3">For information on metadata parameters specific to OpenID Credential Verifiers,
 refer to Section <em>9. Verifier Metadata (Client Metadata)</em> of
 the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span> specification.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
@@ -1754,7 +1754,7 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
 <p id="section-8.1-2">Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
 <p id="section-8.1-3">TBD: example 1 about problem solved with a Subordinate Statement metadata parameter [sanitize endpoints]<a href="#section-8.1-3" class="pilcrow">¶</a></p>
 <p id="section-8.1-4">TBD: example 2 about problem solved with a Subordinate Statement metadata parameter [name of the organization]<a href="#section-8.1-4" class="pilcrow">¶</a></p>
-<p id="section-8.1-5">TBD: example 3 about problem solved with a Subordinate Statement metadata parameter [data that can be requested by an RP]<a href="#section-8.1-5" class="pilcrow">¶</a></p>
+<p id="section-8.1-5">TBD: example 3 about problem solved with a Subordinate Statement metadata parameter [data that can be requested by a Credential Verifier]<a href="#section-8.1-5" class="pilcrow">¶</a></p>
 <p id="section-8.1-6">TBD: example 4 about problem solved with a Subordinate Statement metadata parameter [digital credential configuration supported by a VCI]<a href="#section-8.1-6" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1798,7 +1798,7 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
       <h2 id="name-federation-trust-discovery-">
 <a href="#section-9" class="section-number selfRef">9. </a><a href="#name-federation-trust-discovery-" class="section-name selfRef">Federation Trust Discovery Use Cases</a>
       </h2>
-<p id="section-9-1">The process of trust establishment in federated environments is  illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Relying Parties (RPs).<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">The process of trust establishment in federated environments is illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Credential Verifiers (CVs).<a href="#section-9-1" class="pilcrow">¶</a></p>
 <div id="wallet-checking-the-non-revocation-of-its-wallet-provider">
 <section id="section-9.1">
         <h3 id="name-wallet-checking-the-non-rev">
@@ -1819,7 +1819,7 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
     participant Wallet
     participant TA as Trust Anchor
     participant IM as Intermediate
-    participant CI as Credential Issuer (CI)
+    participant CI as Credential Issuer
 
     Wallet-&gt;&gt;TA: Fetch the list of all Intermediates and CIs
     loop for each Intermediate
@@ -1885,25 +1885,25 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
 <p id="section-9.4-1">...<a href="#section-9.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="wallet-establishing-trust-in-the-relying-party">
+<div id="wallet-establishing-trust-in-the-credential-verifier">
 <section id="section-9.5">
         <h3 id="name-wallet-establishing-trust-i">
-<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-wallet-establishing-trust-i" class="section-name selfRef">Wallet Establishing Trust in the Relying Party</a>
+<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-wallet-establishing-trust-i" class="section-name selfRef">Wallet Establishing Trust in the Credential Verifier</a>
         </h3>
-<p id="section-9.5-1">The Federation Entity Discovery starts with the Wallet Instance fetching the Relying Party's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Relying Party. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Relying Party final metadata.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
+<p id="section-9.5-1">The Federation Entity Discovery starts with the Wallet Instance fetching the Credential Verifier's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Credential Verifier. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Credential Verifier final metadata.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
 <p id="section-9.5-2">Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
 <div class="lang-mermaid sourcecode" id="section-9.5-3">
 <pre>sequenceDiagram
     participant WalletInstance as Wallet Instance
-    participant RP as Relying Party
+    participant CV as Credential Verifier
     participant IE as Intermediate
     participant TA as Trust Anchor
 
-    WalletInstance-&gt;&gt;RP: Fetch RP's Entity Configuration
-    RP-&gt;&gt;WalletInstance: Return Entity Configuration
+    WalletInstance-&gt;&gt;CV: Fetch CV's Entity Configuration
+    CV-&gt;&gt;WalletInstance: Return Entity Configuration
 
-    WalletInstance-&gt;&gt;RP: Extract Authority Hints from RP's Configuration
-    RP-&gt;&gt;WalletInstance: Provide Authority Hints
+    WalletInstance-&gt;&gt;CV: Extract Authority Hints from CV's Configuration
+    CV-&gt;&gt;WalletInstance: Provide Authority Hints
 
     loop for each Authority Hint
         WalletInstance-&gt;&gt;IE: Fetch Entity Configuration -&gt; get federation_fetch_api URL
@@ -1920,7 +1920,7 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
     end
 
     WalletInstance-&gt;&gt;WalletInstance: Applies Policies
-    WalletInstance-&gt;&gt;WalletInstance: Derive RP's final metadata
+    WalletInstance-&gt;&gt;WalletInstance: Derive CV's final metadata
 </pre><a href="#section-9.5-3" class="pilcrow">¶</a>
 </div>
 </section>
@@ -2107,8 +2107,8 @@ are listed in the table below.<a href="#appendix-A.1-1" class="pilcrow">¶</a></
 <p id="appendix-A.1-4">Below is a non-normative example of <code>openid_wallet_provider</code> metadata:<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.1-5">
 <pre>{
-  "authorization_endpoint": "https://wallet.provider.example/authorization",
-  "token_endpoint": "https://wallet.provider.example/token",
+  "authorization_endpoint": "https://wallet-provider.example/authorization",
+  "token_endpoint": "https://wallet-provider.example/token",
   "jwks": {
       "keys": [
         {
@@ -2272,13 +2272,13 @@ and verifiable using the Trust Chain.<a href="#appendix-A.2-3" class="pilcrow">�
 </div>
 </section>
 </div>
-<div id="possible-openid-wallet-relying-party-metadata-usage">
+<div id="possible-openid-credential-verifier-metadata-usage">
 <section id="appendix-A.3">
-        <h3 id="name-possible-openid-wallet-rely">
-<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-possible-openid-wallet-rely" class="section-name selfRef">Possible OpenID Wallet Relying Party Metadata Usage</a>
+        <h3 id="name-possible-openid-credential-v">
+<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-possible-openid-credential-v" class="section-name selfRef">Possible OpenID Credential Verifier Metadata Usage</a>
         </h3>
 <p id="appendix-A.3-1">Possible metadata parameters that could be used by
-OpenID Wallet Relying Parties with the <code>openid_wallet_relying_party</code> Entity Type Identifier
+OpenID Wallet Credential Verifiers with the <code>openid_credential_verifier</code> Entity Type Identifier
 are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
 <p id="appendix-A.3-2">The table and examples below use metadata parameters defined by
 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span> and <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>.<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
@@ -2294,19 +2294,19 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
           <tbody>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">client_id</td>
-              <td class="text-left" rowspan="1" colspan="1">It MUST contain an HTTPS URL that uniquely identifies the RP.</td>
+              <td class="text-left" rowspan="1" colspan="1">It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, Section 3.2.1 and <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, Section 3.2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">client_name</td>
-              <td class="text-left" rowspan="1" colspan="1">Human-readable string name of the RP.</td>
+              <td class="text-left" rowspan="1" colspan="1">Human-readable string name of the Credential Verifier.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, Section 2</td>
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">request_uris</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Array of request_uri values that are pre-registered by the RP. These URLs MUST use the https scheme.</td>
+              <td class="text-left" rowspan="1" colspan="1">JSON Array of request_uri values that are pre-registered by the Credential Verifier. These URLs MUST use the https scheme.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, Section 2</td>
             </tr>
@@ -2323,7 +2323,7 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">vp_formats</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the RP supports.</td>
+              <td class="text-left" rowspan="1" colspan="1">JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span>, Section 7.2.7 and OpenID4VP, Section 9.1</td>
             </tr>
@@ -2334,20 +2334,20 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
             </tr>
             <tr>
               <td class="text-left" rowspan="1" colspan="1">jwks</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Web Key Set document, passed by value, containing the protocol specific keys for the Relying Party.</td>
+              <td class="text-left" rowspan="1" colspan="1">JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier.</td>
               <td class="text-left" rowspan="1" colspan="1">
                 <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>, Section 3, <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, Section 5.2.1, and JWK <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>
 </td>
             </tr>
           </tbody>
         </table>
-<p id="appendix-A.3-4">Below is a non-normative example of the payload of a Wallet Relying Party Entity Configuration:<a href="#appendix-A.3-4" class="pilcrow">¶</a></p>
+<p id="appendix-A.3-4">Below is a non-normative example of the payload of a Credential Verifier Entity Configuration:<a href="#appendix-A.3-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="appendix-A.3-5">
 <pre>{
     "iat": 1718207217,
     "exp": 1749743216,
-    "iss": "https://relying-party.example.org",
-    "sub": "https://relying-party.example.org",
+    "iss": "https://verifier.example.org",
+    "sub": "https://verifier.example.org",
     "authority_hints": [
         "https://trust-anchor.example.org"
     ],
@@ -2364,28 +2364,28 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
     },
     "metadata": {
         "federation_entity": {
-            "homepage_uri": "https://relying-party.example.org",
+            "homepage_uri": "https://verifier.example.org",
             "organization_name": "Organization Name",
             "contacts": [
                 "informazioni@example.it",
                 "protocollo@pec.example.it"
             ],
-            "tos_uri": "https://relying-party.example.org/public/info_policy.html",
-            "policy_uri": "https://relying-party.example.org/public/privacy_policy.html",
-            "logo_uri": "https://relying-party.example.org/public/logo.svg"
+            "tos_uri": "https://verifier.example.org/public/info_policy.html",
+            "policy_uri": "https://verifier.example.org/public/privacy_policy.html",
+            "logo_uri": "https://verifier.example.org/public/logo.svg"
         },
-        "openid_wallet_relying_party": {
+        "openid_credential_verifier": {
             "application_type": "web",
-            "client_id": "https://relying-party.example.org",
+            "client_id": "https://verifier.example.org",
             "client_name": "Organization Name",
             "contacts": [
                 "informazioni@example.it"
             ],
             "request_uris": [
-                "https://relying-party.example.org/request_uri"
+                "https://verifier.example.org/request_uri"
             ],
             "response_uris_supported": [
-                "https://relying-party.example.org/response_uri"
+                "https://verifier.example.org/response_uri"
             ],
             "authorization_signed_response_alg": "ES256",
             "vp_formats": {
@@ -2472,9 +2472,9 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
           <h4 id="name-security-considerations-abo">
 <a href="#appendix-A.3.1" class="section-number selfRef">A.3.1. </a><a href="#name-security-considerations-abo" class="section-name selfRef">Security Considerations About The Parameters request_uris And response_uris_supported</a>
           </h4>
-<p id="appendix-A.3.1-1">There are scenarios where the Relying Party's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Relying Party's metadata and ensures its integrity and authenticity by utilizing <code>metadata</code> and the <code>metadata_policy</code> in the Subordinate Statement about that Relying Party, as defined in the OpenID Federation specification.<a href="#appendix-A.3.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.1-2">In these cases, the RP is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.<a href="#appendix-A.3.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.1-3">To enhance the security of implementations, it is generally recommended that Relying Parties (RPs) randomize their endpoints. This strategy involves appending random fragments to the URIs, such as <a href="https://rp.example.org/request-uri#random-value">https://rp.example.org/request-uri#random-value</a>. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.<a href="#appendix-A.3.1-3" class="pilcrow">¶</a></p>
+<p id="appendix-A.3.1-1">There are scenarios where the Credential Verifier's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Credential Verifier's metadata and ensures its integrity and authenticity by utilizing <code>metadata</code> and the <code>metadata_policy</code> in the Subordinate Statement about that Credential Verifier, as defined in the OpenID Federation specification.<a href="#appendix-A.3.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.3.1-2">In these cases, the Credential Verifier is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.<a href="#appendix-A.3.1-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.3.1-3">To enhance the security of implementations, it is generally recommended that Credential Verifiers randomize their endpoints. This strategy involves appending random fragments to the URIs, such as <a href="https://verifier.example.org/request-uri#random-value">https://verifier.example.org/request-uri#random-value</a>. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.<a href="#appendix-A.3.1-3" class="pilcrow">¶</a></p>
 <p id="appendix-A.3.1-4">For this reason, the parameters <code>metadata</code> or <code>metadata_policy</code> SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.<a href="#appendix-A.3.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -2483,8 +2483,8 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
           <h4 id="name-security-considerations-abou">
 <a href="#appendix-A.3.2" class="section-number selfRef">A.3.2. </a><a href="#name-security-considerations-abou" class="section-name selfRef">Security Considerations About The End-User's Data Protection Using presentation_definitions_supported</a>
           </h4>
-<p id="appendix-A.3.2-1">The <code>presentation_definitions_supported</code> enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Relying Party is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.<a href="#appendix-A.3.2-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.2-2">The <code>metadata</code> and <code>metadata_policy</code> parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Relying Party. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.<a href="#appendix-A.3.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.3.2-1">The <code>presentation_definitions_supported</code> enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Credential Verifier is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.<a href="#appendix-A.3.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.3.2-2">The <code>metadata</code> and <code>metadata_policy</code> parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Credential Verifier. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.<a href="#appendix-A.3.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authentic-sources">
@@ -2529,6 +2529,8 @@ are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></
 <li class="compact" id="appendix-C-3.1">Created Scope section describing the purpose of the document and collaboration with other working groups.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
 </li>
         <li class="compact" id="appendix-C-3.2">Moved metadata tables and examples to an informative appendix on possible usage.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-C-3.3">Fixed #10: Renamed <code>openid_wallet_relying_party</code> to <code>openid_credential_verifier</code>.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
