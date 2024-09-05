@@ -78,7 +78,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 this document are to be interpreted as described in BCP 14 [@!RFC2119]
 [@!RFC8174] when, and only when, they appear in all capitals, as shown here.
 
-.# Warning
+## Warning
 
 This document is not an OpenID Foundation International Standard.
 It is distributed for review and comment.
