@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>OpenID Federation Wallet Architectures 1.0 - draft 01</title>
+<title>OpenID Federation Wallet Architectures 1.0 - draft 02</title>
 <meta content="Giuseppe De Marco" name="author">
 <meta content="Roland Hedberg" name="author">
 <meta content="Michael B. Jones" name="author">
@@ -1209,7 +1209,7 @@ li > p:last-of-type:only-child {
 <thead><tr>
 <td class="left"></td>
 <td class="center">openid-federation-wallet</td>
-<td class="right">August 2024</td>
+<td class="right">September 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">De Marco, et al.</td>
@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-19" class="published">19 August 2024</time>
+<time datetime="2024-09-11" class="published">11 September 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1247,7 +1247,7 @@ li > p:last-of-type:only-child {
 </dd>
 </dl>
 </div>
-<h1 id="title">OpenID Federation Wallet Architectures 1.0 - draft 01</h1>
+<h1 id="title">OpenID Federation Wallet Architectures 1.0 - draft 02</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This specification defines the OpenID Federation entity types for
@@ -1265,10 +1265,13 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
                 <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-requirements-notation-and-c" class="internal xref">Requirements Notation and Conventions</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-warning" class="internal xref">Warning</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
             <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
@@ -1353,38 +1356,13 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
             <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
-            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-possible-use-of-metadata-pa" class="internal xref">Possible Use of Metadata Parameters by Wallet Entities</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.1">
-                <p id="section-toc.1-1.13.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-possible-openid-wallet-prov" class="internal xref">Possible OpenID Wallet Provider Metadata Usage</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.2">
-                <p id="section-toc.1-1.13.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-possible-openid-credential-" class="internal xref">Possible OpenID Credential Issuer Metadata Usage</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3">
-                <p id="section-toc.1-1.13.2.3.1"><a href="#appendix-A.3" class="auto internal xref">A.3</a>.  <a href="#name-possible-openid-credential-v" class="internal xref">Possible OpenID Credential Verifier Metadata Usage</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3.2.1">
-                    <p id="section-toc.1-1.13.2.3.2.1.1"><a href="#appendix-A.3.1" class="auto internal xref">A.3.1</a>.  <a href="#name-security-considerations-abo" class="internal xref">Security Considerations about the Parameters <code>request_uris</code> and <code>response_uris_supported</code></a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3.2.2">
-                    <p id="section-toc.1-1.13.2.3.2.2.1"><a href="#appendix-A.3.2" class="auto internal xref">A.3.2</a>.  <a href="#name-security-considerations-abou" class="internal xref">Security Considerations about the End-User's Data Protection Using <code>presentation_definitions_supported</code></a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13.2.3.2.3">
-                    <p id="section-toc.1-1.13.2.3.2.3.1"><a href="#appendix-A.3.3" class="auto internal xref">A.3.3</a>.  <a href="#name-authentic-sources" class="internal xref">Authentic Sources</a></p>
-</li>
-                </ul>
-</li>
-            </ul>
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
-            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
-            <p id="section-toc.1-1.15.1"><a href="#appendix-C" class="auto internal xref">Appendix C</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
-            <p id="section-toc.1-1.16.1"><a href="#appendix-D" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.15.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1419,6 +1397,16 @@ wallet ecosystems.<a href="#section-1-3" class="pilcrow">¶</a></p>
 "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in
 this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
           <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="warning">
+<section id="section-1.2">
+        <h3 id="name-warning">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-warning" class="section-name selfRef">Warning</a>
+        </h3>
+<p id="section-1.2-1">This document is not an OpenID Foundation International Standard.
+It is distributed for review and comment.
+It is subject to change without notice and may not be referred to as an International Standard.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1960,33 +1948,13 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
 <a href="#section-12" class="section-number selfRef">12. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
-<dt id="DIF.PresentationExchange">[DIF.PresentationExchange]</dt>
-      <dd>
-<span class="refAuthor">Buchner, D.</span>, <span class="refAuthor">Zundel, B.</span>, <span class="refAuthor">Riedel, M.</span>, and <span class="refAuthor">K. H. Duffy</span>, <span class="refTitle">"Presentation Exchange 2.0.0"</span>, <span>&lt;<a href="https://identity.foundation/presentation-exchange/spec/v2.0.0/">https://identity.foundation/presentation-exchange/spec/v2.0.0/</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="OAuth.JARM">[OAuth.JARM]</dt>
-      <dd>
-<span class="refAuthor">Lodderstedt, T.</span> and <span class="refAuthor">B. Brian</span>, <span class="refTitle">"JWT Secured Authorization Response Mode for OAuth 2.0 (JARM)"</span>, <time datetime="2022-11-09" class="refDate">9 November 2022</time>, <span>&lt;<a href="https://openid.net/specs/oauth-v2-jarm.html">https://openid.net/specs/oauth-v2-jarm.html</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="OpenID.Core">[OpenID.Core]</dt>
       <dd>
 <span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 incorporating errata set 2"</span>, <time datetime="2023-12-15" class="refDate">15 December 2023</time>, <span>&lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html">http://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="OpenID.Discovery">[OpenID.Discovery]</dt>
-      <dd>
-<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.B.</span>, and <span class="refAuthor">E. Jay</span>, <span class="refTitle">"OpenID Connect Discovery 1.0"</span>, <time datetime="2023-12-15" class="refDate">15 December 2023</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-discovery-1_0.html">https://openid.net/specs/openid-connect-discovery-1_0.html</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="OpenID.Federation">[OpenID.Federation]</dt>
       <dd>
 <span class="refAuthor">Ed., R. H.</span>, <span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Solberg, A.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Marco, G. D.</span>, and <span class="refAuthor">V. Dzhuvinov</span>, <span class="refTitle">"OpenID Federation 1.0"</span>, <time datetime="2024-05-31" class="refDate">31 May 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid-federation-1_0.html">https://openid.net/specs/openid-federation-1_0.html</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="OpenID.Registration">[OpenID.Registration]</dt>
-      <dd>
-<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">M.B. Jones</span>, <span class="refTitle">"OpenID Connect Dynamic Client Registration 1.0"</span>, <time datetime="2023-12-15" class="refDate">15 December 2023</time>, <span>&lt;<a href="https://openid.net/specs/openid-connect-registration-1_0.html">https://openid.net/specs/openid-connect-registration-1_0.html</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="OpenID4VC-HAIP">[OpenID4VC-HAIP]</dt>
-      <dd>
-<span class="refAuthor">Yasuda, K.</span> and <span class="refAuthor">T. Lodderstedt</span>, <span class="refTitle">"OpenID4VC High Assurance Interoperability Profile with SD-JWT VC"</span>, <time datetime="2024-01-09" class="refDate">9 January 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html">https://openid.net/specs/openid4vc-high-assurance-interoperability-profile-sd-jwt-vc-1_0.html</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="OpenID4VCI">[OpenID4VCI]</dt>
       <dd>
@@ -2004,21 +1972,9 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
       <dd>
 <span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="RFC7515">[RFC7515]</dt>
-      <dd>
-<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Signature (JWS)"</span>, <span class="seriesInfo">RFC 7515</span>, <span class="seriesInfo">DOI 10.17487/RFC7515</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7515">https://www.rfc-editor.org/info/rfc7515</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7517">[RFC7517]</dt>
-      <dd>
-<span class="refAuthor">Jones, M.</span>, <span class="refTitle">"JSON Web Key (JWK)"</span>, <span class="seriesInfo">RFC 7517</span>, <span class="seriesInfo">DOI 10.17487/RFC7517</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7517">https://www.rfc-editor.org/info/rfc7517</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="RFC7519">[RFC7519]</dt>
       <dd>
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC7591">[RFC7591]</dt>
-      <dd>
-<span class="refAuthor">Richer, J., Ed.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Machulak, M.</span>, and <span class="refAuthor">P. Hunt</span>, <span class="refTitle">"OAuth 2.0 Dynamic Client Registration Protocol"</span>, <span class="seriesInfo">RFC 7591</span>, <span class="seriesInfo">DOI 10.17487/RFC7591</span>, <time datetime="2015-07" class="refDate">July 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7591">https://www.rfc-editor.org/info/rfc7591</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8174">[RFC8174]</dt>
       <dd>
@@ -2029,548 +1985,52 @@ the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite 
 <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8392">https://www.rfc-editor.org/info/rfc8392</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC8414">[RFC8414]</dt>
-      <dd>
-<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="RFC9126">[RFC9126]</dt>
     <dd>
-<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Campbell, B.</span>, <span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Tonge, D.</span>, and <span class="refAuthor">F. Skokan</span>, <span class="refTitle">"OAuth 2.0 Pushed Authorization Requests"</span>, <span class="seriesInfo">RFC 9126</span>, <span class="seriesInfo">DOI 10.17487/RFC9126</span>, <time datetime="2021-09" class="refDate">September 2021</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc9126">https://www.rfc-editor.org/info/rfc9126</a>&gt;</span>. </dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 </dl>
 </section>
-<div id="possible-use-of-metadata-parameters-by-wallet-entities">
-<section id="appendix-A">
-      <h2 id="name-possible-use-of-metadata-pa">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-possible-use-of-metadata-pa" class="section-name selfRef">Possible Use of Metadata Parameters by Wallet Entities</a>
-      </h2>
-<p id="appendix-A-1">This non-normative appendix speculates about metadata parameters that might be used
-by the Entity Types defined by this specification.
-Some of these are already defined by other specifications.
-Some are yet to be defined, and may be defined in the future by other specifications.
-Some are likely to change.
-Please read this illustrative content with these caveats in mind.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div id="possible-openid-wallet-provider-metadata-usage">
-<section id="appendix-A.1">
-        <h3 id="name-possible-openid-wallet-prov">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-possible-openid-wallet-prov" class="section-name selfRef">Possible OpenID Wallet Provider Metadata Usage</a>
-        </h3>
-<p id="appendix-A.1-1">Possible metadata parameters that could be used by
-OpenID Wallet Providers with the <code>openid_wallet_provider</code> Entity Type Identifier
-are listed in the table below.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.1-2">The table and examples below use metadata parameters defined by
-<span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>, and <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
-<table class="center" id="table-2">
-          <caption><a href="#table-2" class="selfRef">Table 2</a></caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Metadata Parameter</th>
-              <th class="text-left" rowspan="1" colspan="1">Status</th>
-              <th class="text-left" rowspan="1" colspan="1">Description</th>
-              <th class="text-left" rowspan="1" colspan="1">Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">jwks</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">A JSON Web Key Set (JWKS) that represents the  Wallet Provider's public keys</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 5.2.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> and JWK <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">authorization_endpoint</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">Endpoint for obtaining the authorization for the issuance of the Wallet Attestation</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">token_endpoint</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">Endpoint for obtaining the Wallet Attestation</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">aal_values_supported</td>
-              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-              <td class="text-left" rowspan="1" colspan="1">List of supported values for the Authenticator Assurance Level, as defined in <a href="https://pages.nist.gov/800-63-3/sp800-63b.html#sec4"> NIST Special Publication 800-63B</a>. These values specify the security level of the app. Values are trust framework specific</td>
-              <td class="text-left" rowspan="1" colspan="1">this specification</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">grant_types_supported</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">Grant types supported by the token endpoint</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">token_endpoint_auth_methods_supported</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">Supported authentication methods for the token endpoint</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">token_endpoint_auth_signing_alg_values_supported</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">Supported signature algorithms for the token endpoint</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
-</td>
-            </tr>
-          </tbody>
-        </table>
-<p id="appendix-A.1-4">Below is a non-normative example of <code>openid_wallet_provider</code> metadata:<a href="#appendix-A.1-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-5">
-<pre>{
-  "authorization_endpoint": "https://wallet-provider.example/authorization",
-  "token_endpoint": "https://wallet-provider.example/token",
-  "jwks": {
-      "keys": [
-        {
-          "crv": "P-256",
-          "kty": "EC",
-          "x": "qrJrj3Af_B57sbOIRrcBM7br7wOc8ynj7lHFPTeffUk",
-          "y": "1H0cWDyGgvU8w-kPKU_xycOCUNT2o0bwslIQtnPU6iM",
-          "kid": "5t5YYpBhN-EgIEEI5iUzr6r0MR02LnVQ0OmekmNKcjY"
-        }
-      ]
-  },
-  "aal_values_supported": [
-      "https://trust-framework.example.org/LoA/basic",
-      "https://trust-framework.example.org/LoA/medium",
-      "https://trust-framework.example.org/LoA/high"
-  ],
-  "grant_types_supported": [
-      "urn:ietf:params:oauth:client-assertion-type:jwt-client-attestation"
-  ],
-  "token_endpoint_auth_signing_alg_values_supported": ["RS256", "ES256"],
-  "token_endpoint_auth_methods_supported": [
-      "private_key_jwt"
-  ]
-}
-</pre><a href="#appendix-A.1-5" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="possible-openid-credential-issuer-metadata-usage">
-<section id="appendix-A.2">
-        <h3 id="name-possible-openid-credential-">
-<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-possible-openid-credential-" class="section-name selfRef">Possible OpenID Credential Issuer Metadata Usage</a>
-        </h3>
-<p id="appendix-A.2-1">Possible metadata parameters that could be used by
-OpenID Credential Issuers with the <code>openid_credential_issuer</code> Entity Type Identifier
-are listed in the table below.<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.2-2">The table and examples below use metadata parameters defined by
-<span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>], <span>[<a href="#RFC9126" class="cite xref">RFC9126</a>]</span>, <span>[<a href="#OpenID.Discovery" class="cite xref">OpenID.Discovery</a>]</span>, and <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>.<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.2-3">The usage described below is intended to enable
-the cryptographic material used for the Credential issuance operation be consistent
-and verifiable using the Trust Chain.<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
-<table class="center" id="table-3">
-          <caption><a href="#table-3" class="selfRef">Table 3</a></caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Metadata Parameter</th>
-              <th class="text-left" rowspan="1" colspan="1">Status</th>
-              <th class="text-left" rowspan="1" colspan="1">Description</th>
-              <th class="text-left" rowspan="1" colspan="1">Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">jwks</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Web Key Set directly embeds the public keys used by the Credential Issuer for its signature operations, such as signing Digital Credentials</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 5.2.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> and JWK <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>
-</td>
-            </tr>
-          </tbody>
-        </table>
-<p id="appendix-A.2-5">Below is a non-normative example of a payload of an Credential Issuer Entity Configuration:<a href="#appendix-A.2-5" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-6">
-<pre>{
-    "iat": 1718207217,
-    "exp": 1749743216,
-    "iss": "https://eaa-provider.example.org",
-    "sub": "https://eaa-provider.example.org",
-    "authority_hints": [
-        "https://trust-anchor.example.org"
-    ],
-    "jwks": {
-        "keys": [
-            {
-                "kid": "FANFS3YnC9tjiCaivhWLVUJ3AxwGGz_98uRFaqMEEs",
-                "kty": "EC",
-                "crv": "P-256",
-                "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-            }
-        ]
-    },
-    "metadata": {
-        "federation_entity": {
-            "homepage_uri": "https://eaa-provider.example.org/",
-            "organization_name": "Organization Name",
-            "contacts": [
-                "informazioni@example.it",
-                "protocollo@pec.example.it"
-            ],
-            "tos_uri": "https://eaa-provider.example.org/public/info_policy.html",
-            "policy_uri": "https://eaa-provider.example.org/public/privacy_policy.html",
-            "logo_uri": "https://eaa-provider.example.org/public/logo.svg"
-        },
-        "oauth_authorization_server": {
-            "issuer": "https://eaa-provider.example.org",
-            "pushed_authorization_request_endpoint": "https://eaa-provider.example.org/as/par",
-            "authorization_endpoint": "https://eaa-provider.example.org/authorize",
-            "token_endpoint": "https://eaa-provider.example.org/token",
-            "client_registration_types_supported": [
-                "automatic"
-            ],
-            "code_challenge_methods_supported": [
-                "S256"
-            ],
-            "scopes_supported": [
-                "EuropeanDisabilityCard",
-                "EuropeanHealthInsuranceCard",
-                "MDL"
-            ],
-            "response_modes_supported": [
-                "form_post.jwt",
-                "query"
-            ],
-            "authorization_signing_alg_values_supported": [
-                "ES256",
-                "ES384",
-                "ES512"
-            ],
-            "grant_types_supported": [
-                "authorization_code"
-            ],
-            "token_endpoint_auth_methods_supported": [
-                "attest_jwt_client_auth"
-            ],
-            "token_endpoint_auth_signing_alg_values_supported": [
-                "ES256",
-                "ES384",
-                "ES512"
-            ],
-            "request_object_signing_alg_values_supported": [
-                "ES256",
-                "ES384",
-                "ES512"
-            ],
-            "jwks": {
-                "keys": [
-                    {
-                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
-                        "kty": "EC",
-                        "crv": "P-256",
-                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-                    }
-                ]
-            }
-        },
-        "openid_credential_issuer": {
-            // ... parameters defined in OpenID4VCI ...
-            "jwks": {
-                "keys": [
-                    {
-                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
-                        "kty": "EC",
-                        "crv": "P-256",
-                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-                    }
-                ]
-            }
-        }
-}
-</pre><a href="#appendix-A.2-6" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-<div id="possible-openid-credential-verifier-metadata-usage">
-<section id="appendix-A.3">
-        <h3 id="name-possible-openid-credential-v">
-<a href="#appendix-A.3" class="section-number selfRef">A.3. </a><a href="#name-possible-openid-credential-v" class="section-name selfRef">Possible OpenID Credential Verifier Metadata Usage</a>
-        </h3>
-<p id="appendix-A.3-1">Possible metadata parameters that could be used by
-OpenID Wallet Credential Verifiers with the <code>openid_credential_verifier</code> Entity Type Identifier
-are listed in the table below.<a href="#appendix-A.3-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3-2">The table and examples below use metadata parameters defined by
-<span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>, <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>, <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>, and <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>.<a href="#appendix-A.3-2" class="pilcrow">¶</a></p>
-<table class="center" id="table-4">
-          <caption><a href="#table-4" class="selfRef">Table 4</a></caption>
-<thead>
-            <tr>
-              <th class="text-left" rowspan="1" colspan="1">Metadata Parameter</th>
-              <th class="text-left" rowspan="1" colspan="1">Status</th>
-              <th class="text-left" rowspan="1" colspan="1">Description</th>
-              <th class="text-left" rowspan="1" colspan="1">Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">client_id</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">It MUST contain an HTTPS URL that uniquely identifies the Credential Verifier</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 3.2.1 of <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span> and Section 3.2 of <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">client_name</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">Human-readable string name of the Credential Verifier used for representing the Credential Verifier to the User</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#RFC7591" class="cite xref">RFC7591</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">request_uris</td>
-              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Array of <code>request_uri</code> values that are pre-registered by the Credential Verifier. These URLs MUST use the <code>https</code> scheme.</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 2 of <span>[<a href="#OpenID.Registration" class="cite xref">OpenID.Registration</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">response_uris_supported</td>
-              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Array of <code>response_uri</code> strings, as specified by <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>, to which the Wallet Instance MAY send the Authorization Response using an HTTP POST request</td>
-              <td class="text-left" rowspan="1" colspan="1">this specification</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">authorization_signed_response_alg</td>
-              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-              <td class="text-left" rowspan="1" colspan="1">String identifying the JWS algorithm that MUST be used for signing authorization responses. The algorithm <code>none</code> MUST NOT be used.</td>
-              <td class="text-left" rowspan="1" colspan="1">
-                <span>[<a href="#RFC7515" class="cite xref">RFC7515</a>]</span> and Section 3 of <span>[<a href="#OAuth.JARM" class="cite xref">OAuth.JARM</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">vp_formats</td>
-              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON object defining the formats and proof types of Verifiable Presentations and Verifiable Credentials the Credential Verifier supports</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 7.2.7 of <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span> and Section 9.1 of <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">presentation_definitions_supported</td>
-              <td class="text-left" rowspan="1" colspan="1">OPTIONAL</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Array of supported <code>presentation_definition</code> objects</td>
-              <td class="text-left" rowspan="1" colspan="1">this specification, Section 5 of <span>[<a href="#DIF.PresentationExchange" class="cite xref">DIF.PresentationExchange</a>]</span>, and Section 7.2.8 of <span>[<a href="#OpenID4VC-HAIP" class="cite xref">OpenID4VC-HAIP</a>]</span>
-</td>
-            </tr>
-            <tr>
-              <td class="text-left" rowspan="1" colspan="1">jwks</td>
-              <td class="text-left" rowspan="1" colspan="1">REQUIRED</td>
-              <td class="text-left" rowspan="1" colspan="1">JSON Web Key Set document, passed by value, containing the protocol specific keys for the Credential Verifier</td>
-              <td class="text-left" rowspan="1" colspan="1">Section 5.2.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> and JWK <span>[<a href="#RFC7517" class="cite xref">RFC7517</a>]</span>
-</td>
-            </tr>
-          </tbody>
-        </table>
-<p id="appendix-A.3-4">Below is a non-normative example of the payload of a Credential Verifier Entity Configuration:<a href="#appendix-A.3-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.3-5">
-<pre>{
-    "iat": 1718207217,
-    "exp": 1749743216,
-    "iss": "https://verifier.example.org",
-    "sub": "https://verifier.example.org",
-    "authority_hints": [
-        "https://trust-anchor.example.org"
-    ],
-    "jwks": {
-        "keys": [
-            {
-                "kid": "FANFS3YnC9tjiCaivhWLVUJ3AxwGGz_98uRFaqMEEs",
-                "kty": "EC",
-                "crv": "P-256",
-                "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-            }
-        ]
-    },
-    "metadata": {
-        "federation_entity": {
-            "homepage_uri": "https://verifier.example.org",
-            "organization_name": "Organization Name",
-            "contacts": [
-                "informazioni@example.it",
-                "protocollo@pec.example.it"
-            ],
-            "tos_uri": "https://verifier.example.org/public/info_policy.html",
-            "policy_uri": "https://verifier.example.org/public/privacy_policy.html",
-            "logo_uri": "https://verifier.example.org/public/logo.svg"
-        },
-        "openid_credential_verifier": {
-            "application_type": "web",
-            "client_id": "https://verifier.example.org",
-            "client_name": "Organization Name",
-            "contacts": [
-                "informazioni@example.it"
-            ],
-            "request_uris": [
-                "https://verifier.example.org/request_uri"
-            ],
-            "response_uris_supported": [
-                "https://verifier.example.org/response_uri"
-            ],
-            "authorization_signed_response_alg": "ES256",
-            "vp_formats": {
-                "vc+sd-jwt": {
-                    "sd-jwt_alg_values": [
-                        "ES256",
-                        "ES384",
-                        "ES512"
-                    ]
-                }
-            },
-            "presentation_definitions_supported": [
-                {
-                    "id": "d76c51b7-ea90-49bb-8368-6b3d194fc131",
-                    "input_descriptors": [
-                        {
-                            "id": "PersonIdentificationData",
-                            "name": "Person Identification Data",
-                            "purpose": "User Authentication",
-                            "format": {
-                                "vc+sd-jwt": {
-                                    "alg": [
-                                        "ES256",
-                                        "ES384",
-                                        "ES512"
-                                    ]
-                                }
-                            },
-                            "constraints": {
-                                "limit_disclosure": "required",
-                                "fields": [
-                                    {
-                                        "filter": {
-                                            "const": "PersonIdentificationData",
-                                            "type": "string"
-                                        },
-                                        "path": [
-                                            "$.vct"
-                                        ]
-                                    },
-                                    {
-                                        "filter": {
-                                            "type": "object"
-                                        },
-                                        "path": [
-                                            "$.cnf.jwk"
-                                        ]
-                                    },
-                                    {
-                                        "path": [
-                                            "$.first_name"
-                                        ]
-                                    },
-                                    {
-                                        "path": [
-                                            "$.family_name"
-                                        ]
-                                    }
-                                ]
-                            }
-
-                        }
-                    ]
-                }
-            ],
-            "jwks": {
-                "keys": [
-                    {
-                        "kid": "f10aca0992694b3581f6f699bfc8a2c6cc687725",
-                        "kty": "EC",
-                        "crv": "P-256",
-                        "x": "jE2RpcQbFQxKpMqehahgZv6smmXD0i/LTP2QRzMADk4",
-                        "y": "qkMx5iqt5PhPu5tfctS6HsP+FmLgrxfrzUV2GwMQuh8"
-                    }
-                ]
-            }
-        }
-    }
-}
-</pre><a href="#appendix-A.3-5" class="pilcrow">¶</a>
-</div>
-<div id="security-considerations-about-the-parameters-request-uris-and-response-uris-supported">
-<section id="appendix-A.3.1">
-          <h4 id="name-security-considerations-abo">
-<a href="#appendix-A.3.1" class="section-number selfRef">A.3.1. </a><a href="#name-security-considerations-abo" class="section-name selfRef">Security Considerations about the Parameters <code>request_uris</code> and <code>response_uris_supported</code></a>
-          </h4>
-<p id="appendix-A.3.1-1">There are scenarios where the Credential Verifier's endpoints are attested by a trusted third party, such as a registration service owned by a federation Intermediate. This Intermediate attests to the Credential Verifier's metadata and ensures its integrity and authenticity by utilizing <code>metadata</code> and the <code>metadata_policy</code> in the Subordinate Statement about that Credential Verifier, as defined in the OpenID Federation specification.<a href="#appendix-A.3.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.1-2">In these cases, the Credential Verifier is restricted from altering its endpoint URIs due to the registration requirements, unless it utilizes URI fragments as permitted under the OpenID Connect Core 1.0 specification.<a href="#appendix-A.3.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.1-3">To enhance the security of implementations, it is generally recommended that Credential Verifiers randomize their endpoints. This strategy involves appending random fragments to the URIs, such as <a href="https://verifier.example.org/request-uri#random-value">https://verifier.example.org/request-uri#random-value</a>. Such randomization can help mitigate certain types of attacks by making it more difficult for attackers to predict or reuse fixed endpoint URLs, that could be victim of abuse, such as the one caused by the issuance of many signed responses that may facilitate resource consuptions attacks.<a href="#appendix-A.3.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.1-4">For this reason, the parameters <code>metadata</code> or <code>metadata_policy</code> SHOULD fix the supported URIs to prevent wallet hijacks to fraudolent endpoints and at the same time allow URI randomization using fragments.<a href="#appendix-A.3.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="security-considerations-about-the-end-user-s-data-protection-using-presentation-definitions-supported">
-<section id="appendix-A.3.2">
-          <h4 id="name-security-considerations-abou">
-<a href="#appendix-A.3.2" class="section-number selfRef">A.3.2. </a><a href="#name-security-considerations-abou" class="section-name selfRef">Security Considerations about the End-User's Data Protection Using <code>presentation_definitions_supported</code></a>
-          </h4>
-<p id="appendix-A.3.2-1">The <code>presentation_definitions_supported</code> enhance the End-User data protection within wallet trust frameworks. By defining the specific presentation definitions that a Credential Verifier is authorized to use, this parameter limits the amount of personal data that can be requested. This constraint prevents the over-asking of personal data, aligning with the principles of data minimization and purpose limitation under privacy regulations.<a href="#appendix-A.3.2-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.2-2">The <code>metadata</code> and <code>metadata_policy</code> parameters can be used in the Federation Subordinate Statements, issued by the Trust Anchor and its Intermediates, to configure these limitations. They ensure that only the necessary data as defined by the federation's policy is requested and processed by the Credential Verifier. This approach protects End-User privacy and endures that all data collection practices are transparent and compliant with established policies.<a href="#appendix-A.3.2-2" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="authentic-sources">
-<section id="appendix-A.3.3">
-          <h4 id="name-authentic-sources">
-<a href="#appendix-A.3.3" class="section-number selfRef">A.3.3. </a><a href="#name-authentic-sources" class="section-name selfRef">Authentic Sources</a>
-          </h4>
-<p id="appendix-A.3.3-1">An Authentic Source is a designated authority or system responsible for providing verified and reliable data. It is up to the implementers to decide if the Authentic Source should be implemented using the OAuth 2.0 framework, which offers security protocols and extensive support for diverse authentication scenarios. In these cases, the Authentice Sources represent an OAuth 2.0 Resource Server and therefore the metadata type used is <code>oauth_protected_resource</code>, as defined in <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-resource-metadata/">OAuth 2.0 Protected Resource Metadata</a>.<a href="#appendix-A.3.3-1" class="pilcrow">¶</a></p>
-<p id="appendix-A.3.3-2">This section provides some common configurations for ...<a href="#appendix-A.3.3-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.3.3-3">
-<pre>non-normative example 1
-</pre><a href="#appendix-A.3.3-3" class="pilcrow">¶</a>
-</div>
-<div class="alignLeft art-text artwork" id="appendix-A.3.3-4">
-<pre>non-normative example 2
-</pre><a href="#appendix-A.3.3-4" class="pilcrow">¶</a>
-</div>
-</section>
-</div>
-</section>
-</div>
-</section>
-</div>
 <div id="notices">
-<section id="appendix-B">
+<section id="appendix-A">
       <h2 id="name-notices">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-notices" class="section-name selfRef">Notices</a>
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-notices" class="section-name selfRef">Notices</a>
       </h2>
-<p id="appendix-B-1">Copyright (c) 2024 The OpenID Foundation.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<p id="appendix-B-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that MAY cover technology that MAY be required to practice this specification.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">Copyright (c) 2024 The OpenID Foundation.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that MAY cover technology that MAY be required to practice this specification.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="document-history">
-<section id="appendix-C">
+<section id="appendix-B">
       <h2 id="name-document-history">
-<a href="#appendix-C" class="section-number selfRef">Appendix C. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
       </h2>
-<p id="appendix-C-1">[[ To be removed from the final specification ]]<a href="#appendix-C-1" class="pilcrow">¶</a></p>
-<p id="appendix-C-2">-01<a href="#appendix-C-2" class="pilcrow">¶</a></p>
+<p id="appendix-B-1">[[ To be removed from the final specification ]]<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">-02<a href="#appendix-B-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-3.1">Created Scope section describing the purpose of the document and collaboration with other working groups.<a href="#appendix-C-3.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-3.1">Moved text on Possible Use of Metadata Parameters by Wallet Ecosystems to issue #22.<a href="#appendix-B-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-C-3.2">Moved metadata tables and examples to an informative appendix on possible usage.<a href="#appendix-C-3.2" class="pilcrow">¶</a>
-</li>
-        <li class="compact" id="appendix-C-3.3">Fixed #10: Renamed <code>openid_wallet_relying_party</code> to <code>openid_credential_verifier</code>.<a href="#appendix-C-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-B-3.2">Added warning about the specification not being final.<a href="#appendix-B-3.2" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="appendix-C-4">-00<a href="#appendix-C-4" class="pilcrow">¶</a></p>
+<p id="appendix-B-4">-01<a href="#appendix-B-4" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="appendix-C-5.1">Initial version<a href="#appendix-C-5.1" class="pilcrow">¶</a>
+<li class="compact" id="appendix-B-5.1">Created Scope section describing the purpose of the document and collaboration with other working groups.<a href="#appendix-B-5.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-5.2">Moved metadata tables and examples to an informative appendix on possible usage.<a href="#appendix-B-5.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-5.3">Fixed #10: Renamed <code>openid_wallet_relying_party</code> to <code>openid_credential_verifier</code>.<a href="#appendix-B-5.3" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-B-6">-00<a href="#appendix-B-6" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-B-7.1">Initial version<a href="#appendix-B-7.1" class="pilcrow">¶</a>
 </li>
       </ul>
 </section>
 </div>
 <div id="authors-addresses">
-<section id="appendix-D">
+<section id="appendix-C">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
