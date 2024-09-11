@@ -447,7 +447,7 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
   "tos_uri": "https://vavuso.example.com/tos"
 }
 ````
-**Figure 5**: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.
+**Figure 4**: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.
 
 # Federation Trust Discovery Use Cases
 
