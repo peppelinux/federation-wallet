@@ -576,7 +576,7 @@ We would like to thank the following individuals for their comments, ideas, and 
 - Stefan Liström
 - Francesco Antonio Marino
 - Giada Sciarretta
-- Niels Vandijk
+- Niels van Dijk
 
 {backmatter}
 
