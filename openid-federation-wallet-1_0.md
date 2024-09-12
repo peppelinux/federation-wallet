@@ -119,22 +119,22 @@ Personal Device:
 : Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations.
 
 Wallet Provider:
-: An Organizational Entity responsible for the develoment, publication, and management of a Wallet Solution.
+: An Organizational Entity responsible for the development, publication, and management of a Wallet Solution.
 
 Wallet Instance:
 : Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.
 
 Wallet Solution:
-: The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or other forms of software applicaiton. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.
+: The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or another form of software application. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.
 
 Authentic Source:
-: A protected Resource Server, not necessarly an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.
+: A protected Resource Server, not necessarily an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.
 
 Credential Verifier:
 : Entity that requests and verifies Digital Credentials presented by a Holder. 
 
 Credential Verifier Instance:
-: A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credentials in a proximity flow, therefore  verify the received Digital Credential.
+: A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.
 
 ## Trust Models and Trust Frameworks
 
@@ -148,7 +148,7 @@ The Trust Model defines the relationships and mechanisms through which trust is 
 
 **Third-Party Trust** is the focus of this specification, although the **Web of Trust** model is not excluded if multiple trusted third parties (Trust Anchors) are supported by the participants.
 
-A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a Trust Model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way.
+A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a Trust Model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine-readable way.
 
 In the scope of this specification, only the technical and procedural aspects are considered and fully covered.
 
@@ -217,7 +217,7 @@ Consequently, the End-User obtains and holds the Digital Credentials without dis
 
 # Wallet Instance Types
 
-There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organisational Entity such as a legal person. These two types of End-Users may have different usage and functional requirements.
+There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organizational Entity, such as a legal person. These two types of End-Users may have different usage and functional requirements.
 
 Below a non-exhaustive list of the different Wallet Instance types.
 
@@ -225,7 +225,7 @@ Mobile Wallet Native Application
 : Also known as Mobile Wallet only, is an application that runs natively on a Personal Device under the sole control of an End-User and provided through a platform vendor specific app-store, on behalf of the Wallet Solution. In some cases the End-User as natural person uses the Mobile Wallet representing a legal person.
 
 Web Wallet Native Application
-: Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organisational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:
+: Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organizational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:
     - **Custodial Web Wallet**: Cloud Wallets that have dependency on a cloud infrastructure, not necessarily hosted by the Wallet Provider, are typically classified as Custodial Web Wallets; in this case, the cryptographic keys used and the Digital Credentials are stored in the cloud infrastructure.
     - **Non-Custodial Web Wallet**: A Web Wallet where the cryptographic keys are stored and managed on a media in possession by the End-User and the Digital Credentials can only be used by the End-User, e.g. using a FIDO enabled security hardware token, no matter whether the Credentials are stored locally in a Personal Device or in cloud storage.
 
@@ -262,9 +262,9 @@ Since the Holder may not be an Organizational Entity and cannot be registered as
 
 Outside the Trust Chain, it is the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the Wallet Attestation and under the responsibility of its issuer, the Wallet Provider.
 
-# Establishing Trust with an Credential Verifier Instance
+# Establishing Trust with a Credential Verifier Instance
 
-A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem. 
+A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem.
 
 To establish trust between a Holder's Wallet Instance and a Credential Verifier Instance, a mechanism using a verifiable attestation, such as the Wallet Instance Attestations, SHOULD be employed. This process ensures that the Credential Verifier Instance is legitimate and trustworthy.
 
@@ -429,7 +429,7 @@ Differently from `metadata`, `metadata_policy` ensures that specific settings ca
 
 ## Using Trust Marks
 
-Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happend through auditing or certification processes.
+Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happen through auditing or certification processes.
 
 Trust Marks are typically implemented as signed assertions that can be verified by other entities.
 
@@ -775,8 +775,8 @@ The technology described in this specification was made available from contribut
    -02
 
    * Added non-normative example about using policies with metadata and trust marks
-   * Added Credential Verifier and Credential Verifier Istance
-   * Added section about Credential Verifier Istance
+   * Added Credential Verifier and Credential Verifier Instance
+   * Added section about Credential Verifier Instance
    * Illustrative rationale about Authentic Sources and Wallet Provider within the Four-Party Model sections
    * Moved text on Possible Use of Metadata Parameters by Wallet Ecosystems to issue #22.
    * Added warning about the specification not being final.
