@@ -1293,7 +1293,7 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-establishing-trust-with-an-" class="internal xref">Establishing Trust with an Credential Verifier Instance</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-establishing-trust-with-a-c" class="internal xref">Establishing Trust with a Credential Verifier Instance</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
             <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-wallet-architecture-entity-" class="internal xref">Wallet Architecture Entity Types</a></p>
@@ -1453,7 +1453,7 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.5">Wallet Provider:</dt>
-        <dd style="margin-left: 1.5em" id="section-3-3.6">An Organizational Entity responsible for the develoment, publication, and management of a Wallet Solution.<a href="#section-3-3.6" class="pilcrow">¶</a>
+        <dd style="margin-left: 1.5em" id="section-3-3.6">An Organizational Entity responsible for the development, publication, and management of a Wallet Solution.<a href="#section-3-3.6" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.7">Wallet Instance:</dt>
@@ -1461,11 +1461,11 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.9">Wallet Solution:</dt>
-        <dd style="margin-left: 1.5em" id="section-3-3.10">The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or other forms of software applicaiton. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.<a href="#section-3-3.10" class="pilcrow">¶</a>
+        <dd style="margin-left: 1.5em" id="section-3-3.10">The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or another form of software application. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.<a href="#section-3-3.10" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.11">Authentic Source:</dt>
-        <dd style="margin-left: 1.5em" id="section-3-3.12">A protected Resource Server, not necessarly an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.<a href="#section-3-3.12" class="pilcrow">¶</a>
+        <dd style="margin-left: 1.5em" id="section-3-3.12">A protected Resource Server, not necessarily an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.<a href="#section-3-3.12" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.13">Credential Verifier:</dt>
@@ -1473,7 +1473,7 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 </dd>
         <dd class="break"></dd>
 <dt id="section-3-3.15">Credential Verifier Instance:</dt>
-        <dd style="margin-left: 1.5em" id="section-3-3.16">A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credentials in a proximity flow, therefore  verify the received Digital Credential.<a href="#section-3-3.16" class="pilcrow">¶</a>
+        <dd style="margin-left: 1.5em" id="section-3-3.16">A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.<a href="#section-3-3.16" class="pilcrow">¶</a>
 </dd>
       <dd class="break"></dd>
 </dl>
@@ -1496,7 +1496,7 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 </li>
         </ul>
 <p id="section-3.1-4"><strong>Third-Party Trust</strong> is the focus of this specification, although the <strong>Web of Trust</strong> model is not excluded if multiple trusted third parties (Trust Anchors) are supported by the participants.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
-<p id="section-3.1-5">A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a Trust Model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a Trust Model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine-readable way.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 <p id="section-3.1-6">In the scope of this specification, only the technical and procedural aspects are considered and fully covered.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
 <p id="section-3.1-7">OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
 </section>
@@ -1575,7 +1575,7 @@ The four Entities interact with each other as described below:<a href="#section-
       <h2 id="name-wallet-instance-types">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-wallet-instance-types" class="section-name selfRef">Wallet Instance Types</a>
       </h2>
-<p id="section-5-1">There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organisational Entity such as a legal person. These two types of End-Users may have different usage and functional requirements.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organizational Entity, such as a legal person. These two types of End-Users may have different usage and functional requirements.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Below a non-exhaustive list of the different Wallet Instance types.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-5-3">
         <dt id="section-5-3.1">Mobile Wallet Native Application</dt>
@@ -1584,7 +1584,7 @@ The four Entities interact with each other as described below:<a href="#section-
         <dd class="break"></dd>
 <dt id="section-5-3.3">Web Wallet Native Application</dt>
         <dd style="margin-left: 1.5em" id="section-5-3.4">
-          <p id="section-5-3.4.1">Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organisational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:<a href="#section-5-3.4.1" class="pilcrow">¶</a></p>
+          <p id="section-5-3.4.1">Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organizational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:<a href="#section-5-3.4.1" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-5-3.4.2.1">
               <strong>Custodial Web Wallet</strong>: Cloud Wallets that have dependency on a cloud infrastructure, not necessarily hosted by the Wallet Provider, are typically classified as Custodial Web Wallets; in this case, the cryptographic keys used and the Digital Credentials are stored in the cloud infrastructure.<a href="#section-5-3.4.2.1" class="pilcrow">¶</a>
@@ -1635,10 +1635,10 @@ The four Entities interact with each other as described below:<a href="#section-
 </div>
 </section>
 </div>
-<div id="establishing-trust-with-an-credential-verifier-instance">
+<div id="establishing-trust-with-a-credential-verifier-instance">
 <section id="section-6">
-      <h2 id="name-establishing-trust-with-an-">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-establishing-trust-with-an-" class="section-name selfRef">Establishing Trust with an Credential Verifier Instance</a>
+      <h2 id="name-establishing-trust-with-a-c">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-establishing-trust-with-a-c" class="section-name selfRef">Establishing Trust with a Credential Verifier Instance</a>
       </h2>
 <p id="section-6-1">A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">To establish trust between a Holder's Wallet Instance and a Credential Verifier Instance, a mechanism using a verifiable attestation, such as the Wallet Instance Attestations, SHOULD be employed. This process ensures that the Credential Verifier Instance is legitimate and trustworthy.<a href="#section-6-2" class="pilcrow">¶</a></p>
@@ -1879,7 +1879,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
         <h3 id="name-using-trust-marks">
 <a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-using-trust-marks" class="section-name selfRef">Using Trust Marks</a>
         </h3>
-<p id="section-8.4-1">Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happend through auditing or certification processes.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-1">Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happen through auditing or certification processes.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
 <p id="section-8.4-2">Trust Marks are typically implemented as signed assertions that can be verified by other entities.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
 <p id="section-8.4-3">This verification process involves checking the digital signature against the public key of the Trust Mark Issuer to ensure the Trust Mark has not been forged, and its check to the Trust Mark Status endpoint to check it against any revocation.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
 <p id="section-8.4-4">Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
@@ -2128,9 +2128,9 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 <ul class="compact">
 <li class="compact" id="appendix-B-3.1">Added non-normative example about using policies with metadata and trust marks<a href="#appendix-B-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-B-3.2">Added Credential Verifier and Credential Verifier Istance<a href="#appendix-B-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-B-3.2">Added Credential Verifier and Credential Verifier Instance<a href="#appendix-B-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="appendix-B-3.3">Added section about Credential Verifier Istance<a href="#appendix-B-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="appendix-B-3.3">Added section about Credential Verifier Instance<a href="#appendix-B-3.3" class="pilcrow">¶</a>
 </li>
         <li class="compact" id="appendix-B-3.4">Illustrative rationale about Authentic Sources and Wallet Provider within the Four-Party Model sections<a href="#appendix-B-3.4" class="pilcrow">¶</a>
 </li>
