@@ -93,7 +93,7 @@ It uses applicable metadata parameters defined by other specifications
 for wallet entities.
 
 Collaboration Note: When a metadata parameter is needed for an Entity Type
-defined by ths specification that does not currently exist and
+defined by this specification that does not currently exist and
 that would be usable by wallet ecosystems both using and not using OpenID Federation,
 it is the editors' intent to work with the working groups creating
 general-purpose wallet specifications to define those new parameters there.
@@ -125,10 +125,16 @@ Wallet Instance:
 : Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.
 
 Wallet Solution:
-: The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service. It may also utilize services and web services for the exchange of data between the Wallet Provider and its Wallet Instances.
+: The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or other forms of software applicaiton. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.
 
 Authentic Source:
 : A protected Resource Server, not necessarly an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.
+
+Credential Verifier:
+: Entity that requests and verifies Digital Credentials presented by a Holder. 
+
+Credential Verifier Instance:
+: A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credentials in a proximity flow, therefore  verify the received Digital Credential.
 
 ## Trust Models and Trust Frameworks
 
@@ -138,11 +144,11 @@ The Trust Model defines the relationships and mechanisms through which trust is 
 
 - **Direct Trust**: Trust is established directly between two parties without intermediaries.
 - **Third-Party Trust**: Trust is facilitated by a trusted third party.
-- **Web of Trust**: Trust is decentralized, with each participant making individual decisions about whom to trust, using Direct Trust or potentially multiple Third-Parties.
+- **Web of Trust**: Each participant makes individual decisions about whom to trust, using Direct Trust or potentially multiple Third-Parties.
 
-**Third-Party Trust** is the focus of this specification, although the **Web of Trust** model is not excluded if multiple trusted third parties (trust anchors) are supported by the participants.
+**Third-Party Trust** is the focus of this specification, although the **Web of Trust** model is not excluded if multiple trusted third parties (Trust Anchors) are supported by the participants.
 
-A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a trust model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way.
+A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a Trust Model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine readable way.
 
 In the scope of this specification, only the technical and procedural aspects are considered and fully covered.
 
@@ -163,6 +169,31 @@ The four Entities interact with each other as described below:
 4. **Trust Anchor**: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.
 
 ````
++-------------------+    +---------------+    +---------------------+
+| Credential Issuer |<-->|    Holder     |<-->| Credential Verifier |
+|                   |    |               |    |                     |
++-------------------+    +---------------+    +---------------------+
+         |                       |                     |
+         |                       |                     |
+         V                       V                     V
++--------------------------------------------------------------+
+|                          Trust Anchor                        |
++--------------------------------------------------------------+
+````
+**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model. 
+
+where Authentic Sources and Wallet Providers figure such as extensions to be not considered in the core structure of the four parties.
+
+The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Credential Verifier. The Credential Issuer provides Digital Credentials to the Holder, while the Credential Verifier relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Credential Verifier, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
+
+In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.
+
+The transactions primarily involve the transfer or management of Digital Credentials rather than granting access to services based on identity verification.
+
+Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Credential Verifier to authenticate themselves.
+
+
+````
 +------------------+     +-----------------+
 | Authentic Source |     | Wallet Provider |
 |                  |     |                 |
@@ -181,19 +212,12 @@ The four Entities interact with each other as described below:
 |                          Trust Anchor                        |
 +--------------------------------------------------------------+
 ````
-**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model
+**Figure 2**: Representation acknowledging the roles of Authentic Sources and Wallet Providers in the ecosystem while maintaining the core structure of the Four-Party Model.
 
-The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Credential Verifier. The Credential Issuer provides Digital Credentials to the Holder, while the Credential Verifier relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Credential Verifier, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
-
-In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.
-
-The transactions primarily involve the transfer or management of Digital Credentials rather than granting access to services based on identity verification.
-
-Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Credential Verifier to authenticate themselves.
 
 # Wallet Instance Types
 
-There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organisational Entity such as a legal person. These two types of users may have different usage and functional requirements.
+There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organisational Entity such as a legal person. These two types of End-Users may have different usage and functional requirements.
 
 Below a non-exhaustive list of the different Wallet Instance types.
 
@@ -236,11 +260,13 @@ Since the Holder may not be an Organizational Entity and cannot be registered as
 +----------------------------+    +-------------------------------+
 ```
 
-Outside the Trust Chain, we have the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the responsibility of the Wallet Provider.
+Outside the Trust Chain, it is the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the Wallet Attestation and under the responsibility of its issuer, the Wallet Provider.
 
-# Establishing Trust with the Credential Verifier
+# Establishing Trust with an Credential Verifier Instance
 
-TBD: concept of Credential Verifier instance in the form of verifier app in control of a natural person.
+A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem. 
+
+To establish trust between a Holder's Wallet Instance and a Credential Verifier Instance, a mechanism using a verifiable attestation, such as the Wallet Instance Attestations, SHOULD be employed. This process ensures that the Credential Verifier Instance is legitimate and trustworthy.
 
 # Wallet Architecture Entity Types
 
@@ -296,14 +322,100 @@ Qualitative aspects of federation entities, including administrative protocols, 
 Metadata refers to application-specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.
 
 Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.
+These modifications allow a federation authority, such as a Trust Anchor, to apply policies coercively to its subordinates. This can include actions such as removing weak signature algorithms from their metadata, enforcing the use of specific endpoints configured at the time of the entity's registration within the ecosystem, or restricting the personal data that a Credential Verifier is allowed to request.
 
-TBD: example 1 about problem solved with a Subordinate Statement metadata parameter [sanitize endpoints]
+````
+{
+  "iss": "https://trust-anchor.example.com",
+  "sub": "https://credential-verifier.example.it",
+  "iat": 1616239022,
+  "exp": 1616239322,
+  "metadata": {
+    "federation_entity": {
+      "organization_name": "Example Credential Verifier",
+    },
+    "openid_credential_verifier": {
+      "application_type": "web",
+      "client_name": "Example Credential Verifier",
+      "request_uris": [
+          "https://verifier.example.org/request_uri"
+      ],
+      "response_uris_supported": [
+          "https://verifier.example.org/response_uri"
+      ],
+      "presentation_definitions_supported": [
+          {
+              "id": "d76c51b7-ea90-49bb-8368-6b3d194fc131",
+              "input_descriptors": [
+                  {
+                      "id": "PersonIdentificationData",
+                      "name": "Person Identification Data",
+                      "purpose": "User Authentication",
+                      "format": {
+                          "vc+sd-jwt": {
+                              "alg": [
+                                  "ES256",
+                                  "ES384",
+                                  "ES512"
+                              ]
+                          }
+                      },
+                      "constraints": {
+                          "limit_disclosure": "required",
+                          "fields": [
+                              {
+                                  "filter": {
+                                      "const": "PersonIdentificationData",
+                                      "type": "string"
+                                  },
+                                  "path": [
+                                      "$.vct"
+                                  ]
+                              },
+                              {
+                                  "filter": {
+                                      "type": "object"
+                                  },
+                                  "path": [
+                                      "$.cnf.jwk"
+                                  ]
+                              },
+                              {
+                                  "path": [
+                                      "$.first_name"
+                                  ]
+                              },
+                              {
+                                  "path": [
+                                      "$.family_name"
+                                  ]
+                              }
+                          ]
+                      }
 
-TBD: example 2 about problem solved with a Subordinate Statement metadata parameter [name of the organization]
+                  }
+              ]
+          }
+      ],
+    }
+  },
+  "jwks": {
+    "keys": [
+      {
+        "kty": "RSA",
+        "use": "sig",
+        "kid": "1",
+        "n": "0vx7agoebGcQSuuPiLJXZptN9nndrQmbXEPCRfceaC7mkxr8v...",
+        "e": "AQAB"
+      }
+    ]
+  }
+}
+````
+**Figure 3**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
 
-TBD: example 3 about problem solved with a Subordinate Statement metadata parameter [data that can be requested by a Credential Verifier]
 
-TBD: example 4 about problem solved with a Subordinate Statement metadata parameter [digital credential configuration supported by a VCI]
+
 
 ## Differences Between `metadata` and `metadata_policy`
 
@@ -313,12 +425,7 @@ This distinction positions the `metadata` parameter as an ideal tool for federat
 
 ## Using Metadata Policies
 
-Differently from `metadata`, `metadata_policy` ensures that specific settings can be propagated to all the entities statements contained within a Trust Chain.
-
-TBD: example 1 about problem solved with a Subordinate Statement metadata_policy parameter [weak sign alg disabled for everybody along the chain]
-
-TBD: example 2 about problem solved with a Subordinate Statement metadata_policy parameter [resolve endpoint overwritted to the one provided by the TA]
-
+Differently from `metadata`, `metadata_policy` ensures that specific settings can be propagated to all the Entities Statements contained within a Trust Chain.
 
 ## Using Trust Marks
 
@@ -330,11 +437,17 @@ This verification process involves checking the digital signature against the pu
 
 Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.
 
-TBD: example 1 about problem solved with a Subordinate Statement trust_marks parameter [under age user]
-
-TBD: example 2 about problem solved with a Subordinate Statement trust_marks parameter
-
-TBD: example 3 about problem solved with a Subordinate Statement trust_marks parameter [disabled user accessibility compliance]
+````
+{
+  "id":"https://diligent.federation.example.com/openid_credential_verifier/private/under-age",
+  "iss": "https://trustissuer.pinarolo.example.it",
+  "sub": "https://vavuso.example.com/rp",
+  "iat": 1579621160,
+  "policy_uri": "https://vavuso.example.com/policy",
+  "tos_uri": "https://vavuso.example.com/tos"
+}
+````
+**Figure 4**: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.
 
 # Federation Trust Discovery Use Cases
 
@@ -661,6 +774,10 @@ The technology described in this specification was made available from contribut
 
    -02
 
+   * Added non-normative example about using policies with metadata and trust marks
+   * Added Credential Verifier and Credential Verifier Istance
+   * Added section about Credential Verifier Istance
+   * Illustrative rationale about Authentic Sources and Wallet Provider within the Four-Party Model sections
    * Moved text on Possible Use of Metadata Parameters by Wallet Ecosystems to issue #22.
    * Added warning about the specification not being final.
 
