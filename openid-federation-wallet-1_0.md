@@ -415,8 +415,6 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 **Figure 3**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
 
 
-
-
 ## Differences Between `metadata` and `metadata_policy`
 
 The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of [@!OpenID.Federation].
@@ -566,7 +564,18 @@ sequenceDiagram
 
 # Implementation Considerations for Offline Flows
 
-TBD: usage of static trust chain having at least a Trust Anchor in common with the requestor
+The static Trust Chain parameter within the JWT headers is used to ensure that the entities involved in the transaction have a common Trust Anchor. which facilitates trust without the need for real-time verification using the Federation API endpoints.
+
+Entity that issues a signed data object, including the `trust_chain` parameter, might be:
+
+- Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Providers trusts;
+- Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider;
+- Credential Issuers in signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider.
+
+The Entity that receives the data object including the JWT `trust_chain`, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working internet connection for reaching the Federation API.
+
+Using short-lived Trust Chains ensures compatibility with required revocation administrative protocols. For example, if a revocation must be propagated in less than 24 hours, the Trust Chain should not be valid for more than that period.
+
 
 # Acknowledgments
 
