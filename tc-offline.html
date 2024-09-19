@@ -2041,7 +2041,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 <p id="section-10-1">The static Trust Chain parameter within the JWT headers, as defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> Section 4.3, is used to hint to the entity involved in a transaction to have a common Trust Anchor. This facilitate the trust evaluation without the need for real-time Federation Entity Discovery using the Federation API endpoints.<a href="#section-10-1" class="pilcrow">¶</a></p>
 <p id="section-10-2">Entity that issues a signed data object, including the <code>trust_chain</code> parameter, might be:<a href="#section-10-2" class="pilcrow">¶</a></p>
 <ul class="compact">
-<li class="compact" id="section-10-3.1">Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Providers trusts;<a href="#section-10-3.1" class="pilcrow">¶</a>
+<li class="compact" id="section-10-3.1">Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;<a href="#section-10-3.1" class="pilcrow">¶</a>
 </li>
         <li class="compact" id="section-10-3.2">Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider;<a href="#section-10-3.2" class="pilcrow">¶</a>
 </li>
