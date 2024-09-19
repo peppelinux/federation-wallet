@@ -564,7 +564,7 @@ sequenceDiagram
 
 # Implementation Considerations for Offline Flows
 
-The static Trust Chain parameter within the JWT headers is used to ensure that the entities involved in the transaction have a common Trust Anchor. This enables trust without the need for real-time Federation Entity Discovery using the Federation API endpoints.
+The static Trust Chain parameter within the JWT headers, as defined in [@!OpenID.Federation] Section 4.3, is used to hint to the entity involved in a transaction to have a common Trust Anchor. This facilitate the trust evaluation without the need for real-time Federation Entity Discovery using the Federation API endpoints.
 
 Entity that issues a signed data object, including the `trust_chain` parameter, might be:
 
