@@ -2043,9 +2043,9 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 <ul class="compact">
 <li class="compact" id="section-10-3.1">Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;<a href="#section-10-3.1" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-10-3.2">Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider;<a href="#section-10-3.2" class="pilcrow">¶</a>
+        <li class="compact" id="section-10-3.2">Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the <code>wallet_metadata</code> parameter provided by the Wallet in the Request URI POST;<a href="#section-10-3.2" class="pilcrow">¶</a>
 </li>
-        <li class="compact" id="section-10-3.3">Credential Issuers in signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider.<a href="#section-10-3.3" class="pilcrow">¶</a>
+        <li class="compact" id="section-10-3.3">Credential Issuers in signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the Wallet Attestation used during the Issuance.<a href="#section-10-3.3" class="pilcrow">¶</a>
 </li>
       </ul>
 <p id="section-10-4">The Entity that receives the data object including the JWT <code>trust_chain</code>, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working internet connection for reaching the Federation API.<a href="#section-10-4" class="pilcrow">¶</a></p>
