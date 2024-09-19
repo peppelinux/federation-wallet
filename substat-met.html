@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>OpenID Federation Wallet Architectures 1.0 - draft 02</title>
+<meta content="Giuseppe De Marco" name="author">
+<meta content="Roland Hedberg" name="author">
+<meta content="Michael B. Jones" name="author">
+<meta content="John Bradley" name="author">
+<meta content="
+       This specification defines the OpenID Federation entity types for
+digital wallet architectures. 
+    " name="description">
+<meta content="xml2rfc 3.16.0" name="generator">
+<meta content="security" name="keyword">
+<meta content="openid" name="keyword">
+<meta content="ssi" name="keyword">
+<meta content="openid-federation-wallet" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.16.0
+    Python 3.10.2
+    appdirs 1.4.4
+    ConfigArgParse 1.5.3
+    google-i18n-address 2.5.2
+    html5lib 1.1
+    intervaltree 3.1.0
+    Jinja2 3.1.2
+    lxml 4.9.2
+    MarkupSafe 2.1.2
+    pycountry 22.3.5
+    PyYAML 6.0
+    requests 2.28.2
+    setuptools 57.5.0
+    six 1.16.0
+    wcwidth 0.2.6
+-->
+<link href="./openid-federation-wallet.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">/*
+
+  NOTE: Changes at the bottom of this file overrides some earlier settings.
+
+  Once the style has stabilized and has been adopted as an official RFC style,
+  this can be consolidated so that style settings occur only in one place, but
+  for now the contents of this file consists first of the initial CSS work as
+  provided to the RFC Formatter (xml2rfc) work, followed by itemized and
+  commented changes found necessary during the development of the v3
+  formatters.
+
+*/
+
+/* fonts */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans'); /* Sans-serif */
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif'); /* Serif (print) */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono'); /* Monospace */
+
+:root {
+  --font-sans: 'Noto Sans', Arial, Helvetica, sans-serif;
+  --font-serif: 'Noto Serif', 'Times', 'Times New Roman', serif;
+  --font-mono: 'Roboto Mono', Courier, 'Courier New', monospace;
+}
+
+@viewport {
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+@-ms-viewport {
+  width: extend-to-zoom;
+  zoom: 1.0;
+}
+/* general and mobile first */
+html {
+}
+body {
+  max-width: 90%;
+  margin: 1.5em auto;
+  color: #222;
+  background-color: #fff;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+.ears {
+  display: none;
+}
+
+/* headings */
+#title, h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  font-weight: bold;
+  line-height: 1.3;
+}
+#title {
+  clear: both;
+  border-bottom: 1px solid #ddd;
+  margin: 0 0 0.5em 0;
+  padding: 1em 0 0.5em;
+}
+.author {
+  padding-bottom: 4px;
+}
+h1 {
+  font-size: 26px;
+  margin: 1em 0;
+}
+h2 {
+  font-size: 22px;
+  margin-top: -20px;  /* provide offset for in-page anchors */
+  padding-top: 33px;
+}
+h3 {
+  font-size: 18px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h4 {
+  font-size: 16px;
+  margin-top: -36px;  /* provide offset for in-page anchors */
+  padding-top: 42px;
+}
+h5, h6 {
+  font-size: 14px;
+}
+#n-copyright-notice {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+}
+/* general structure */
+p {
+  padding: 0;
+  margin: 0 0 1em 0;
+  text-align: left;
+}
+div, span {
+  position: relative;
+}
+div {
+  margin: 0;
+}
+.alignRight.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignRight.art-text pre {
+  padding: 0;
+}
+.alignRight {
+  margin: 1em 0;
+}
+.alignRight > *:first-child {
+  border: none;
+  margin: 0;
+  float: right;
+  clear: both;
+}
+.alignRight > *:nth-child(2) {
+  clear: both;
+  display: block;
+  border: none;
+}
+svg {
+  display: block;
+}
+svg[font-family~="serif" i], svg [font-family~="serif" i] {
+  font-family: var(--font-serif);
+}
+svg[font-family~="sans-serif" i], svg [font-family~="sans-serif" i] {
+  font-family: var(--font-sans);
+}
+svg[font-family~="monospace" i], svg [font-family~="monospace" i] {
+  font-family: var(--font-mono);
+}
+.alignCenter.art-text {
+  background-color: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  padding: 1em 1em 0;
+  margin-bottom: 1.5em;
+}
+.alignCenter.art-text pre {
+  padding: 0;
+}
+.alignCenter {
+  margin: 1em 0;
+}
+.alignCenter > *:first-child {
+  display: table;
+  border: none;
+  margin: 0 auto;
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 1em 2em;
+}
+ol ol, ul ul, ol ul, ul ol {
+  margin-left: 1em;
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+.ulCompact li {
+  margin: 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+}
+ul.empty li, .ulEmpty li {
+  margin-top: 0.5em;
+}
+ul.ulBare, li.ulBare {
+  margin-left: 0em !important;
+}
+ul.compact, .ulCompact,
+ol.compact, .olCompact {
+  line-height: 100%;
+  margin: 0 0 0 2em;
+}
+
+/* definition lists */
+dl {
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+/* 
+dl.nohang > dt {
+  float: none;
+}
+*/
+dl > dd {
+  margin-bottom: .8em;
+  min-height: 1.3em;
+}
+dl.compact > dd, .dlCompact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+
+/* links */
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #22e; /* Arlen: WCAG 2019 */
+}
+a[href]:hover {
+  background-color: #f2f2f2;
+}
+figcaption a[href],
+a[href].selfRef {
+  color: #222;
+}
+/* XXX probably not this:
+a.selfRef:hover {
+  background-color: transparent;
+  cursor: default;
+} */
+
+/* Figures */
+tt, code, pre {
+  background-color: #f9f9f9;
+  font-family: var(--font-mono);
+}
+pre {
+  border: 1px solid #eee;
+  margin: 0;
+  padding: 1em;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0;
+}
+figure blockquote {
+  margin: 0.8em 0.4em 0.4em;
+}
+figcaption {
+  font-style: italic;
+  margin: 0 0 1em 0;
+}
+@media screen {
+  pre {
+    overflow-x: auto;
+    max-width: 100%;
+    max-width: calc(100% - 22px);
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 1.2em 2em;
+}
+blockquote {
+  background-color: #f9f9f9;
+  color: #111; /* Arlen: WCAG 2019 */
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  margin: 1em 0;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  border: 1px solid #eee;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5em 0.75em;
+}
+th {
+  text-align: left;
+  background-color: #e9e9e9;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f5f5f5;
+}
+table caption {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+table p {
+  /* XXX to avoid bottom margin on table row signifiers. If paragraphs should
+     be allowed within tables more generally, it would be far better to select on a class. */
+  margin: 0;
+}
+
+/* pilcrow */
+a.pilcrow {
+  color: #666; /* Arlen: AHDJ 2019 */
+  text-decoration: none;
+  visibility: hidden;
+  user-select: none;
+  -ms-user-select: none;
+  -o-user-select:none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+@media screen {
+  aside:hover > a.pilcrow,
+  p:hover > a.pilcrow,
+  blockquote:hover > a.pilcrow,
+  div:hover > a.pilcrow,
+  li:hover > a.pilcrow,
+  pre:hover > a.pilcrow {
+    visibility: visible;
+  }
+  a.pilcrow:hover {
+    background-color: transparent;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+.bcp14 {
+  font-variant: small-caps;
+}
+
+.role {
+  font-variant: all-small-caps;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: 0.9em;
+}
+#identifiers dt {
+  width: 3em;
+  clear: left;
+}
+#identifiers dd {
+  float: left;
+  margin-bottom: 0;
+}
+/* Fix PDF info block run off issue */
+@media print {
+  #identifiers dd {
+    float: none;
+  }
+}
+#identifiers .authors .author {
+  display: inline-block;
+  margin-right: 1.5em;
+}
+#identifiers .authors .org {
+  font-style: italic;
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #666; /* Arlen: WCAG 2019 */
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+}
+.docInfo .prepared {
+  float: left;
+}
+.docInfo .prepared {
+  float: right;
+}
+
+/* table of contents */
+#toc  {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+}
+nav.toc ul {
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  list-style: none;
+}
+nav.toc li {
+  line-height: 1.3em;
+  margin: 0.75em 0;
+  padding-left: 1.2em;
+  text-indent: -1.2em;
+}
+/* references */
+.references dt {
+  text-align: right;
+  font-weight: bold;
+  min-width: 7em;
+}
+.references dd {
+  margin-left: 8em;
+  overflow: auto;
+}
+
+.refInstance {
+  margin-bottom: 1.25em;
+}
+
+.references .ascii {
+  margin-bottom: 0.25em;
+}
+
+/* index */
+.index ul {
+  margin: 0 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+.index ul ul {
+  margin: 0;
+}
+.index li {
+  margin: 0;
+  text-indent: -2em;
+  padding-left: 2em;
+  padding-bottom: 5px;
+}
+.indexIndex {
+  margin: 0.5em 0 1em;
+}
+.index a {
+  font-weight: 700;
+}
+/* make the index two-column on all but the smallest screens */
+@media (min-width: 600px) {
+  .index ul {
+    -moz-column-count: 2;
+    -moz-column-gap: 20px;
+  }
+  .index ul ul {
+    -moz-column-count: 1;
+    -moz-column-gap: 0;
+  }
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  margin: 1em 0;
+}
+
+address.vcard .nameRole {
+  font-weight: 700;
+  margin-left: 0;
+}
+address.vcard .label {
+  font-family: var(--font-sans);
+  margin: 0.5em 0;
+}
+address.vcard .type {
+  display: none;
+}
+.alternative-contact {
+  margin: 1.5em 0 1em;
+}
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+
+/* temporary notes */
+.rfcEditorRemove::before {
+  position: absolute;
+  top: 0.2em;
+  right: 0.2em;
+  padding: 0.2em;
+  content: "The RFC Editor will remove this note";
+  color: #9e2a00; /* Arlen: WCAG 2019 */
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+}
+.rfcEditorRemove {
+  position: relative;
+  padding-top: 1.8em;
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  border-radius: 3px;
+}
+.cref {
+  background-color: #ffd; /* Arlen: WCAG 2019 */
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+/* alternative layout for smaller screens */
+@media screen and (max-width: 1023px) {
+  body {
+    padding-top: 2em;
+  }
+  #title {
+    padding: 1em 0;
+  }
+  h1 {
+    font-size: 24px;
+  }
+  h2 {
+    font-size: 20px;
+    margin-top: -18px;  /* provide offset for in-page anchors */
+    padding-top: 38px;
+  }
+  #identifiers dd {
+    max-width: 60%;
+  }
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    background-color: inherit;
+    border-bottom: 1px solid #ccc;
+  }
+  #toc h2 {
+    margin: -1px 0 0 0;
+    padding: 4px 0 4px 6px;
+    padding-right: 1em;
+    min-width: 190px;
+    font-size: 1.1em;
+    text-align: right;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+  }
+  #toc h2::before { /* css hamburger */
+    float: right;
+    position: relative;
+    width: 1em;
+    height: 1px;
+    left: -164px;
+    margin: 6px 0 0 0;
+    background: white none repeat scroll 0 0;
+    box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+    content: "";
+  }
+  #toc nav {
+    display: none;
+    padding: 0.5em 1em 1em;
+    overflow: auto;
+    height: calc(100vh - 48px);
+    border-left: 1px solid #ddd;
+  }
+}
+
+/* alternative layout for wide screens */
+@media screen and (min-width: 1024px) {
+  body {
+    max-width: 724px;
+    margin: 42px auto;
+    padding-left: 1.5em;
+    padding-right: 29em;
+  }
+  #toc {
+    position: fixed;
+    top: 42px;
+    right: 42px;
+    width: 25%;
+    margin: 0;
+    padding: 0 1em;
+    z-index: 1;
+  }
+  #toc h2 {
+    border-top: none;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0.25em 1em 1em 0;
+  }
+  #toc nav {
+    display: block;
+    height: calc(90vh - 84px);
+    bottom: 0;
+    padding: 0.5em 0 0;
+    overflow: auto;
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc, #n-introduction {
+    page-break-before: always;
+  }
+  #toc {
+    border-top: none;
+    padding-top: 0;
+  }
+  figure, pre {
+    page-break-inside: avoid;
+  }
+  figure {
+    overflow: scroll;
+  }
+  .breakable pre {
+    break-inside: auto;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  h2+*, h3+*, h4+*, h5+*, h6+* {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+/* This is commented out here, as the string-set: doesn't
+   pass W3C validation currently */
+/*
+.ears thead .left {
+  string-set: ears-top-left content();
+}
+
+.ears thead .center {
+  string-set: ears-top-center content();
+}
+
+.ears thead .right {
+  string-set: ears-top-right content();
+}
+
+.ears tfoot .left {
+  string-set: ears-bottom-left content();
+}
+
+.ears tfoot .center {
+  string-set: ears-bottom-center content();
+}
+
+.ears tfoot .right {
+  string-set: ears-bottom-right content();
+}
+*/
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+  /* The following is commented out here, but set appropriately by in code, as
+     the content depends on the document */
+  /*
+  @top-left {
+    content: 'Internet-Draft';
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-left {
+    content: string(ears-top-left);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-center {
+    content: string(ears-top-center);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @top-right {
+    content: string(ears-top-right);
+    vertical-align: bottom;
+    border-bottom: solid 1px #ccc;
+  }
+  @bottom-left {
+    content: string(ears-bottom-left);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-center {
+    content: string(ears-bottom-center);
+    vertical-align: top;
+    border-top: solid 1px #ccc;
+  }
+  @bottom-right {
+      content: '[Page ' counter(page) ']';
+      vertical-align: top;
+      border-top: solid 1px #ccc;
+  }
+  */
+
+}
+
+/* Changes introduced to fix issues found during implementation */
+/* Make sure links are clickable even if overlapped by following H* */
+a {
+  z-index: 2;
+}
+/* Separate body from document info even without intervening H1 */
+section {
+  clear: both;
+}
+
+
+/* Top align author divs, to avoid names without organization dropping level with org names */
+.author {
+  vertical-align: top;
+}
+
+/* Leave room in document info to show Internet-Draft on one line */
+#identifiers dt {
+  width: 8em;
+}
+
+/* Don't waste quite as much whitespace between label and value in doc info */
+#identifiers dd {
+  margin-left: 1em;
+}
+
+/* Give floating toc a background color (needed when it's a div inside section */
+#toc {
+  background-color: white;
+}
+
+/* Make the collapsed ToC header render white on gray also when it's a link */
+@media screen and (max-width: 1023px) {
+  #toc h2 a,
+  #toc h2 a:link,
+  #toc h2 a:focus,
+  #toc h2 a:hover,
+  #toc a.toplink,
+  #toc a.toplink:hover {
+    color: white;
+    background-color: #444;
+    text-decoration: none;
+  }
+}
+
+/* Give the bottom of the ToC some whitespace */
+@media screen and (min-width: 1024px) {
+  #toc {
+    padding: 0 0 1em 1em;
+  }
+}
+
+/* Style section numbers with more space between number and title */
+.section-number {
+  padding-right: 0.5em;
+}
+
+/* prevent monospace from becoming overly large */
+tt, code, pre {
+  font-size: 95%;
+}
+
+/* Fix the height/width aspect for ascii art*/
+.sourcecode pre,
+.art-text pre {
+  line-height: 1.12;
+}
+
+
+/* Add styling for a link in the ToC that points to the top of the document */
+a.toplink {
+  float: right;
+  margin-right: 0.5em;
+}
+
+/* Fix the dl styling to match the RFC 7992 attributes */
+dl > dt,
+dl.dlParallel > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.dlNewline > dt {
+  float: none;
+}
+
+/* Provide styling for table cell text alignment */
+table td.text-left,
+table th.text-left {
+  text-align: left;
+}
+table td.text-center,
+table th.text-center {
+  text-align: center;
+}
+table td.text-right,
+table th.text-right {
+  text-align: right;
+}
+
+/* Make the alternative author contact information look less like just another
+   author, and group it closer with the primary author contact information */
+.alternative-contact {
+  margin: 0.5em 0 0.25em 0;
+}
+address .non-ascii {
+  margin: 0 0 0 2em;
+}
+
+/* With it being possible to set tables with alignment
+  left, center, and right, { width: 100%; } does not make sense */
+table {
+  width: auto;
+}
+
+/* Avoid reference text that sits in a block with very wide left margin,
+   because of a long floating dt label.*/
+.references dd {
+  overflow: visible;
+}
+
+/* Control caption placement */
+caption {
+  caption-side: bottom;
+}
+
+/* Limit the width of the author address vcard, so names in right-to-left
+   script don't end up on the other side of the page. */
+
+address.vcard {
+  max-width: 30em;
+  margin-right: auto;
+}
+
+/* For address alignment dependent on LTR or RTL scripts */
+address div.left {
+  text-align: left;
+}
+address div.right {
+  text-align: right;
+}
+
+/* Provide table alignment support.  We can't use the alignX classes above
+   since they do unwanted things with caption and other styling. */
+table.right {
+ margin-left: auto;
+ margin-right: 0;
+}
+table.center {
+ margin-left: auto;
+ margin-right: auto;
+}
+table.left {
+ margin-left: 0;
+ margin-right: auto;
+}
+
+/* Give the table caption label the same styling as the figcaption */
+caption a[href] {
+  color: #222;
+}
+
+@media print {
+  .toplink {
+    display: none;
+  }
+
+  /* avoid overwriting the top border line with the ToC header */
+  #toc {
+    padding-top: 1px;
+  }
+
+  /* Avoid page breaks inside dl and author address entries */
+  .vcard {
+    page-break-inside: avoid;
+  }
+
+}
+/* Tweak the bcp14 keyword presentation */
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+/* Tweak the invisible space above H* in order not to overlay links in text above */
+ h2 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 31px;
+ }
+ h3 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+ h4 {
+  margin-top: -18px;  /* provide offset for in-page anchors */
+  padding-top: 24px;
+ }
+/* Float artwork pilcrow to the right */
+@media screen {
+  .artwork a.pilcrow {
+    display: block;
+    line-height: 0.7;
+    margin-top: 0.15em;
+  }
+}
+/* Make pilcrows on dd visible */
+@media screen {
+  dd:hover > a.pilcrow {
+    visibility: visible;
+  }
+}
+/* Make the placement of figcaption match that of a table's caption
+   by removing the figure's added bottom margin */
+.alignLeft.art-text,
+.alignCenter.art-text,
+.alignRight.art-text {
+   margin-bottom: 0;
+}
+.alignLeft,
+.alignCenter,
+.alignRight {
+  margin: 1em 0 0 0;
+}
+/* In print, the pilcrow won't show on hover, so prevent it from taking up space,
+   possibly even requiring a new line */
+@media print {
+  a.pilcrow {
+    display: none;
+  }
+}
+/* Styling for the external metadata */
+div#external-metadata {
+  background-color: #eee;
+  padding: 0.5em;
+  margin-bottom: 0.5em;
+  display: none;
+}
+div#internal-metadata {
+  padding: 0.5em;                       /* to match the external-metadata padding */
+}
+/* Styling for title RFC Number */
+h1#rfcnum {
+  clear: both;
+  margin: 0 0 -1em;
+  padding: 1em 0 0 0;
+}
+/* Make .olPercent look the same as <ol><li> */
+dl.olPercent > dd {
+  margin-bottom: 0.25em;
+  min-height: initial;
+}
+/* Give aside some styling to set it apart */
+aside {
+  border-left: 1px solid #ddd;
+  margin: 1em 0 1em 2em;
+  padding: 0.2em 2em;
+}
+aside > dl,
+aside > ol,
+aside > ul,
+aside > table,
+aside > p {
+  margin-bottom: 0.5em;
+}
+/* Additional page break settings */
+@media print {
+  figcaption, table caption {
+    page-break-before: avoid;
+  }
+}
+/* Font size adjustments for print */
+@media print {
+  body  { font-size: 10pt;      line-height: normal; max-width: 96%; }
+  h1    { font-size: 1.72em;    padding-top: 1.5em; } /* 1*1.2*1.2*1.2 */
+  h2    { font-size: 1.44em;    padding-top: 1.5em; } /* 1*1.2*1.2 */
+  h3    { font-size: 1.2em;     padding-top: 1.5em; } /* 1*1.2 */
+  h4    { font-size: 1em;       padding-top: 1.5em; }
+  h5, h6 { font-size: 1em;      margin: initial; padding: 0.5em 0 0.3em; }
+}
+/* Sourcecode margin in print, when there's no pilcrow */
+@media print {
+  .artwork,
+  .artwork > pre,
+  .sourcecode {
+    margin-bottom: 1em;
+  }
+}
+/* Avoid narrow tables forcing too narrow table captions, which may render badly */
+table {
+  min-width: 20em;
+}
+/* ol type a */
+ol.type-a { list-style-type: lower-alpha; }
+ol.type-A { list-style-type: upper-alpha; }
+ol.type-i { list-style-type: lower-roman; }
+ol.type-I { list-style-type: lower-roman; }
+/* Apply the print table and row borders in general, on request from the RPC,
+and increase the contrast between border and odd row background slightly */
+table {
+  border: 1px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+}
+tr {
+  break-inside: avoid;
+}
+tr:nth-child(2n+1) > td {
+  background-color: #f8f8f8;
+}
+/* Use style rules to govern display of the TOC. */
+@media screen and (max-width: 1023px) {
+  #toc nav { display: none; }
+  #toc.active nav { display: block; }
+}
+/* Add support for keepWithNext */
+.keepWithNext {
+  break-after: avoid-page;
+  break-after: avoid-page;
+}
+/* Add support for keepWithPrevious */
+.keepWithPrevious {
+  break-before: avoid-page;
+}
+/* Change the approach to avoiding breaks inside artwork etc. */
+figure, pre, table, .artwork, .sourcecode  {
+  break-before: auto;
+  break-after: auto;
+}
+/* Avoid breaks between <dt> and <dd> */
+dl {
+  break-before: auto;
+  break-inside: auto;
+}
+dt {
+  break-before: auto;
+  break-after: avoid-page;
+}
+dd {
+  break-before: avoid-page;
+  break-after: auto;
+  orphans: 3;
+  widows: 3
+}
+span.break, dd.break {
+  margin-bottom: 0;
+  min-height: 0;
+  break-before: auto;
+  break-inside: auto;
+  break-after: auto;
+}
+/* Undo break-before ToC */
+@media print {
+  #toc {
+    break-before: auto;
+  }
+}
+/* Text in compact lists should not get extra bottom margin space,
+   since that would makes the list not compact */
+ul.compact p, .ulCompact p,
+ol.compact p, .olCompact p {
+ margin: 0;
+}
+/* But the list as a whole needs the extra space at the end */
+section ul.compact,
+section .ulCompact,
+section ol.compact,
+section .olCompact {
+  margin-bottom: 1em;                    /* same as p not within ul.compact etc. */
+}
+/* The tt and code background above interferes with for instance table cell
+   backgrounds.  Changed to something a bit more selective. */
+tt, code {
+  background-color: transparent;
+}
+p tt, p code, li tt, li code {
+  background-color: #f8f8f8;
+}
+/* Tweak the pre margin -- 0px doesn't come out well */
+pre {
+   margin-top: 0.5px;
+}
+/* Tweak the compact list text */
+ul.compact, .ulCompact,
+ol.compact, .olCompact,
+dl.compact, .dlCompact {
+  line-height: normal;
+}
+/* Don't add top margin for nested lists */
+li > ul, li > ol, li > dl,
+dd > ul, dd > ol, dd > dl,
+dl > dd > dl {
+  margin-top: initial;
+}
+/* Elements that should not be rendered on the same line as a <dt> */
+/* This should match the element list in writer.text.TextWriter.render_dl() */
+dd > div.artwork:first-child,
+dd > aside:first-child,
+dd > figure:first-child,
+dd > ol:first-child,
+dd > div.sourcecode:first-child,
+dd > table:first-child,
+dd > ul:first-child {
+  clear: left;
+}
+/* fix for weird browser behaviour when <dd/> is empty */
+dt+dd:empty::before{
+  content: "\00a0";
+}
+/* Make paragraph spacing inside <li> smaller than in body text, to fit better within the list */
+li > p {
+  margin-bottom: 0.5em
+}
+/* Don't let p margin spill out from inside list items */
+li > p:last-of-type:only-child {
+  margin-bottom: 0;
+}
+</style>
+<link href="rfc-local.css" rel="stylesheet" type="text/css">
+</head>
+<body class="xml2rfc">
+<script src="metadata.min.js"></script>
+<table class="ears">
+<thead><tr>
+<td class="left"></td>
+<td class="center">openid-federation-wallet</td>
+<td class="right">September 2024</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">De Marco, et al.</td>
+<td class="center">Standards Track</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">OpenID Connect A/B</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2024-09-19" class="published">19 September 2024</time>
+    </dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">G. De Marco</div>
+<div class="org">Dipartimento per la trasformazione digitale</div>
+</div>
+<div class="author">
+      <div class="author-name">R. Hedberg</div>
+<div class="org">Catalogix</div>
+</div>
+<div class="author">
+      <div class="author-name">M.B. Jones</div>
+<div class="org">Self-Issued Consulting</div>
+</div>
+<div class="author">
+      <div class="author-name">J. Bradley</div>
+<div class="org">Yubico</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">OpenID Federation Wallet Architectures 1.0 - draft 02</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">This specification defines the OpenID Federation entity types for
+digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-requirements-notation-and-c" class="internal xref">Requirements Notation and Conventions</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.2">
+                <p id="section-toc.1-1.1.2.2.1" class="keepWithNext"><a href="#section-1.2" class="auto internal xref">1.2</a>.  <a href="#name-warning" class="internal xref">Warning</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-scope" class="internal xref">Scope</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-trust-models-and-trust-fram" class="internal xref">Trust Models and Trust Frameworks</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-the-four-party-model" class="internal xref">The Four-Party Model</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-wallet-instance-types" class="internal xref">Wallet Instance Types</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-establishing-trust-with-the" class="internal xref">Establishing Trust with the Holder</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-establishing-trust-with-a-c" class="internal xref">Establishing Trust with a Credential Verifier Instance</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-wallet-architecture-entity-" class="internal xref">Wallet Architecture Entity Types</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
+                <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-openid-wallet-provider-enti" class="internal xref">OpenID Wallet Provider Entity Type</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
+                <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-openid-credential-issuer-en" class="internal xref">OpenID Credential Issuer Entity Type</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.3">
+                <p id="section-toc.1-1.7.2.3.1"><a href="#section-7.3" class="auto internal xref">7.3</a>.  <a href="#name-openid-credential-verifier-" class="internal xref">OpenID Credential Verifier Entity Type</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-federation-policies" class="internal xref">Federation Policies</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-using-metadata" class="internal xref">Using Metadata</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-differences-between-metadat" class="internal xref">Differences Between <code>metadata</code> and <code>metadata_policy</code></a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-using-metadata-policies" class="internal xref">Using Metadata Policies</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-using-trust-marks" class="internal xref">Using Trust Marks</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-federation-trust-discovery-" class="internal xref">Federation Trust Discovery Use Cases</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.1">
+                <p id="section-toc.1-1.9.2.1.1"><a href="#section-9.1" class="auto internal xref">9.1</a>.  <a href="#name-wallet-checking-the-non-rev" class="internal xref">Wallet Checking the Non-Revocation of its Wallet Provider</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
+                <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-wallet-discovering-credenti" class="internal xref">Wallet Discovering Credentials Issuers</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-credential-issuers-establis" class="internal xref">Credential Issuers Establishing Trust in the Wallet Provider</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
+                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.  <a href="#name-credential-issuers-establish" class="internal xref">Credential Issuers Establishing Trust in the Wallet</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
+                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-wallet-establishing-trust-i" class="internal xref">Wallet Establishing Trust in the Credential Verifier</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations for Offline Flows</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-notices" class="internal xref">Notices</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-document-history" class="internal xref">Document History</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">As digital wallets become increasingly deployed for managing identity credentials,
+establishing an architecture for trusted communication is required to allow each
+participant in the ecosystem to evaluate other participants' compliance with mutual trust frameworks
+and accomplish secure and trusted transactions.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This specification defines how to use OpenID Federation 1.0 <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> to enhance the
+security and interoperability of wallet ecosystems, facilitating trust establishment
+among the parties and enabling secure metadata exchange and policy
+application across large scale deployments.
+It outlines the general architecture of a federated trust
+infrastructure for wallet ecosystems, identifying participant roles and describing
+the use of those roles.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Additionally, this specification provides practical examples of how to apply
+policies for typical use cases within wallet ecosystems.
+Finally, it offers guidance on defining trust marks for use within
+wallet ecosystems.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<div id="requirements-notation-and-conventions">
+<section id="section-1.1">
+        <h3 id="name-requirements-notation-and-c">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-requirements-notation-and-c" class="section-name selfRef">Requirements Notation and Conventions</a>
+        </h3>
+<p id="section-1.1-1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in
+this document are to be interpreted as described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span>
+          <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they appear in all capitals, as shown here.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="warning">
+<section id="section-1.2">
+        <h3 id="name-warning">
+<a href="#section-1.2" class="section-number selfRef">1.2. </a><a href="#name-warning" class="section-name selfRef">Warning</a>
+        </h3>
+<p id="section-1.2-1">This document is not an OpenID Foundation International Standard.
+It is distributed for review and comment.
+It is subject to change without notice and may not be referred to as an International Standard.<a href="#section-1.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="scope">
+<section id="section-2">
+      <h2 id="name-scope">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-scope" class="section-name selfRef">Scope</a>
+      </h2>
+<p id="section-2-1">This specification is a profile of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> for wallet ecosystems.
+It defines entity types for entities participating in those ecosystems.
+It describes trust evaluation mechanisms for those entities.
+It uses applicable metadata parameters defined by other specifications
+for wallet entities.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">Collaboration Note: When a metadata parameter is needed for an Entity Type
+defined by this specification that does not currently exist and
+that would be usable by wallet ecosystems both using and not using OpenID Federation,
+it is the editors' intent to work with the working groups creating
+general-purpose wallet specifications to define those new parameters there.<a href="#section-2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-3">
+      <h2 id="name-terminology">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<p id="section-3-1">This specification uses the terms
+"End-User" and "Entity" as defined by OpenID Connect Core <span>[<a href="#OpenID.Core" class="cite xref">OpenID.Core</a>]</span>,
+"JSON Web Token (JWT)" defined by JSON Web Token (JWT) <span>[<a href="#RFC7519" class="cite xref">RFC7519</a>]</span>,
+"CBOR Web Token (CWT)" defined by CBOR Web Token (CWT) <span>[<a href="#RFC8392" class="cite xref">RFC8392</a>]</span>,
+"Client" as defined by <span>[<a href="#RFC6749" class="cite xref">RFC6749</a>]</span>,
+"Verifiable Presentation" and "Wallet Attestation" defined in <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>,
+"Holder" and "Credential Issuer" defined in <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>,
+and "Trust Mark", "Federation Entity", "Trust Anchor",
+"Intermediate", and "Subordinate Statement" defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2">This specification also defines the following terms:<a href="#section-3-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-3-3">
+        <dt id="section-3-3.1">Organizational Entity:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.2">A Federation Entity represented by a legal entity, specifically referring to public or private organizations (excluding natural persons) recognized through a unique identifier. For the purposes of this specification, an Organizational Entity is also referred to as an Organization.<a href="#section-3-3.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.3">Personal Device:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.4">Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations.<a href="#section-3-3.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.5">Wallet Provider:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.6">An Organizational Entity responsible for the development, publication, and management of a Wallet Solution.<a href="#section-3-3.6" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.7">Wallet Instance:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.8">Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.<a href="#section-3-3.8" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.9">Wallet Solution:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.10">The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or another form of software application. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.<a href="#section-3-3.10" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.11">Authentic Source:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.12">A protected Resource Server, not necessarily an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.<a href="#section-3-3.12" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.13">Credential Verifier:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.14">Entity that requests and verifies Digital Credentials presented by a Holder.<a href="#section-3-3.14" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-3-3.15">Credential Verifier Instance:</dt>
+        <dd style="margin-left: 1.5em" id="section-3-3.16">A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.<a href="#section-3-3.16" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<div id="trust-models-and-trust-frameworks">
+<section id="section-3.1">
+        <h3 id="name-trust-models-and-trust-fram">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-trust-models-and-trust-fram" class="section-name selfRef">Trust Models and Trust Frameworks</a>
+        </h3>
+<p id="section-3.1-1">The terms "trust model" and "trust framework" are often used in the context of security, identity management, and federation systems.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">The Trust Model defines the relationships and mechanisms through which trust is established and maintained between entities in a system. It outlines how entities interact, the basis on which they can trust each other, and the roles they play within the system. Trust Models can be simple or complex, depending on the number of parties involved and the nature of their interactions. Common examples include:<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-3.1-3.1">
+            <strong>Direct Trust</strong>: Trust is established directly between two parties without intermediaries.<a href="#section-3.1-3.1" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-3.1-3.2">
+            <strong>Third-Party Trust</strong>: Trust is facilitated by a trusted third party.<a href="#section-3.1-3.2" class="pilcrow">¶</a>
+</li>
+          <li class="compact" id="section-3.1-3.3">
+            <strong>Web of Trust</strong>: Each participant makes individual decisions about whom to trust, using Direct Trust or potentially multiple Third-Parties.<a href="#section-3.1-3.3" class="pilcrow">¶</a>
+</li>
+        </ul>
+<p id="section-3.1-4"><strong>Third-Party Trust</strong> is the focus of this specification, although the <strong>Web of Trust</strong> model is not excluded if multiple trusted third parties (Trust Anchors) are supported by the participants.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">A Trust Framework is a comprehensive structure that includes policies, standards, and guidelines that govern the implementation of a Trust Model. It provides detailed rules for how trust should be managed, including the legal, technical, and procedural aspects. To allow for a scalable approach, as many aspects of the framework as possible should be presented in a machine discoverable and machine-readable way.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
+<p id="section-3.1-6">In the scope of this specification, only the technical and procedural aspects are considered and fully covered.<a href="#section-3.1-6" class="pilcrow">¶</a></p>
+<p id="section-3.1-7">OpenID Federation <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span> is a building block for assembling and using trust frameworks. It can help ensure that all participants in a system understand and adhere to the same principles and practices, making interactions predictable and secure.<a href="#section-3.1-7" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="the-four-party-model">
+<section id="section-4">
+      <h2 id="name-the-four-party-model">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-the-four-party-model" class="section-name selfRef">The Four-Party Model</a>
+      </h2>
+<p id="section-4-1">The Four-Party Model is a framework involving four key participants:
+the Holder, the Credential Issuer, the Credential Verifier,
+and an Entity trusted by the other Entities called the Trust Anchor.
+This is an extension of the three-party Issuer-Holder-Verifier Model described in
+<span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span> and <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span> that adds a fourth party: the Trust Anchor.
+The four Entities interact with each other as described below:<a href="#section-4-1" class="pilcrow">¶</a></p>
+<ol start="1" type="1" class="compact type-1" id="section-4-2">
+<li id="section-4-2.1">
+          <strong>Holder</strong>: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Credential Verifiers recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.<a href="#section-4-2.1" class="pilcrow">¶</a>
+</li>
+        <li id="section-4-2.2">
+          <strong>Credential Issuer</strong>: This Entity issues Digital Credentials to the Holder, after having evaluated the trust in the Wallet Solution and the security of the Holder.<a href="#section-4-2.2" class="pilcrow">¶</a>
+</li>
+        <li id="section-4-2.3">
+          <strong>Credential Verifier</strong>: This is any Entity that requires proof of the End-User's identity, through the presentation of Credentials, to provide services or carry out transactions. Credential Verifiers rely on the validity of the Digital Credentials presented via the End-User's Wallet. They MUST have the means to verify these Credentials against the Credential Issuer's cryptographic public keys or other verification methods to ensure they are authentic and have not been tampered with. The Credential Verifier uses the Trust Anchor and its Intermediates to establish the trust with the Credential Issuers, obtains their metadata and cryptographic material, and check the validity of the presented Digital Credentials. It also establishes trust with the Holder and the Wallet Solution used by it.<a href="#section-4-2.3" class="pilcrow">¶</a>
+</li>
+        <li id="section-4-2.4">
+          <strong>Trust Anchor</strong>: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.<a href="#section-4-2.4" class="pilcrow">¶</a>
+</li>
+      </ol>
+<div class="alignLeft art-text artwork" id="section-4-3">
+<pre>+-------------------+    +---------------+    +---------------------+
+| Credential Issuer |&lt;--&gt;|    Holder     |&lt;--&gt;| Credential Verifier |
+|                   |    |               |    |                     |
++-------------------+    +---------------+    +---------------------+
+         |                       |                     |
+         |                       |                     |
+         V                       V                     V
++--------------------------------------------------------------+
+|                          Trust Anchor                        |
++--------------------------------------------------------------+
+</pre><a href="#section-4-3" class="pilcrow">¶</a>
+</div>
+<p id="section-4-4"><strong>Figure 1</strong>: The relationships and interactions within a Wallet ecosystem using the Four-Party Model.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-5">where Authentic Sources and Wallet Providers figure such as extensions to be not considered in the core structure of the four parties.<a href="#section-4-5" class="pilcrow">¶</a></p>
+<p id="section-4-6">The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Credential Verifier. The Credential Issuer provides Digital Credentials to the Holder, while the Credential Verifier relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Credential Verifier, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-7">In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder, therefore to the End-User in control of the Wallet.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<p id="section-4-8">The transactions primarily involve the transfer or management of Digital Credentials rather than granting access to services based on identity verification.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9">Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Credential Verifier to authenticate themselves.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4-10">
+<pre>+------------------+     +-----------------+
+| Authentic Source |     | Wallet Provider |
+|                  |     |                 |
++------------------+     +-----------------+
+         |                       |
+         |                       |
+         V                       V
++-------------------+    +---------------+    +---------------------+
+| Credential Issuer |&lt;--&gt;|    Holder     |&lt;--&gt;| Credential Verifier |
+|                   |    |               |    |                     |
++-------------------+    +---------------+    +---------------------+
+         |                       |                     |
+         |                       |                     |
+         V                       V                     V
++--------------------------------------------------------------+
+|                          Trust Anchor                        |
++--------------------------------------------------------------+
+</pre><a href="#section-4-10" class="pilcrow">¶</a>
+</div>
+<p id="section-4-11"><strong>Figure 2</strong>: Representation acknowledging the roles of Authentic Sources and Wallet Providers in the ecosystem while maintaining the core structure of the Four-Party Model.<a href="#section-4-11" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="wallet-instance-types">
+<section id="section-5">
+      <h2 id="name-wallet-instance-types">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-wallet-instance-types" class="section-name selfRef">Wallet Instance Types</a>
+      </h2>
+<p id="section-5-1">There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organizational Entity, such as a legal person. These two types of End-Users may have different usage and functional requirements.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-2">Below a non-exhaustive list of the different Wallet Instance types.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlCompact dlParallel" id="section-5-3">
+        <dt id="section-5-3.1">Mobile Wallet Native Application</dt>
+        <dd style="margin-left: 1.5em" id="section-5-3.2">Also known as Mobile Wallet only, is an application that runs natively on a Personal Device under the sole control of an End-User and provided through a platform vendor specific app-store, on behalf of the Wallet Solution. In some cases the End-User as natural person uses the Mobile Wallet representing a legal person.<a href="#section-5-3.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-3.3">Web Wallet Native Application</dt>
+        <dd style="margin-left: 1.5em" id="section-5-3.4">
+          <p id="section-5-3.4.1">Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organizational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:<a href="#section-5-3.4.1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-5-3.4.2.1">
+              <strong>Custodial Web Wallet</strong>: Cloud Wallets that have dependency on a cloud infrastructure, not necessarily hosted by the Wallet Provider, are typically classified as Custodial Web Wallets; in this case, the cryptographic keys used and the Digital Credentials are stored in the cloud infrastructure.<a href="#section-5-3.4.2.1" class="pilcrow">¶</a>
+</li>
+            <li class="compact" id="section-5-3.4.2.2">
+              <strong>Non-Custodial Web Wallet</strong>: A Web Wallet where the cryptographic keys are stored and managed on a media in possession by the End-User and the Digital Credentials can only be used by the End-User, e.g. using a FIDO enabled security hardware token, no matter whether the Credentials are stored locally in a Personal Device or in cloud storage.<a href="#section-5-3.4.2.2" class="pilcrow">¶</a>
+</li>
+          </ul>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-5-3.5">Progressive Web Application Wallet (PWAW)</dt>
+        <dd style="margin-left: 1.5em" id="section-5-3.6">PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.<a href="#section-5-3.6" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
+<div id="establishing-trust-with-the-holder">
+<section id="section-5.1">
+        <h3 id="name-establishing-trust-with-the">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-establishing-trust-with-the" class="section-name selfRef">Establishing Trust with the Holder</a>
+        </h3>
+<p id="section-5.1-1">Since the Holder may not be an Organizational Entity and cannot be registered as an Organization through registration services, it is not represented within a Trust Chain and does not qualify as a Federation Entity. This context sets the stage for understanding the unique position of the Holder in relation to the Trust Chain and Federation Entities.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-5.1-2">
+<pre>+----------------------------+
+| Trust Chain                |
+| +------------------------+ |
+| | Trust Anchor           | |
+| | (Entity Configuration) | |
+| +------------------------+ |
+|                     |      |
+|                     v      |
+| +------------------------+ |
+| | Trust Anchor           | |
+| | (Subordinate Statement | |
+| |  about the             | |
+| |  Wallet Provider)      | |
+| +------------------------+ |
+|                     |      |
+|                     v      |
+| +------------------------+ |
+| | Wallet Provider        | |    +-------------------------------+
+| | (Entity Configuration) |-----&gt;|      Wallet Attestation       |
+| +------------------------+ |    | (Not part of the Trust Chain) |
++----------------------------+    +-------------------------------+
+</pre><a href="#section-5.1-2" class="pilcrow">¶</a>
+</div>
+<p id="section-5.1-3">Outside the Trust Chain, it is the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the Wallet Attestation and under the responsibility of its issuer, the Wallet Provider.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="establishing-trust-with-a-credential-verifier-instance">
+<section id="section-6">
+      <h2 id="name-establishing-trust-with-a-c">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-establishing-trust-with-a-c" class="section-name selfRef">Establishing Trust with a Credential Verifier Instance</a>
+      </h2>
+<p id="section-6-1">A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">To establish trust between a Holder's Wallet Instance and a Credential Verifier Instance, a mechanism using a verifiable attestation, such as the Wallet Instance Attestations, SHOULD be employed. This process ensures that the Credential Verifier Instance is legitimate and trustworthy.<a href="#section-6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="wallet-architecture-entity-types">
+<section id="section-7">
+      <h2 id="name-wallet-architecture-entity-">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-wallet-architecture-entity-" class="section-name selfRef">Wallet Architecture Entity Types</a>
+      </h2>
+<p id="section-7-1">This section defines the Entity Types used by Organizational Entities in their Entity Configurations according to their roles in the Wallet ecosystem.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<table class="center" id="table-1">
+        <caption><a href="#table-1" class="selfRef">Table 1</a></caption>
+<thead>
+          <tr>
+            <th class="text-left" rowspan="1" colspan="1">Entity</th>
+            <th class="text-left" rowspan="1" colspan="1">Entity Type Identifiers</th>
+            <th class="text-left" rowspan="1" colspan="1">References</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Trust Anchor</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>federation_entity</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Intermediate</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>federation_entity</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Wallet Provider</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>federation_entity</code>, <code>openid_wallet_provider</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">this specification</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Authorization Server</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>federation_entity</code>, <code>oauth_authorization_server</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, <span>[<a href="#RFC8414" class="cite xref">RFC8414</a>]</span>
+</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Credential Issuer</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>federation_entity</code>, <code>openid_credential_issuer</code>, <code>oauth_authorization_server</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, this specification</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">Credential Verifier</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <code>federation_entity</code>, <code>openid_credential_verifier</code>
+</td>
+            <td class="text-left" rowspan="1" colspan="1">
+              <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span>, this specification</td>
+          </tr>
+        </tbody>
+      </table>
+<p id="section-7-3">The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span>, the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of <code>oauth_authorization_server</code> is OPTIONAL.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<div id="openid-wallet-provider-entity-type">
+<section id="section-7.1">
+        <h3 id="name-openid-wallet-provider-enti">
+<a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-openid-wallet-provider-enti" class="section-name selfRef">OpenID Wallet Provider Entity Type</a>
+        </h3>
+<p id="section-7.1-1">The OpenID Federation Entity Type Identifier for the Wallet Provider is <code>openid_wallet_provider</code>.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1-2">For information on metadata parameters specific to OpenID Wallets,
+refer to Section <em>8. Wallet Metadata (Authorization Server Metadata)</em> of
+the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span> specification.<a href="#section-7.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="openid-credential-issuer-entity-type">
+<section id="section-7.2">
+        <h3 id="name-openid-credential-issuer-en">
+<a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-openid-credential-issuer-en" class="section-name selfRef">OpenID Credential Issuer Entity Type</a>
+        </h3>
+<p id="section-7.2-1">The OpenID Federation Entity Type Identifier for the Credential Issuer is <code>openid_credential_issuer</code>.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-2">For information on metadata parameters specific to OpenID Credential Issuers,
+refer to Section <em>10.2. Credential Issuer Metadata</em> of
+the OpenID for Verifiable Credential Issuance <span>[<a href="#OpenID4VCI" class="cite xref">OpenID4VCI</a>]</span> specification.<a href="#section-7.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="openid-credential-verifier-entity-type">
+<section id="section-7.3">
+        <h3 id="name-openid-credential-verifier-">
+<a href="#section-7.3" class="section-number selfRef">7.3. </a><a href="#name-openid-credential-verifier-" class="section-name selfRef">OpenID Credential Verifier Entity Type</a>
+        </h3>
+<p id="section-7.3-1">The OpenID Federation Entity Type Identifier for the Credential Verifier is <code>openid_credential_verifier</code>.<a href="#section-7.3-1" class="pilcrow">¶</a></p>
+<p id="section-7.3-2">This specification introduces a distinct Entity Type Identifier for the OpenID Credential Verifier to clearly differentiate it from a traditional OpenID Connect Relying Party (<code>openid_relying_party</code>). This distinction highlights the unique characteristics and functionalities of the Wallet ecosystem and its Credential Verifier.<a href="#section-7.3-2" class="pilcrow">¶</a></p>
+<p id="section-7.3-3">For information on metadata parameters specific to OpenID Credential Verifiers,
+refer to Section <em>9. Verifier Metadata (Client Metadata)</em> of
+the OpenID for Verifiable Presentations <span>[<a href="#OpenID4VP" class="cite xref">OpenID4VP</a>]</span> specification.<a href="#section-7.3-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="federation-policies">
+<section id="section-8">
+      <h2 id="name-federation-policies">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-federation-policies" class="section-name selfRef">Federation Policies</a>
+      </h2>
+<p id="section-8-1">Policies refer to a set of rules that govern the operations, security, and interactions within a federation.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-2">Technical implementation of federation policies over participants metadata is managed with the use of <code>metadata</code> and <code>metadata_policy</code> parameters in Subordinate Statements. These parameters allow for the configuration enforcement of application-specific metadata changes for each subject (Leaf).<a href="#section-8-2" class="pilcrow">¶</a></p>
+<p id="section-8-3">Qualitative aspects of federation entities, including administrative protocols, security measures, and behavioral profiling, are regulated by Trust Marks. These marks provide verifiable assertions of compliance with specific profiles beyond the scope of the application-specific metadata.<a href="#section-8-3" class="pilcrow">¶</a></p>
+<div id="using-metadata">
+<section id="section-8.1">
+        <h3 id="name-using-metadata">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-using-metadata" class="section-name selfRef">Using Metadata</a>
+        </h3>
+<p id="section-8.1-1">Metadata refers to application-specific properties about a subject and for the purpose of the interoperability. This includes details such as service endpoints, cryptographic keys, and other supported configurations.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.
+These modifications allow a federation authority, such as a Trust Anchor, to apply policies coercively to its subordinates. This can include actions such as removing weak signature algorithms from their metadata, enforcing the use of specific endpoints configured at the time of the entity's registration within the ecosystem, or restricting the personal data that a Credential Verifier is allowed to request.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-8.1-3">
+<pre>{
+  "iss": "https://trust-anchor.example.com",
+  "sub": "https://credential-verifier.example.it",
+  "iat": 1616239022,
+  "exp": 1616239322,
+  "metadata": {
+    "federation_entity": {
+      "organization_name": "Example Credential Verifier",
+    },
+    "openid_credential_verifier": {
+      "application_type": "web",
+      "client_name": "Example Credential Verifier",
+      "request_uris": [
+          "https://verifier.example.org/request_uri"
+      ],
+      "response_uris_supported": [
+          "https://verifier.example.org/response_uri"
+      ],
+      "presentation_definitions_supported": [
+          {
+              "id": "d76c51b7-ea90-49bb-8368-6b3d194fc131",
+              "input_descriptors": [
+                  {
+                      "id": "PersonIdentificationData",
+                      "name": "Person Identification Data",
+                      "purpose": "User Authentication",
+                      "format": {
+                          "vc+sd-jwt": {
+                              "alg": [
+                                  "ES256",
+                                  "ES384",
+                                  "ES512"
+                              ]
+                          }
+                      },
+                      "constraints": {
+                          "limit_disclosure": "required",
+                          "fields": [
+                              {
+                                  "filter": {
+                                      "const": "PersonIdentificationData",
+                                      "type": "string"
+                                  },
+                                  "path": [
+                                      "$.vct"
+                                  ]
+                              },
+                              {
+                                  "filter": {
+                                      "type": "object"
+                                  },
+                                  "path": [
+                                      "$.cnf.jwk"
+                                  ]
+                              },
+                              {
+                                  "path": [
+                                      "$.first_name"
+                                  ]
+                              },
+                              {
+                                  "path": [
+                                      "$.family_name"
+                                  ]
+                              }
+                          ]
+                      }
+
+                  }
+              ]
+          }
+      ],
+    }
+  },
+  "jwks": {
+    "keys": [
+      {
+        "kty": "RSA",
+        "use": "sig",
+        "kid": "1",
+        "n": "0vx7agoebGcQSuuPiLJXZptN9nndrQmbXEPCRfceaC7mkxr8v...",
+        "e": "AQAB"
+      }
+    ]
+  }
+}
+</pre><a href="#section-8.1-3" class="pilcrow">¶</a>
+</div>
+<p id="section-8.1-4"><strong>Figure 3</strong>: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="differences-between-metadata-and-metadata-policy">
+<section id="section-8.2">
+        <h3 id="name-differences-between-metadat">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-differences-between-metadat" class="section-name selfRef">Differences Between <code>metadata</code> and <code>metadata_policy</code></a>
+        </h3>
+<p id="section-8.2-1">The key difference between <code>metadata</code> and <code>metadata_policy</code> is that metadata directly affects only the Immediate Subordinate Entity, while <code>metadata_policy</code> impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-2">This distinction positions the <code>metadata</code> parameter as an ideal tool for federation authorities managing Immediate Subordinates registrations and needing to sanitize Leaves configurations in an arbitrary way. The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="using-metadata-policies">
+<section id="section-8.3">
+        <h3 id="name-using-metadata-policies">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-using-metadata-policies" class="section-name selfRef">Using Metadata Policies</a>
+        </h3>
+<p id="section-8.3-1">Differently from <code>metadata</code>, <code>metadata_policy</code> ensures that specific settings can be propagated to all the Entities Statements contained within a Trust Chain.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="using-trust-marks">
+<section id="section-8.4">
+        <h3 id="name-using-trust-marks">
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-using-trust-marks" class="section-name selfRef">Using Trust Marks</a>
+        </h3>
+<p id="section-8.4-1">Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happen through auditing or certification processes.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">Trust Marks are typically implemented as signed assertions that can be verified by other entities.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">This verification process involves checking the digital signature against the public key of the Trust Mark Issuer to ensure the Trust Mark has not been forged, and its check to the Trust Mark Status endpoint to check it against any revocation.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-8.4-5">
+<pre>{
+  "id":"https://diligent.federation.example.com/openid_credential_verifier/private/under-age",
+  "iss": "https://trustissuer.pinarolo.example.it",
+  "sub": "https://vavuso.example.com/rp",
+  "iat": 1579621160,
+  "policy_uri": "https://vavuso.example.com/policy",
+  "tos_uri": "https://vavuso.example.com/tos"
+}
+</pre><a href="#section-8.4-5" class="pilcrow">¶</a>
+</div>
+<p id="section-8.4-6"><strong>Figure 4</strong>: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.<a href="#section-8.4-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="federation-trust-discovery-use-cases">
+<section id="section-9">
+      <h2 id="name-federation-trust-discovery-">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-federation-trust-discovery-" class="section-name selfRef">Federation Trust Discovery Use Cases</a>
+      </h2>
+<p id="section-9-1">The process of trust establishment in federated environments is illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Credential Verifiers (CVs).<a href="#section-9-1" class="pilcrow">¶</a></p>
+<div id="wallet-checking-the-non-revocation-of-its-wallet-provider">
+<section id="section-9.1">
+        <h3 id="name-wallet-checking-the-non-rev">
+<a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-wallet-checking-the-non-rev" class="section-name selfRef">Wallet Checking the Non-Revocation of its Wallet Provider</a>
+        </h3>
+<p id="section-9.1-1">...<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="wallet-discovering-credentials-issuers">
+<section id="section-9.2">
+        <h3 id="name-wallet-discovering-credenti">
+<a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-wallet-discovering-credenti" class="section-name selfRef">Wallet Discovering Credentials Issuers</a>
+        </h3>
+<p id="section-9.2-1">Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
+<p id="section-9.2-2">In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
+<div class="lang-mermaid sourcecode" id="section-9.2-3">
+<pre>sequenceDiagram
+    participant Wallet
+    participant TA as Trust Anchor
+    participant IM as Intermediate
+    participant CI as Credential Issuer
+
+    Wallet-&gt;&gt;TA: Fetch the list of all Intermediates and CIs
+    loop for each Intermediate
+        Wallet-&gt;&gt;IM: Fetch listing of Subordinates/CIs
+    end
+    loop for each CI
+        Wallet-&gt;&gt;CI: Fetch CI's Entity Configuration
+        Wallet-&gt;&gt;IM: Fetch Subordinate Statement(s) for CI
+        Wallet-&gt;&gt;TA: Fetch Subordinate Statement for Intermediate(s)
+        Wallet-&gt;&gt;Wallet: Validate Trust Chain for CI
+        Wallet-&gt;&gt;Wallet: Include CI in Discovery Page&lt;br/&gt;with validated information and logo
+    end
+</pre><a href="#section-9.2-3" class="pilcrow">¶</a>
+</div>
+<p id="section-9.2-4">The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.<a href="#section-9.2-4" class="pilcrow">¶</a></p>
+<p id="section-9.2-5">The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.<a href="#section-9.2-5" class="pilcrow">¶</a></p>
+<div class="lang-mermaid sourcecode" id="section-9.2-6">
+<pre>sequenceDiagram
+    participant Wallet
+    participant CI as Credential Issuer
+    participant IE as Intermediate Entities
+    participant TA as Trust Anchor
+
+    Wallet-&gt;&gt;CI: Fetch CI's Entity Configuration
+    CI-&gt;&gt;Wallet: Return Entity Configuration
+
+    Wallet-&gt;&gt;Wallet: Extract Authority Hints from CI's Configuration
+
+    loop for each Authority Hint
+        Wallet-&gt;&gt;IE: Fetch Entity Configuration
+        Wallet-&gt;&gt;IE: Fetch Subordinate Statement
+        Wallet-&gt;&gt;Wallet: Validate the previous statement&lt;br/&gt;using the Federation Entity Keys&lt;br/&gt;provided in the Subordinate Statement
+    end
+
+    Wallet-&gt;&gt;Wallet: Validate Trust Chain
+
+    alt If Trust Chain is Valid and Unexpired
+        Wallet-&gt;&gt;Wallet: Proceed with Federation Process
+    else
+        Wallet-&gt;&gt;Wallet: Abort Process with Error
+    end
+
+    Wallet-&gt;&gt;Wallet: Applies Policies
+    Wallet-&gt;&gt;Wallet: Derive CI's final metadata
+    Wallet-&gt;&gt;Wallet: Get available Credentials allowed for issuance
+</pre><a href="#section-9.2-6" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="credential-issuers-establishing-trust-in-the-wallet-provider">
+<section id="section-9.3">
+        <h3 id="name-credential-issuers-establis">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-credential-issuers-establis" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet Provider</a>
+        </h3>
+<p id="section-9.3-1">...<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="credential-issuers-establishing-trust-in-the-wallet">
+<section id="section-9.4">
+        <h3 id="name-credential-issuers-establish">
+<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-credential-issuers-establish" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet</a>
+        </h3>
+<p id="section-9.4-1">...<a href="#section-9.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="wallet-establishing-trust-in-the-credential-verifier">
+<section id="section-9.5">
+        <h3 id="name-wallet-establishing-trust-i">
+<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-wallet-establishing-trust-i" class="section-name selfRef">Wallet Establishing Trust in the Credential Verifier</a>
+        </h3>
+<p id="section-9.5-1">The Federation Entity Discovery starts with the Wallet Instance fetching the Credential Verifier's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Credential Verifier. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Credential Verifier final metadata.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
+<p id="section-9.5-2">Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
+<div class="lang-mermaid sourcecode" id="section-9.5-3">
+<pre>sequenceDiagram
+    participant WalletInstance as Wallet Instance
+    participant CV as Credential Verifier
+    participant IE as Intermediate
+    participant TA as Trust Anchor
+
+    WalletInstance-&gt;&gt;CV: Fetch CV's Entity Configuration
+    CV-&gt;&gt;WalletInstance: Return Entity Configuration
+
+    WalletInstance-&gt;&gt;CV: Extract Authority Hints from CV's Configuration
+    CV-&gt;&gt;WalletInstance: Provide Authority Hints
+
+    loop for each Authority Hint
+        WalletInstance-&gt;&gt;IE: Fetch Entity Configuration -&gt; get federation_fetch_api URL
+        IE-&gt;&gt;WalletInstance: Fetch Subordinate Statement
+        WalletInstance-&gt;&gt;WalletInstance: Validate the previous statement&lt;br/&gt;using the Federation Entity Keys&lt;br/&gt;provided in the Subordinate Statement
+    end
+
+    WalletInstance-&gt;&gt;WalletInstance: Validate Trust Chain
+
+    alt If Trust Chain is valid and unexpired
+        WalletInstance-&gt;&gt;WalletInstance: Proceed with Federation Process
+    else
+        WalletInstance-&gt;&gt;WalletInstance: Abort Process with Error
+    end
+
+    WalletInstance-&gt;&gt;WalletInstance: Applies Policies
+    WalletInstance-&gt;&gt;WalletInstance: Derive CV's final metadata
+</pre><a href="#section-9.5-3" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="implementation-considerations-for-offline-flows">
+<section id="section-10">
+      <h2 id="name-implementation-consideratio">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations for Offline Flows</a>
+      </h2>
+<p id="section-10-1">TBD: usage of static trust chain having at least a Trust Anchor in common with the requestor<a href="#section-10-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="section-11">
+      <h2 id="name-acknowledgments">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="section-11-1">We would like to thank the following individuals for their comments, ideas, and contributions to this implementation profile and to the initial set of implementations.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="section-11-2.1">Leif Johansson<a href="#section-11-2.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-11-2.2">Stefan Listr&amp;#246;m<a href="#section-11-2.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-11-2.3">Francesco Antonio Marino<a href="#section-11-2.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-11-2.4">Giada Sciarretta<a href="#section-11-2.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="section-11-2.5">Niels van Dijk<a href="#section-11-2.5" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<section id="section-12">
+      <h2 id="name-normative-references">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+      </h2>
+<dl class="references">
+<dt id="OpenID.Core">[OpenID.Core]</dt>
+      <dd>
+<span class="refAuthor">Sakimura, N.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Jones, M.</span>, <span class="refAuthor">de Medeiros, B.</span>, and <span class="refAuthor">C. Mortimore</span>, <span class="refTitle">"OpenID Connect Core 1.0 incorporating errata set 2"</span>, <time datetime="2023-12-15" class="refDate">15 December 2023</time>, <span>&lt;<a href="http://openid.net/specs/openid-connect-core-1_0.html">http://openid.net/specs/openid-connect-core-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID.Federation">[OpenID.Federation]</dt>
+      <dd>
+<span class="refAuthor">Ed., R. H.</span>, <span class="refAuthor">Jones, M. B.</span>, <span class="refAuthor">Solberg, A.</span>, <span class="refAuthor">Bradley, J.</span>, <span class="refAuthor">Marco, G. D.</span>, and <span class="refAuthor">V. Dzhuvinov</span>, <span class="refTitle">"OpenID Federation 1.0"</span>, <time datetime="2024-05-31" class="refDate">31 May 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid-federation-1_0.html">https://openid.net/specs/openid-federation-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID4VCI">[OpenID4VCI]</dt>
+      <dd>
+<span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">T. Looker</span>, <span class="refTitle">"OpenID for Verifiable Credential Issuance"</span>, <time datetime="2024-08-09" class="refDate">9 August 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html">https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="OpenID4VP">[OpenID4VP]</dt>
+      <dd>
+<span class="refAuthor">Terbu, O.</span>, <span class="refAuthor">Lodderstedt, T.</span>, <span class="refAuthor">Yasuda, K.</span>, and <span class="refAuthor">T. Looker</span>, <span class="refTitle">"OpenID for Verifiable Presentations"</span>, <time datetime="2024-08-09" class="refDate">9 August 2024</time>, <span>&lt;<a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html">https://openid.net/specs/openid-4-verifiable-presentations-1_0.html</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC2119">[RFC2119]</dt>
+      <dd>
+<span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc2119">https://www.rfc-editor.org/info/rfc2119</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC6749">[RFC6749]</dt>
+      <dd>
+<span class="refAuthor">Hardt, D., Ed.</span>, <span class="refTitle">"The OAuth 2.0 Authorization Framework"</span>, <span class="seriesInfo">RFC 6749</span>, <span class="seriesInfo">DOI 10.17487/RFC6749</span>, <time datetime="2012-10" class="refDate">October 2012</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc6749">https://www.rfc-editor.org/info/rfc6749</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC7519">[RFC7519]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Bradley, J.</span>, and <span class="refAuthor">N. Sakimura</span>, <span class="refTitle">"JSON Web Token (JWT)"</span>, <span class="seriesInfo">RFC 7519</span>, <span class="seriesInfo">DOI 10.17487/RFC7519</span>, <time datetime="2015-05" class="refDate">May 2015</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc7519">https://www.rfc-editor.org/info/rfc7519</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8174">[RFC8174]</dt>
+      <dd>
+<span class="refAuthor">Leiba, B.</span>, <span class="refTitle">"Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 8174</span>, <span class="seriesInfo">DOI 10.17487/RFC8174</span>, <time datetime="2017-05" class="refDate">May 2017</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8174">https://www.rfc-editor.org/info/rfc8174</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8392">[RFC8392]</dt>
+      <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Wahlstroem, E.</span>, <span class="refAuthor">Erdtman, S.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"CBOR Web Token (CWT)"</span>, <span class="seriesInfo">RFC 8392</span>, <span class="seriesInfo">DOI 10.17487/RFC8392</span>, <time datetime="2018-05" class="refDate">May 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8392">https://www.rfc-editor.org/info/rfc8392</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RFC8414">[RFC8414]</dt>
+    <dd>
+<span class="refAuthor">Jones, M.</span>, <span class="refAuthor">Sakimura, N.</span>, and <span class="refAuthor">J. Bradley</span>, <span class="refTitle">"OAuth 2.0 Authorization Server Metadata"</span>, <span class="seriesInfo">RFC 8414</span>, <span class="seriesInfo">DOI 10.17487/RFC8414</span>, <time datetime="2018-06" class="refDate">June 2018</time>, <span>&lt;<a href="https://www.rfc-editor.org/info/rfc8414">https://www.rfc-editor.org/info/rfc8414</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+</dl>
+</section>
+<div id="notices">
+<section id="appendix-A">
+      <h2 id="name-notices">
+<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-notices" class="section-name selfRef">Notices</a>
+      </h2>
+<p id="appendix-A-1">Copyright (c) 2024 The OpenID Foundation.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-2">The OpenID Foundation (OIDF) grants to any Contributor, developer, implementer, or other interested party a non-exclusive, royalty free, worldwide copyright license to reproduce, prepare derivative works from, distribute, perform and display, this Implementers Draft or Final Specification solely for the purposes of (i) developing specifications, and (ii) implementing Implementers Drafts and Final Specifications based on such documents, provided that attribution be made to the OIDF as the source of the material, but that such attribution does not indicate an endorsement by the OIDF.<a href="#appendix-A-2" class="pilcrow">¶</a></p>
+<p id="appendix-A-3">The technology described in this specification was made available from contributions from various sources, including members of the OpenID Foundation and others. Although the OpenID Foundation has taken steps to help ensure that the technology is available for distribution, it takes no position regarding the validity or scope of any intellectual property or other rights that might be claimed to pertain to the implementation or use of the technology described in this specification or the extent to which any license under such rights might or might not be available; neither does it represent that it has made any independent effort to identify any such rights. The OpenID Foundation and the contributors to this specification make no (and hereby expressly disclaim any) warranties (express, implied, or otherwise), including implied warranties of merchantability, non-infringement, fitness for a particular purpose, or title, related to this specification, and the entire risk as to implementing this specification is assumed by the implementer. The OpenID Intellectual Property Rights policy requires contributors to offer a patent promise not to assert certain patent claims against other contributors and against implementers. The OpenID Foundation invites any interested party to bring to its attention any copyrights, patents, patent applications, or other proprietary rights that MAY cover technology that MAY be required to practice this specification.<a href="#appendix-A-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="document-history">
+<section id="appendix-B">
+      <h2 id="name-document-history">
+<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-document-history" class="section-name selfRef">Document History</a>
+      </h2>
+<p id="appendix-B-1">[[ To be removed from the final specification ]]<a href="#appendix-B-1" class="pilcrow">¶</a></p>
+<p id="appendix-B-2">-02<a href="#appendix-B-2" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-B-3.1">Added non-normative example about using policies with metadata and trust marks<a href="#appendix-B-3.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-3.2">Added Credential Verifier and Credential Verifier Instance<a href="#appendix-B-3.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-3.3">Added section about Credential Verifier Instance<a href="#appendix-B-3.3" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-3.4">Illustrative rationale about Authentic Sources and Wallet Provider within the Four-Party Model sections<a href="#appendix-B-3.4" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-3.5">Moved text on Possible Use of Metadata Parameters by Wallet Ecosystems to issue #22.<a href="#appendix-B-3.5" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-3.6">Added warning about the specification not being final.<a href="#appendix-B-3.6" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-B-4">-01<a href="#appendix-B-4" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-B-5.1">Created Scope section describing the purpose of the document and collaboration with other working groups.<a href="#appendix-B-5.1" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-5.2">Moved metadata tables and examples to an informative appendix on possible usage.<a href="#appendix-B-5.2" class="pilcrow">¶</a>
+</li>
+        <li class="compact" id="appendix-B-5.3">Fixed #10: Renamed <code>openid_wallet_relying_party</code> to <code>openid_credential_verifier</code>.<a href="#appendix-B-5.3" class="pilcrow">¶</a>
+</li>
+      </ul>
+<p id="appendix-B-6">-00<a href="#appendix-B-6" class="pilcrow">¶</a></p>
+<ul class="compact">
+<li class="compact" id="appendix-B-7.1">Initial version<a href="#appendix-B-7.1" class="pilcrow">¶</a>
+</li>
+      </ul>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-C">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Giuseppe De Marco</span></div>
+<div dir="auto" class="left"><span class="org">Dipartimento per la trasformazione digitale</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:gi.demarco@innovazione.gov.it" class="email">gi.demarco@innovazione.gov.it</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Roland Hedberg</span></div>
+<div dir="auto" class="left"><span class="org">Catalogix</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:roland@catalogix.se" class="email">roland@catalogix.se</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Michael B. Jones</span></div>
+<div dir="auto" class="left"><span class="org">Self-Issued Consulting</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:michael_b_jones@hotmail.com" class="email">michael_b_jones@hotmail.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">John Bradley</span></div>
+<div dir="auto" class="left"><span class="org">Yubico</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:ve7jtb@ve7jtb.com" class="email">ve7jtb@ve7jtb.com</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
