@@ -568,7 +568,7 @@ The static Trust Chain parameter within the JWT headers, as defined in [@!OpenID
 
 Entity that issues a signed data object, including the `trust_chain` parameter, might be:
 
-- Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Providers trusts;
+- Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;
 - Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider;
 - Credential Issuers in signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider.
 
