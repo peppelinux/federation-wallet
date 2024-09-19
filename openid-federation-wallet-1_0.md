@@ -569,8 +569,8 @@ The static Trust Chain parameter within the JWT headers, as defined in [@!OpenID
 Entity that issues a signed data object, including the `trust_chain` parameter, might be:
 
 - Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;
-- Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider;
-- Credential Issuers in signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider.
+- Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request which includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the `wallet_metadata` parameter provided by the Wallet in the Request URI POST;
+- Credential Issuers in signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the Wallet Attestation used during the Issuance.
 
 The Entity that receives the data object including the JWT `trust_chain`, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working internet connection for reaching the Federation API.
 
