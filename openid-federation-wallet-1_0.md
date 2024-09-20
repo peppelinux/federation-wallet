@@ -169,7 +169,6 @@ The four Entities interact with each other as described below:
 4. **Trust Anchor**: This Entity and its Intermediates, issue Subordinate Statements and any required information about the status of the Federation and its participants (Organizational Entities), to demonstrate their non-revocations, distribute the policies and prevents the repudiation of the past transaction about any trust evaluation, if signed. Historical proofs allow for the evaluation of an Organizational Entity's status within a federation and their past signatures, which can be verified using a historical Trust Chain.
 
 
-!---
 ~~~ ascii-art
 +-------------------+    +---------------+    +---------------------+
 | Credential Issuer |<-->|    Holder     |<-->| Credential Verifier |
@@ -182,10 +181,7 @@ The four Entities interact with each other as described below:
 |                          Trust Anchor                        |
 +--------------------------------------------------------------+
 ~~~
----!
-**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model. 
-
-where Authentic Sources and Wallet Providers figure such as extensions to be not considered in the core structure of the four parties.
+**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model, where Authentic Sources and Wallet Providers figure such as extensions to be not considered in the core structure of the four parties.
 
 The Figure above illustrates at the center the Holder, who interacts directly with both the Credential Issuer and the Credential Verifier. The Credential Issuer provides Digital Credentials to the Holder, while the Credential Verifier relies on these Credentials to verify the Holder's claims. Above the Holder is the Wallet Provider, which facilitates the registration and the attestation of the security and integrity of the Holder. All entities, including the Credential Issuer, Credential Verifier, Wallet Provider and therefore Holders, and are underpinned by a Trust Anchor, which provides a foundational layer of trust and security for the entire system. This setup ensures that all interactions and transactions are anchored in a trusted framework.
 
@@ -331,8 +327,8 @@ Metadata refers to application-specific properties about a subject and for the p
 Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.
 These modifications allow a federation authority, such as a Trust Anchor, to apply policies coercively to its subordinates. This can include actions such as removing weak signature algorithms from their metadata, enforcing the use of specific endpoints configured at the time of the entity's registration within the ecosystem, or restricting the personal data that a Credential Verifier is allowed to request.
 
-!---
-```json=
+
+```
 {
   "iss": "https://trust-anchor.example.com",
   "sub": "https://credential-verifier.example.it",
@@ -420,7 +416,6 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
   }
 }
 ```
-!---
 **Figure 3**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
 
 
@@ -444,7 +439,7 @@ This verification process involves checking the digital signature against the pu
 
 Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.
 
-!---
+
 ```json=
 {
   "id":"https://diligent.federation.example.com/openid_credential_verifier/private/under-age",
@@ -455,7 +450,6 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
   "tos_uri": "https://vavuso.example.com/tos"
 }
 ```
-!---
 **Figure 4**: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.
 
 # Federation Trust Discovery Use Cases
@@ -472,7 +466,6 @@ Wallets begin by discovering the identity of Credential Issuers through the fede
 
 In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
 
-!---
 ~~~ ascii-art
 
         +------+                                           +------------+ +------------+ +-----------------+          
@@ -512,13 +505,12 @@ In the example represented in the sequence diagram below, the Wallet Instance us
         |Wallet|                                           |Trust Anchor| |Intermediate| |Credential Issuer|          
         +------+                                           +------------+ +------------+ +-----------------+    
 ~~~~
----!
+
 
 The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.
 
 The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which Credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.
 
-!---
 ~~~~ ascii-art
         +------+                                   +-----------------+ +-------------------------+          
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
@@ -582,7 +574,6 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
         +------+                                   +-----------------+ +-------------------------+     
 ~~~~
-!---
 
 
 ## Credential Issuers Establishing Trust in the Wallet Provider
@@ -599,8 +590,8 @@ The Federation Entity Discovery starts with the Wallet Instance fetching the Cre
 
 Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.
 
-!---
-~~~~ ascii-art
+
+~~~ ascii-art
         +------+                                   +-----------------+ +-------------------------+          
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
         +---┬--+                                   +--------┬--------+ +------------┬------------+          
@@ -662,8 +653,7 @@ Note: While this section exemplifies the journey of discovery from the perspecti
         +---+--+                                   +--------+--------+ +------------+------------+          
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
         +------+                                   +-----------------+ +-------------------------+     
-~~~~
-!---
+~~~
 
 # Implementation Considerations for Offline Flows
 
