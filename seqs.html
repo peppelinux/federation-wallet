@@ -1335,6 +1335,15 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.2">
                 <p id="section-toc.1-1.9.2.2.1"><a href="#section-9.2" class="auto internal xref">9.2</a>.  <a href="#name-wallet-discovering-credenti" class="internal xref">Wallet Discovering Credentials Issuers</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.3">
+                <p id="section-toc.1-1.9.2.3.1"><a href="#section-9.3" class="auto internal xref">9.3</a>.  <a href="#name-credential-issuers-establis" class="internal xref">Credential Issuers Establishing Trust in the Wallet Provider</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.4">
+                <p id="section-toc.1-1.9.2.4.1"><a href="#section-9.4" class="auto internal xref">9.4</a>.  <a href="#name-credential-issuers-establish" class="internal xref">Credential Issuers Establishing Trust in the Wallet</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9.2.5">
+                <p id="section-toc.1-1.9.2.5.1"><a href="#section-9.5" class="auto internal xref">9.5</a>.  <a href="#name-wallet-establishing-trust-i" class="internal xref">Wallet Establishing Trust in the Credential Verifier</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
@@ -1912,7 +1921,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
         </h3>
 <p id="section-9.2-1">Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
 <p id="section-9.2-2">In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
-<div class="breakable lang-ascii-art sourcecode" id="section-9.2-3">
+<div class="lang-ascii-art sourcecode" id="section-9.2-3">
 <pre>
         +------+                                           +------------+ +------------+ +-----------------+
         |Wallet|                                           |Trust Anchor| |Intermediate| |Credential Issuer|
@@ -1950,16 +1959,13 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
         +---┴--+                                           +------┴-----+ +------┴-----+ +--------┴--------+
         |Wallet|                                           |Trust Anchor| |Intermediate| |Credential Issuer|
         +------+                                           +------------+ +------------+ +-----------------+
-~~~~
-**Figure 4**: Federation Credential Issuer listing, the Wallet Instance browse the entire federation collecting all the Credential Issuers.
-
-
-The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.
-
-The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which Credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.
-
-~~~~ ascii-art
-        +------+                                   +-----------------+ +-------------------------+
+</pre><a href="#section-9.2-3" class="pilcrow">¶</a>
+</div>
+<p id="section-9.2-4"><strong>Figure 4</strong>: Federation Credential Issuer listing, the Wallet Instance browse the entire federation collecting all the Credential Issuers.<a href="#section-9.2-4" class="pilcrow">¶</a></p>
+<p id="section-9.2-5">The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.<a href="#section-9.2-5" class="pilcrow">¶</a></p>
+<p id="section-9.2-6">The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which Credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.<a href="#section-9.2-6" class="pilcrow">¶</a></p>
+<div class="breakable lang-ascii-art sourcecode" id="section-9.2-7">
+<pre>        +------+                                   +-----------------+ +-------------------------+
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|
         +---+--+                                   +--------+--------+ +------------+------------+
             |    Fetch CI's Entity Configuration            |                       |
@@ -2020,27 +2026,36 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
         +---+--+                                   +--------+--------+ +------------+------------+
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|
         +------+                                   +-----------------+ +-------------------------+
-~~~~
-**Figure 5**: Federation Entity Discovery, the Wallet Instance evaluates the trust with a Credential Issuer.
-
-
-## Credential Issuers Establishing Trust in the Wallet Provider
-
-...
-
-## Credential Issuers Establishing Trust in the Wallet
-
-...
-
-## Wallet Establishing Trust in the Credential Verifier
-
-The Federation Entity Discovery starts with the Wallet Instance fetching the Credential Verifier's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Credential Verifier. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Credential Verifier final metadata.
-
-Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.
-
-
-~~~ ascii-art
-        +------+                                 +-------------------+ +-------------------------+
+</pre><a href="#section-9.2-7" class="pilcrow">¶</a>
+</div>
+<p id="section-9.2-8"><strong>Figure 5</strong>: Federation Entity Discovery, the Wallet Instance evaluates the trust with a Credential Issuer.<a href="#section-9.2-8" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="credential-issuers-establishing-trust-in-the-wallet-provider">
+<section id="section-9.3">
+        <h3 id="name-credential-issuers-establis">
+<a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-credential-issuers-establis" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet Provider</a>
+        </h3>
+<p id="section-9.3-1">...<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="credential-issuers-establishing-trust-in-the-wallet">
+<section id="section-9.4">
+        <h3 id="name-credential-issuers-establish">
+<a href="#section-9.4" class="section-number selfRef">9.4. </a><a href="#name-credential-issuers-establish" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet</a>
+        </h3>
+<p id="section-9.4-1">...<a href="#section-9.4-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="wallet-establishing-trust-in-the-credential-verifier">
+<section id="section-9.5">
+        <h3 id="name-wallet-establishing-trust-i">
+<a href="#section-9.5" class="section-number selfRef">9.5. </a><a href="#name-wallet-establishing-trust-i" class="section-name selfRef">Wallet Establishing Trust in the Credential Verifier</a>
+        </h3>
+<p id="section-9.5-1">The Federation Entity Discovery starts with the Wallet Instance fetching the Credential Verifier's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Credential Verifier. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Credential Verifier final metadata.<a href="#section-9.5-1" class="pilcrow">¶</a></p>
+<p id="section-9.5-2">Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.<a href="#section-9.5-2" class="pilcrow">¶</a></p>
+<div class="breakable lang-ascii-art sourcecode" id="section-9.5-3">
+<pre>        +------+                                 +-------------------+ +-------------------------+
         |Wallet|                                 |Credential Verifier| |Intermediate/Trust Anchor|
         +---┬--+                                 +--------+----------+ +----------+--------------+
             |         Fetch Entity Configuration          |                       |
@@ -2101,9 +2116,9 @@ Note: While this section exemplifies the journey of discovery from the perspecti
         +---+--+                                   +--------+--------+ +----------+--------------+
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|
         +------+                                   +-----------------+ +-------------------------+
-</pre><a href="#section-9.2-3" class="pilcrow">¶</a>
+</pre><a href="#section-9.5-3" class="pilcrow">¶</a>
 </div>
-<p id="section-9.2-4"><strong>Figure 6</strong>: Federation Entity Discovery, the Wallet Instance evaluates the trust with a Credential Verifier.<a href="#section-9.2-4" class="pilcrow">¶</a></p>
+<p id="section-9.5-4"><strong>Figure 6</strong>: Federation Entity Discovery, the Wallet Instance evaluates the trust with a Credential Verifier.<a href="#section-9.5-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
