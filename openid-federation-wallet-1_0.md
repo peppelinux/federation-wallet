@@ -192,7 +192,6 @@ The transactions primarily involve the transfer or management of Digital Credent
 Consequently, the End-User obtains and holds the Digital Credentials without disclosing their intended use to the Credential Issuers. At any subsequent time, the End-User can present these Digital Credentials to a Credential Verifier to authenticate themselves.
 
 
-!---
 ~~~ ascii-art
 +------------------+     +-----------------+
 | Authentic Source |     | Wallet Provider |
@@ -212,7 +211,6 @@ Consequently, the End-User obtains and holds the Digital Credentials without dis
 |                          Trust Anchor                        |
 +--------------------------------------------------------------+
 ~~~
-!---
 **Figure 2**: Representation acknowledging the roles of Authentic Sources and Wallet Providers in the ecosystem while maintaining the core structure of the Four-Party Model.
 
 
@@ -237,7 +235,6 @@ Progressive Web Application Wallet (PWAW)
 
 Since the Holder may not be an Organizational Entity and cannot be registered as an Organization through registration services, it is not represented within a Trust Chain and does not qualify as a Federation Entity. This context sets the stage for understanding the unique position of the Holder in relation to the Trust Chain and Federation Entities.
 
-!---
 ~~~ ascii-art
 +----------------------------+
 | Trust Chain                |
@@ -261,7 +258,7 @@ Since the Holder may not be an Organizational Entity and cannot be registered as
 | +------------------------+ |    | (Not part of the Trust Chain) |
 +----------------------------+    +-------------------------------+
 ~~~
-!---
+**Figure 3**: Federation Trust Chain and Wallet Attestation are separate things, where the Wallet Attestation is linked to its Issuer attested within the Trust Chain.
 
 Outside the Trust Chain, it is the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the Wallet Attestation and under the responsibility of its issuer, the Wallet Provider.
 
@@ -283,6 +280,8 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
 | Credential Verifier         | `federation_entity`, `openid_credential_verifier`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
+**Table 1**: Federation Trust Chain and Wallet Attestation are separate things, where the Wallet Attestation is linked to its Issuer attested within the Trust Chain.
+
 
 The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of `oauth_authorization_server` is OPTIONAL.
 
@@ -326,7 +325,6 @@ Metadata refers to application-specific properties about a subject and for the p
 
 Metadata within a Subordinate Statement allows for modifications to the metadata published in a Leaf's Entity Configuration.
 These modifications allow a federation authority, such as a Trust Anchor, to apply policies coercively to its subordinates. This can include actions such as removing weak signature algorithms from their metadata, enforcing the use of specific endpoints configured at the time of the entity's registration within the ecosystem, or restricting the personal data that a Credential Verifier is allowed to request.
-
 
 ```
 {
@@ -416,7 +414,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
   }
 }
 ```
-**Figure 3**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
+**Example 1**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
 
 
 ## Differences Between `metadata` and `metadata_policy`
@@ -450,7 +448,7 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
   "tos_uri": "https://vavuso.example.com/tos"
 }
 ```
-**Figure 4**: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.
+**Example 2**: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.
 
 # Federation Trust Discovery Use Cases
 
@@ -505,6 +503,7 @@ In the example represented in the sequence diagram below, the Wallet Instance us
         |Wallet|                                           |Trust Anchor| |Intermediate| |Credential Issuer|          
         +------+                                           +------------+ +------------+ +-----------------+    
 ~~~~
+**Figure 4**: Federation Credential Issuer listing, the Wallet Instance browse the entire federation collecting all the Credential Issuers.  
 
 
 The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.
@@ -514,7 +513,7 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
 ~~~~ ascii-art
         +------+                                   +-----------------+ +-------------------------+          
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
-        +---┬--+                                   +--------┬--------+ +------------┬------------+          
+        +---+--+                                   +--------+--------+ +------------+------------+          
             |    Fetch CI's Entity Configuration            |                       |                       
             |---------------------------------------------->|                       |                       
             |                                               |                       |                       
@@ -526,7 +525,7 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
             |                                               |                       |                       
 +-------+---+-----------------------------------------------+-----------------------+------------+
 | LOOP  |for each Authority Hint                            |                       |            |
-╟-------+   |                                               |                       |            |
++-------+   |                                               |                       |            |
 |           |                       Fetch Entity Configuration                      |            |
 |           |---------------------------------------------------------------------->|            |
 |           |                                               |                       |            |
@@ -547,7 +546,7 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
             |                                               |                       |                       
 +------+----+------------------------------------------+    |                       |                       
 | ALT  |If Trust Chain is Valid and Unexpired          |    |                       |                       
-╟------+    |                                          |    |                       |                       
++------+    |                                          |    |                       |                       
 |           |----+                                     |    |                       |                       
 |           |    | Proceed with Federation Process     |    |                       |                       
 |           |<---+                                     |    |                       |                       
@@ -574,6 +573,7 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
         +------+                                   +-----------------+ +-------------------------+     
 ~~~~
+**Figure 5**: Federation Entity Discovery, the Wallet Instance evaluates the trust with a Credential Issuer.
 
 
 ## Credential Issuers Establishing Trust in the Wallet Provider
@@ -592,68 +592,69 @@ Note: While this section exemplifies the journey of discovery from the perspecti
 
 
 ~~~ ascii-art
-        +------+                                   +-----------------+ +-------------------------+          
-        |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
-        +---┬--+                                   +--------┬--------+ +------------┬------------+          
-            |    Fetch CI's Entity Configuration            |                       |                       
-            |---------------------------------------------->|                       |                       
-            |                                               |                       |                       
-            |----+                                          |                       |                       
-            |    | Extract Authority Hints                  |                       |
-            |    | from CI's Configuration                  |                       |                       
-            |<---+                                          |                       |                       
-            |                                               |                       |                       
-            |                                               |                       |                       
-+-------+---+-----------------------------------------------+-----------------------+------------+
-| LOOP  |for each Authority Hint                            |                       |            |
-╟-------+   |                                               |                       |            |
-|           |                       Fetch Entity Configuration                      |            |
-|           |---------------------------------------------------------------------->|            |
-|           |                                               |                       |            |
-|           |                      Fetch Subordinate Statement                      |            |
-|           |---------------------------------------------------------------------->|            |
-|           |                                               |                       |            |
-|           |----+                                          |                       |            |
-|           |    | Validate the previous statement          |                       |            |
-|           |<---+ using the Federation Entity Keys         |                       |            |
-|           |      provided in the Subordinate Statement    |                       |            |
-|           |                                               |                       |            |
-+-----------+-----------------------------------------------+-----------------------+------------+
-            |                                               |                       |                       
-            |----+                                          |                       |                       
-            |    | Validate Trust Chain                     |                       |                       
-            |<---+                                          |                       |                       
-            |                                               |                       |                       
-            |                                               |                       |                       
-+------+----+------------------------------------------+    |                       |                       
-| ALT  |If Trust Chain is Valid and Unexpired          |    |                       |                       
-╟------+    |                                          |    |                       |                       
-|           |----+                                     |    |                       |                       
-|           |    | Proceed with Federation Process     |    |                       |                       
-|           |<---+                                     |    |                       |                       
-+-----------+------------------------------------------+    |                       |                       
-|           |                                          |    |                       |                       
-|           |----+                                     |    |                       |                       
-|           |    | Abort Process with Error            |    |                       |                       
-|           |<---+                                     |    |                       |                       
-+-----------+------------------------------------------+    |                       |                       
-            |                                               |                       |                       
-            |----+                                          |                       |                       
-            |    | Applies Policies                         |                       |                       
-            |<---+                                          |                       |                       
-            |                                               |                       |                       
-            |----+                                          |                       |                       
-            |    | Derive CI's final metadata               |                       |                       
-            |<---+                                          |                       |                       
-            |                                               |                       |                       
-            |----+                                          |                       |                       
-            |    | Get available Credentials                |                       |
-            |    | allowed for issuance                     |                       |                       
-            |<---+                                          |                       |                       
-        +---+--+                                   +--------+--------+ +------------+------------+          
+        +------+                                 +-------------------+ +-------------------------+          
+        |Wallet|                                 |Credential Verifier| |Intermediate/Trust Anchor|          
+        +---┬--+                                 +--------+----------+ +----------+--------------+          
+            |         Fetch Entity Configuration          |                       |                       
+            |-------------------------------------------->|                       |                       
+            |                                             |                       |                       
+            |----+                                        |                       |                       
+            |    | Extract Authority Hints                |                       |
+            |    | from Entity Configuration              |                       |                       
+            |<---+                                        |                       |                       
+            |                                             |                       |                       
+            |                                             |                       |                       
++-------+---+---------------------------------------------+-----------------------+------------+
+| LOOP  |for each Authority Hint                          |                       |            |
+╟-------+   |                                             |                       |            |
+|           |                     Fetch Entity Configuration                      |            |
+|           |-------------------------------------------------------------------->|            |
+|           |                                             |                       |            |
+|           |                      Fetch Subordinate Statement                    |            |
+|           |-------------------------------------------------------------------->|            |
+|           |                                             |                       |            |
+|           |----+                                        |                       |            |
+|           |    | Validate the previous statement        |                       |            |
+|           |<---+ using the Federation Entity Keys       |                       |            |
+|           |      provided in the Subordinate Statement  |                       |            |
+|           |                                             |                       |            |
++-----------+-----------------------------------------------+---------------------+------------+
+            |                                               |                     |                       
+            |----+                                          |                     |                       
+            |    | Validate Trust Chain                     |                     |                       
+            |<---+                                          |                     |                       
+            |                                               |                     |                       
+            |                                               |                     |                       
++------+----+------------------------------------------+    |                     |                       
+| ALT  |If Trust Chain is Valid and Unexpired          |    |                     |                       
+╟------+    |                                          |    |                     |                       
+|           |----+                                     |    |                     |                       
+|           |    | Proceed with Federation Process     |    |                     |                       
+|           |<---+                                     |    |                     |                       
++-----------+------------------------------------------+    |                     |                       
+|           |                                          |    |                     |                       
+|           |----+                                     |    |                     |                       
+|           |    | Abort Process with Error            |    |                     |                       
+|           |<---+                                     |    |                     |                       
++-----------+------------------------------------------+    |                     |                       
+            |                                               |                     |                       
+            |----+                                          |                     |                       
+            |    | Applies Policies                         |                     |                       
+            |<---+                                          |                     |                       
+            |                                               |                     |                       
+            |----+                                          |                     |                       
+            |    | Derive final metadata                    |                     |                       
+            |<---+                                          |                     |                       
+            |                                               |                     |                       
+            |----+                                          |                     |                       
+            |    | Get Credentials                          |                     |
+            |    | allowed for presentation                 |                     |                       
+            |<---+                                          |                     |                       
+        +---+--+                                   +--------+--------+ +----------+--------------+          
         |Wallet|                                   |Credential Issuer| |Intermediate/Trust Anchor|          
         +------+                                   +-----------------+ +-------------------------+     
 ~~~
+**Figure 6**: Federation Entity Discovery, the Wallet Instance evaluates the trust with a Credential Verifier.
 
 # Implementation Considerations for Offline Flows
 
