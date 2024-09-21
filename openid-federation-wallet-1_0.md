@@ -453,17 +453,17 @@ The process of trust establishment in federated environments is illustrated in t
 
 ## Wallet Checking the Non-Revocation of its Wallet Provider
 
-Wallets SHOULD periodically check their Wallet Providers compliance through the federation's trust infrastructure. This involves retrieving the Wallet Provider's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor, ensuring that the Wallet Provider has not been revoked within the federation. Wallets SHOULD remain neutral in attesting to the reliability of their Wallet Providers for the End-User, thereby protecting the End-User against any malevolent behavior by the Wallet Provider.
+Wallets SHOULD periodically check their Wallet Providers' compliance through the federation's trust infrastructure. This involves retrieving the Wallet Provider's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor, ensuring that the Wallet Provider has not been revoked within the federation. Wallets SHOULD remain neutral in attesting to the reliability of their Wallet Providers for the End-User, thereby protecting the End-User against any malevolent behavior by the Wallet Provider.
 
 The Wallet Provider’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication. In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Wallet Providers enabled within the federation.
 
-The process to discover the trust with a Wallet Provider is equivalent to the one made for discoving the trust with a Credential Issuer, as described in the dedicated section below.
+The process to discover the trust with a Wallet Provider is equivalent to the one used for discoving the trust with a Credential Issuer, as described in the dedicated section below.
 
 ## Wallet Discovering Credentials Issuers
 
 Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.
 
-the process described in the represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
+In the process represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
 
 
 ````mermaid
