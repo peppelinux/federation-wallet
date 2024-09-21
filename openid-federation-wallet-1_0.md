@@ -574,7 +574,7 @@ Entity that issues a signed data object, including the `trust_chain` parameter, 
 
 The Entity that receives the data object including the JWT `trust_chain`, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working internet connection for reaching the Federation API.
 
-Using short-lived Trust Chains ensures compatibility with required revocation administrative protocols. For example, if a revocation must be propagated in less than 24 hours, the Trust Chain should not be valid for more than that period.
+Using short-lived Trust Chains ensures compatibility with required revocation administrative protocols, such as those defined in a legal framework. For example, if a revocation must be propagated in less than 24 hours, the Trust Chain should not be valid for more than that period.
 
 
 # Acknowledgments
