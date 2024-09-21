@@ -457,7 +457,7 @@ Wallets SHOULD periodically check their Wallet Providers' compliance through the
 
 The Wallet Provider’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication. The Wallet Instance SHOULD use the Federation API to periodically reestablish trust with its Wallet Provider.
 
-The process to discover the trust with a Wallet Provider is equivalent to the one used for discoving the trust with a Credential Issuer, as described in the dedicated section below.
+The process to discover the trust with a Wallet Provider is equivalent to the one used for discovering the trust with a Credential Issuer, as described in the dedicated section below.
 
 ## Wallet Discovering Credentials Issuers
 
