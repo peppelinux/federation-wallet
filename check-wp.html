@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-19" class="published">19 September 2024</time>
+<time datetime="2024-09-21" class="published">21 September 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1910,9 +1910,9 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
         <h3 id="name-wallet-checking-the-non-rev">
 <a href="#section-9.1" class="section-number selfRef">9.1. </a><a href="#name-wallet-checking-the-non-rev" class="section-name selfRef">Wallet Checking the Non-Revocation of its Wallet Provider</a>
         </h3>
-<p id="section-9.1-1">Wallets SHOULD periodically check their Wallet Providers compliance through the federation's trust infrastructure. This involves retrieving the Wallet Provider's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor, ensuring that the Wallet Provider has not been revoked within the federation. Wallets SHOULD remain neutral in attesting to the reliability of their Wallet Providers for the End-User, thereby protecting the End-User against any malevolent behavior by the Wallet Provider.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
+<p id="section-9.1-1">Wallets SHOULD periodically check their Wallet Providers' compliance through the federation's trust infrastructure. This involves retrieving the Wallet Provider's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor, ensuring that the Wallet Provider has not been revoked within the federation. Wallets SHOULD remain neutral in attesting to the reliability of their Wallet Providers for the End-User, thereby protecting the End-User against any malevolent behavior by the Wallet Provider.<a href="#section-9.1-1" class="pilcrow">¶</a></p>
 <p id="section-9.1-2">The Wallet Provider’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication. In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Wallet Providers enabled within the federation.<a href="#section-9.1-2" class="pilcrow">¶</a></p>
-<p id="section-9.1-3">The process to discover the trust with a Wallet Provider is equivalent to the one made for discoving the trust with a Credential Issuer, as described in the dedicated section below.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
+<p id="section-9.1-3">The process to discover the trust with a Wallet Provider is equivalent to the one used for discoving the trust with a Credential Issuer, as described in the dedicated section below.<a href="#section-9.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="wallet-discovering-credentials-issuers">
@@ -1921,7 +1921,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-wallet-discovering-credenti" class="section-name selfRef">Wallet Discovering Credentials Issuers</a>
         </h3>
 <p id="section-9.2-1">Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.<a href="#section-9.2-1" class="pilcrow">¶</a></p>
-<p id="section-9.2-2">the process described in the represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
+<p id="section-9.2-2">In the process represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.<a href="#section-9.2-2" class="pilcrow">¶</a></p>
 <div class="lang-mermaid sourcecode" id="section-9.2-3">
 <pre>sequenceDiagram
     participant Wallet
