@@ -207,10 +207,10 @@ Consequently, the End-User obtains and holds the Digital Credentials without dis
          |                       |                     |
          |                       |                     |
          V                       V                     V
-+--------------------------------------------------------------+
-|                          Trust Anchor                        |
-+--------------------------------------------------------------+
-~~~
++-------------------------------------------------------------------+
+|                          Trust Anchor                             |
++-------------------------------------------------------------------+
+````
 **Figure 2**: Representation acknowledging the roles of Authentic Sources and Wallet Providers in the ecosystem while maintaining the core structure of the Four-Party Model.
 
 
@@ -279,10 +279,8 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
-| Credential Verifier         | `federation_entity`, `openid_credential_verifier`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
+| Credential Verifier   | `federation_entity`, `openid_credential_verifier`          | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
 **Table 1**: Map of the Federation Entity Types and corresponding metadata types for the Wallet architectures.
-
-
 The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of `oauth_authorization_server` is OPTIONAL.
 
 ## OpenID Wallet Provider Entity Type
@@ -413,9 +411,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
     ]
   }
 }
-```
 **Example 1**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
-
 
 ## Differences Between `metadata` and `metadata_policy`
 
@@ -456,13 +452,17 @@ The process of trust establishment in federated environments is illustrated in t
 
 ## Wallet Checking the Non-Revocation of its Wallet Provider
 
-...
+Wallets SHOULD periodically check their Wallet Providers' compliance through the federation's trust infrastructure. This involves retrieving the Wallet Provider's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor, ensuring that the Wallet Provider has not been revoked within the federation. Wallets SHOULD remain neutral in attesting to the reliability of their Wallet Providers for the End-User, thereby protecting the End-User against any malevolent behavior by the Wallet Provider.
+
+The Wallet Provider’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication. The Wallet Instance SHOULD use the Federation API to periodically reestablish trust with its Wallet Provider.
+
+The process to discover the trust with a Wallet Provider is equivalent to the one used for discovering the trust with a Credential Issuer, as described in the dedicated section below.
 
 ## Wallet Discovering Credentials Issuers
 
 Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.
 
-In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
+In the process represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
 
 ~~~ ascii-art
 
@@ -658,7 +658,18 @@ Note: While this section exemplifies the journey of discovery from the perspecti
 
 # Implementation Considerations for Offline Flows
 
-TBD: usage of static trust chain having at least a Trust Anchor in common with the requestor
+The static Trust Chain parameter within the JWT headers, as defined in Section 4.3 of [@!OpenID.Federation], is used as a hint to the Entity involved in a transaction with a common Trust Anchor. This facilitates trust evaluation without the need for real-time Federation Entity Discovery using Federation API endpoints.
+
+The Entity that issues a signed data object, including the `trust_chain` parameter, might be:
+
+- Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;
+- Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request that includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the `wallet_metadata` parameter provided by the Wallet in the Request URI POST;
+- A Credential Issuer in a signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the Wallet Attestation used during the Issuance.
+
+The Entity that receives the data object including the JWT `trust_chain`, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working network connection for reaching the Federation API.
+
+Using short-lived Trust Chains ensures compatibility with required revocation administrative protocols, such as those defined in a legal framework. For example, if a revocation must be propagated in less than 24 hours, the Trust Chain should not be valid for more than that period.
+
 
 # Acknowledgments
 
