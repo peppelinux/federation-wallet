@@ -281,6 +281,8 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
 | Credential Verifier   | `federation_entity`, `openid_credential_verifier`          | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
 **Table 1**: Map of the Federation Entity Types and corresponding metadata types for the Wallet architectures.
+
+
 The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of `oauth_authorization_server` is OPTIONAL.
 
 ## OpenID Wallet Provider Entity Type
