@@ -508,7 +508,7 @@ In the process represented in the sequence diagram below, the Wallet Instance us
 **Figure 4**: Federation Credential Issuer listing, the Wallet Instance browse the entire federation collecting all the Credential Issuers.  
 
 
-The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the credential types and logo obtained through their Trust Chain.
+The diagram above shows how a Wallet navigates the federation, collecting and validating the Trust Chain for each Credential Issuer (CI), and creating a discovery page including each Credential Issuer using the information, such as the Credential Types and logo obtained through their Trust Chain.
 
 The diagram below illustrates how a Wallet establishes trust with a Credential Issuer by verifying its link (even if indirect) to a Trust Anchor and validating which Credentials it is authorized to issue. This may happen in a credential offer flow, for instance, where the Wallet is used by an End-User starting from the Credential Issuer website and without any discovery phases started before within the Wallet.
 
