@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-19" class="published">19 September 2024</time>
+<time datetime="2024-09-30" class="published">30 September 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1863,7 +1863,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 <a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-differences-between-metadat" class="section-name selfRef">Differences Between <code>metadata</code> and <code>metadata_policy</code></a>
         </h3>
 <p id="section-8.2-1">The key difference between <code>metadata</code> and <code>metadata_policy</code> is that metadata directly affects only the Immediate Subordinate Entity, while <code>metadata_policy</code> impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
-<p id="section-8.2-2">This distinction positions the <code>metadata</code> parameter as an ideal tool for federation authorities managing Immediate Subordinates registrations, as Leaves, and needing to sanitize their configurations in an arbitrary way. The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.2-2">The <code>metadata</code> parameter allows federation authorities, managing Immediate Subordinates registrations, to sanitize their configurations in an arbitrary way, without necessarly use the policy language used with the <code>metadata_policy</code> parameter . The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters. The <code>metadata</code> parameter value updates all the matching part of the <code>metadata</code> json object contained within the Subordinate Entity Configuration.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="using-metadata-policies">
