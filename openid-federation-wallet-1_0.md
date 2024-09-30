@@ -208,9 +208,9 @@ Consequently, the End-User obtains and holds the Digital Credentials without dis
          |                       |                     |
          |                       |                     |
          V                       V                     V
-+--------------------------------------------------------------+
-|                          Trust Anchor                        |
-+--------------------------------------------------------------+
++-------------------------------------------------------------------+
+|                          Trust Anchor                             |
++-------------------------------------------------------------------+
 ````
 **Figure 2**: Representation acknowledging the roles of Authentic Sources and Wallet Providers in the ecosystem while maintaining the core structure of the Four-Party Model.
 
@@ -279,7 +279,7 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
-| Credential Verifier         | `federation_entity`, `openid_credential_verifier`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
+| Credential Verifier   | `federation_entity`, `openid_credential_verifier`         | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
 
 The Credential Issuer is an OAuth 2.0 Protected Resource Server and it MAY also implement, within the same Entity, an OAuth 2.0 Authorization Server. According to [@!OpenID4VCI], the Authorization Server can be external to the Entity that implements the Credential Endpoint, therefore the use of `oauth_authorization_server` is OPTIONAL.
 
@@ -453,13 +453,17 @@ The process of trust establishment in federated environments is illustrated in t
 
 ## Wallet Checking the Non-Revocation of its Wallet Provider
 
-...
+Wallets SHOULD periodically check their Wallet Providers' compliance through the federation's trust infrastructure. This involves retrieving the Wallet Provider's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor, ensuring that the Wallet Provider has not been revoked within the federation. Wallets SHOULD remain neutral in attesting to the reliability of their Wallet Providers for the End-User, thereby protecting the End-User against any malevolent behavior by the Wallet Provider.
+
+The Wallet Provider’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication. The Wallet Instance SHOULD use the Federation API to periodically reestablish trust with its Wallet Provider.
+
+The process to discover the trust with a Wallet Provider is equivalent to the one used for discovering the trust with a Credential Issuer, as described in the dedicated section below.
 
 ## Wallet Discovering Credentials Issuers
 
 Wallets begin by discovering the identity of Credential Issuers through the federation's trust infrastructure. This involves retrieving the Credential Issuer's Entity Configuration and verifying its Trust Chain up to a recognized Trust Anchor. The Credential Issuer’s Entity Configuration provides essential information, including its roles within the federation, policies it adheres to, and cryptographic keys for secure communication.
 
-In the example represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
+In the process represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.
 
 
 ````mermaid
