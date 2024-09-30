@@ -421,7 +421,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 
 The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 5 and 6.1 of [@!OpenID.Federation].
 
-The `metadata` parameter allows federation authorities, managing Immediate Subordinates registrations, to sanitize their configurations in an arbitrary way, without necessarly use the policy language used with the `metadata_policy` parameter . The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration during technical tests and finalize it by setting specific metadata parameters. The `metadata` parameter value updates all the matching part of the `metadata` json object contained within the Subordinate Entity Configuration.
+The `metadata` parameter allows federation authorities managing Immediate Subordinates' registrations to sanitize their configurations in an arbitrary way, without necessarily using the policy language in the `metadata_policy` parameter. The Trust Anchor (TA) and Intermediate (INT) sanitize an Entity Configuration and finalize it by setting specific metadata parameters. The `metadata` parameter value updates all the matching parts of the `metadata` JSON object contained within the Subordinate Entity Configuration.
 
 ## Using Metadata Policies
 
