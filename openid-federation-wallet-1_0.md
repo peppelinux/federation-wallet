@@ -580,11 +580,22 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
 
 ## Credential Issuers Establishing Trust in the Wallet Provider
 
-...
+The evaluation of trust by the Credential Issuer towards the Wallet Provider is conducted exactly as other federation entities. This process can be achieved through Federation Entity Discovery, where the Trust Chain is constructed starting from the Entity Configuration of the Wallet Provider. Alternatively, trust can be established via a signed data object issued by Wallet Provider, which includes the `trust_chain` parameter. This parameter contains a pre-constructed and verifiable Trust Chain, which MUST be validated using one of the the public keys of the Trust Anchor.
+
+In the Federation Entity Discovery approach, the Credential Issuer retrieves the Entity Configuration of the Wallet Provider and follows the `authority_hints` to build the Trust Chain in the usual manner. 
+
+When using a signed data object, the Wallet Provider may include a `trust_chain` parameter within the object. This parameter holds a pre-constructed Trust Chain that the Credential Issuer validates. This method allows for a streamlined trust evaluation process, as the Trust Chain is provided directly by the Wallet Provider and can be quickly validated.
+
 
 ## Credential Issuers Establishing Trust in the Wallet
 
-...
+During the issuance phase, the Wallet Instance authenticates with the Credential Issuer using a Client authentication mechanism that includes a proof issued by its Wallet Provider. 
+
+This proof is a signed data object that confirms the match of a Wallet Instance to a Wallet Solution, as attested by the Wallet Provider. This proof contains all the information the Credential Issuer requires regarding the security and compliance of the Wallet Instance and the cryptographic proof of possession of this attestation provided by the Wallet Instance presenting it.
+
+To establish trust with the Wallet Instance, the Credential Issuer MUST first establish trust with the Wallet Provider that is the issuer of the verifiable attestation, as described in the previous section.
+
+The verifiable attestation issued by the Wallet Provider to the Wallet Instance MUST be cryptographically validated using the cryptographic material provided by the federation Trust Chain. The Credential Issuer evaluates the adequacy of these verifiable attestations using mechanisms and rules that might depend upon different regulations and frameworks that are out of the scope of this specification.
 
 ## Wallet Establishing Trust in the Credential Verifier
 
