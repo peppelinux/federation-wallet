@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-21" class="published">21 September 2024</time>
+<time datetime="2024-09-30" class="published">30 September 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -2038,7 +2038,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
       <h2 id="name-implementation-consideratio">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations for Offline Flows</a>
       </h2>
-<p id="section-10-1">The static Trust Chain parameter within the JWT headers, as defined in Section 4.3 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, is used as a hint to the Entity involved in a transaction to have a common Trust Anchor. This facilitates the trust evaluation without the need for real-time Federation Entity Discovery using the Federation API endpoints.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">The static Trust Chain parameter within the JWT headers, as defined in Section 4.3 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>, is used as a hint to the Entity involved in a transaction with a common Trust Anchor. This facilitates trust evaluation without the need for real-time Federation Entity Discovery using Federation API endpoints.<a href="#section-10-1" class="pilcrow">¶</a></p>
 <p id="section-10-2">The Entity that issues a signed data object, including the <code>trust_chain</code> parameter, might be:<a href="#section-10-2" class="pilcrow">¶</a></p>
 <ul class="compact">
 <li class="compact" id="section-10-3.1">Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;<a href="#section-10-3.1" class="pilcrow">¶</a>
@@ -2048,7 +2048,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
         <li class="compact" id="section-10-3.3">A Credential Issuer in a signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the Wallet Attestation used during the Issuance.<a href="#section-10-3.3" class="pilcrow">¶</a>
 </li>
       </ul>
-<p id="section-10-4">The Entity that receives the data object including the JWT <code>trust_chain</code>, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working internet connection for reaching the Federation API.<a href="#section-10-4" class="pilcrow">¶</a></p>
+<p id="section-10-4">The Entity that receives the data object including the JWT <code>trust_chain</code>, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working network connection for reaching the Federation API.<a href="#section-10-4" class="pilcrow">¶</a></p>
 <p id="section-10-5">Using short-lived Trust Chains ensures compatibility with required revocation administrative protocols, such as those defined in a legal framework. For example, if a revocation must be propagated in less than 24 hours, the Trust Chain should not be valid for more than that period.<a href="#section-10-5" class="pilcrow">¶</a></p>
 </section>
 </div>
