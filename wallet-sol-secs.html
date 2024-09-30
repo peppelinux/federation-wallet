@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-09-22" class="published">22 September 2024</time>
+<time datetime="2024-09-30" class="published">30 September 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1980,9 +1980,9 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
         <h3 id="name-credential-issuers-establis">
 <a href="#section-9.3" class="section-number selfRef">9.3. </a><a href="#name-credential-issuers-establis" class="section-name selfRef">Credential Issuers Establishing Trust in the Wallet Provider</a>
         </h3>
-<p id="section-9.3-1">The evaluation of trust by the Credential Issuer towards the Wallet Provider is conducted exactly as other types of entities. This process can be achieved through Federation Entity Discovery, where the Trust Chain is constructed starting from the Entity Configuration of the Wallet Provider. Alternatively, trust can be established via a signed data object issued by Wallet Provider, which includes the <code>trust_chain</code> parameter. This parameter contains a pre-constructed and verifiable Trust Chain, which MUST be validated using one of the the public keys of the Trust Anchor.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
+<p id="section-9.3-1">The evaluation of trust by the Credential Issuer towards the Wallet Provider is conducted exactly as other federation entities. This process can be achieved through Federation Entity Discovery, where the Trust Chain is constructed starting from the Entity Configuration of the Wallet Provider. Alternatively, trust can be established via a signed data object issued by Wallet Provider, which includes the <code>trust_chain</code> parameter. This parameter contains a pre-constructed and verifiable Trust Chain, which MUST be validated using one of the the public keys of the Trust Anchor.<a href="#section-9.3-1" class="pilcrow">¶</a></p>
 <p id="section-9.3-2">In the Federation Entity Discovery approach, the Credential Issuer retrieves the Entity Configuration of the Wallet Provider and follows the <code>authority_hints</code> to build the Trust Chain in the usual manner.<a href="#section-9.3-2" class="pilcrow">¶</a></p>
-<p id="section-9.3-3">When using a signed data object, the Wallet Provider includes a <code>trust_chain</code> parameter within the object. This parameter holds a pre-constructed Trust Chain that the Credential Issuer validates. This method allows for a streamlined trust evaluation process, as the trust chain is provided directly by the wallet provider and can be quickly validated.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
+<p id="section-9.3-3">When using a signed data object, the Wallet Provider may include a <code>trust_chain</code> parameter within the object. This parameter holds a pre-constructed Trust Chain that the Credential Issuer validates. This method allows for a streamlined trust evaluation process, as the Trust Chain is provided directly by the Wallet Provider and can be quickly validated.<a href="#section-9.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="credential-issuers-establishing-trust-in-the-wallet">
