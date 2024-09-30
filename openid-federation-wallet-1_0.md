@@ -92,11 +92,6 @@ It describes trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.
 
-Collaboration Note: When a metadata parameter is needed for an Entity Type
-defined by this specification that does not currently exist and
-that would be usable by wallet ecosystems both using and not using OpenID Federation,
-it is the editors' intent to work with the working groups creating
-general-purpose wallet specifications to define those new parameters there.
 
 # Terminology
 
@@ -161,6 +156,8 @@ the Holder, the Credential Issuer, the Credential Verifier,
 and an Entity trusted by the other Entities called the Trust Anchor.
 This is an extension of the three-party Issuer-Holder-Verifier Model described in
 [@!OpenID4VCI] and [@!OpenID4VP] that adds a fourth party: the Trust Anchor.
+
+
 The four Entities interact with each other as described below:
 
 1. **Holder**: The Holder requests, stores, presents, and manages Digital Credentials and other forms of digital attestations. It discovers trustworthy Credential Issuers through the Trust Anchor and its Intermediates. Additionally, the Holder evaluates trust with Credential Verifiers recognized by the Trust Anchor and its Intermediates and checks for the non-revocation of the other Entities in use.
@@ -336,70 +333,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
     "federation_entity": {
       "organization_name": "Example Credential Verifier",
     },
-    "openid_credential_verifier": {
-      "application_type": "web",
-      "client_name": "Example Credential Verifier",
-      "request_uris": [
-          "https://verifier.example.org/request_uri"
-      ],
-      "response_uris_supported": [
-          "https://verifier.example.org/response_uri"
-      ],
-      "presentation_definitions_supported": [
-          {
-              "id": "d76c51b7-ea90-49bb-8368-6b3d194fc131",
-              "input_descriptors": [
-                  {
-                      "id": "PersonIdentificationData",
-                      "name": "Person Identification Data",
-                      "purpose": "User Authentication",
-                      "format": {
-                          "vc+sd-jwt": {
-                              "alg": [
-                                  "ES256",
-                                  "ES384",
-                                  "ES512"
-                              ]
-                          }
-                      },
-                      "constraints": {
-                          "limit_disclosure": "required",
-                          "fields": [
-                              {
-                                  "filter": {
-                                      "const": "PersonIdentificationData",
-                                      "type": "string"
-                                  },
-                                  "path": [
-                                      "$.vct"
-                                  ]
-                              },
-                              {
-                                  "filter": {
-                                      "type": "object"
-                                  },
-                                  "path": [
-                                      "$.cnf.jwk"
-                                  ]
-                              },
-                              {
-                                  "path": [
-                                      "$.first_name"
-                                  ]
-                              },
-                              {
-                                  "path": [
-                                      "$.family_name"
-                                  ]
-                              }
-                          ]
-                      }
-
-                  }
-              ]
-          }
-      ],
-    }
+    "openid_credential_verifier": { ... as defined in the OpenID4VCI specs ... }
   },
   "jwks": {
     "keys": [
