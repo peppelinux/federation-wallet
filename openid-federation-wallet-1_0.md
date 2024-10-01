@@ -333,7 +333,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
     "federation_entity": {
       "organization_name": "Example Credential Verifier",
     },
-    "openid_credential_verifier": { ... as defined in the OpenID4VCI specs ... }
+    "openid_credential_verifier": { ... as defined in the OpenID4VP specs ... }
   },
   "jwks": {
     "keys": [
