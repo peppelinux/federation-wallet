@@ -92,6 +92,12 @@ It describes trust evaluation mechanisms for those entities.
 It uses applicable metadata parameters defined by other specifications
 for wallet entities.
 
+Collaboration Note: When a metadata parameter is needed for an Entity Type
+defined by this specification that does not currently exist and
+that would be usable by wallet ecosystems both using and not using OpenID Federation,
+it is the editors' intent to work with the working groups creating
+general-purpose wallet specifications to define those new parameters there.
+
 
 # Terminology
 
