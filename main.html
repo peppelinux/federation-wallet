@@ -1315,6 +1315,15 @@ digital wallet architectures.<a href="#section-abstract-1" class="pilcrow">¶</a
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
                 <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-using-metadata" class="internal xref">Using Metadata</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-differences-between-metadat" class="internal xref">Differences Between <code>metadata</code> and <code>metadata_policy</code></a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-using-metadata-policies" class="internal xref">Using Metadata Policies</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.4">
+                <p id="section-toc.1-1.8.2.4.1"><a href="#section-8.4" class="auto internal xref">8.4</a>.  <a href="#name-using-trust-marks" class="internal xref">Using Trust Marks</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
@@ -1781,30 +1790,38 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
     ]
   }
 }
-**Example 1**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
-
-## Differences Between `metadata` and `metadata_policy`
-
-The key difference between `metadata` and `metadata_policy` is that metadata directly affects only the Immediate Subordinate Entity, while `metadata_policy` impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 3, 5 and 6.1 of [@!OpenID.Federation].
-
-
-## Using Metadata Policies
-
-Differently from `metadata`, `metadata_policy` ensures that specific settings can be propagated to all the Entities Statements contained within a Trust Chain.
-
-## Using Trust Marks
-
-Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happen through auditing or certification processes.
-
-Trust Marks are typically implemented as signed assertions that can be verified by other entities.
-
-This verification process involves checking the digital signature against the public key of the Trust Mark Issuer to ensure the Trust Mark has not been forged, and its check to the Trust Mark Status endpoint to check it against any revocation.
-
-Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.
-
-
-```json=
-{
+</pre><a href="#section-8.1-3" class="pilcrow">¶</a>
+</div>
+<p id="section-8.1-4"><strong>Example 1</strong>: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="differences-between-metadata-and-metadata-policy">
+<section id="section-8.2">
+        <h3 id="name-differences-between-metadat">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-differences-between-metadat" class="section-name selfRef">Differences Between <code>metadata</code> and <code>metadata_policy</code></a>
+        </h3>
+<p id="section-8.2-1">The key difference between <code>metadata</code> and <code>metadata_policy</code> is that metadata directly affects only the Immediate Subordinate Entity, while <code>metadata_policy</code> impacts the configuration of all Subordinate Entities along a Trust Chain, as defined in Sections 3, 5 and 6.1 of <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="using-metadata-policies">
+<section id="section-8.3">
+        <h3 id="name-using-metadata-policies">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-using-metadata-policies" class="section-name selfRef">Using Metadata Policies</a>
+        </h3>
+<p id="section-8.3-1">Differently from <code>metadata</code>, <code>metadata_policy</code> ensures that specific settings can be propagated to all the Entities Statements contained within a Trust Chain.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="using-trust-marks">
+<section id="section-8.4">
+        <h3 id="name-using-trust-marks">
+<a href="#section-8.4" class="section-number selfRef">8.4. </a><a href="#name-using-trust-marks" class="section-name selfRef">Using Trust Marks</a>
+        </h3>
+<p id="section-8.4-1">Trust Marks are issued by authorized entities (Trust Mark Issuers) within the federation, typically after an entity has demonstrated compliance with certain standards, this might happen through auditing or certification processes.<a href="#section-8.4-1" class="pilcrow">¶</a></p>
+<p id="section-8.4-2">Trust Marks are typically implemented as signed assertions that can be verified by other entities.<a href="#section-8.4-2" class="pilcrow">¶</a></p>
+<p id="section-8.4-3">This verification process involves checking the digital signature against the public key of the Trust Mark Issuer to ensure the Trust Mark has not been forged, and its check to the Trust Mark Status endpoint to check it against any revocation.<a href="#section-8.4-3" class="pilcrow">¶</a></p>
+<p id="section-8.4-4">Trust Marks SHOULD be defined within the trust framework. Trust Marks are asserted about a subject through a registration service or compliance evaluation mechanism and therefore included in subject's Entity Configurations. This allows other entities to quickly assess the compliance status of a subject by examining the Entity Configuration of a subject.<a href="#section-8.4-4" class="pilcrow">¶</a></p>
+<div class="lang-json= sourcecode" id="section-8.4-5">
+<pre>{
   "id":"https://diligent.federation.example.com/openid_credential_verifier/private/under-age",
   "iss": "https://trustissuer.pinarolo.example.it",
   "sub": "https://vavuso.example.com/rp",
@@ -1812,9 +1829,9 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
   "policy_uri": "https://vavuso.example.com/policy",
   "tos_uri": "https://vavuso.example.com/tos"
 }
-</pre><a href="#section-8.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-8.4-5" class="pilcrow">¶</a>
 </div>
-<p id="section-8.1-4"><strong>Example 2</strong>: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+<p id="section-8.4-6"><strong>Example 2</strong>: Trust Mark to be included in a Leaf Entity Configuration, which payload states Leaf's compliance in interacting with under-age End-User.<a href="#section-8.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
