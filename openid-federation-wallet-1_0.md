@@ -135,7 +135,7 @@ Credential Verifier:
 : Entity that requests and verifies Digital Credentials presented by a Holder. 
 
 Credential Verifier Instance:
-: A software application that allows an individual using a Personal Device to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.
+: A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.
 
 ## Trust Models and Trust Frameworks
 
