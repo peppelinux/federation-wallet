@@ -353,6 +353,7 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
     ]
   }
 }
+```
 **Example 1**: Example demonstrating how a Federation Authority can issue a Subordinate Statement about a Credential Verifier, specifying certain metadata parameters such as the endpoints to use and the allowed Digital Credentials to be requested.
 
 ## Differences Between `metadata` and `metadata_policy`
@@ -541,7 +542,6 @@ The verifiable attestation issued by the Wallet Provider to the Wallet Instance 
 The Federation Entity Discovery starts with the Wallet Instance fetching the Credential Verifier's Entity Configuration to identify authority hints, pointing to Federation Entities that can issue Subordinate Statements about the Credential Verifier. The Wallet Instance then follows these hints and collects the Subordinate Statements and validating each one. The process continues until the Wallet Instance reaches the Trust Anchor. Finally, the Wallet Instance compiles the validated Trust Chain. If the Trust Chain is valid, the Wallet Instance processes the Credential Verifier final metadata.
 
 Note: While this section exemplifies the journey of discovery from the perspective of an OpenID Wallet Instance, it is important to understand that this approach can be applied to every kind of entity type within the federation.
-
 
 ~~~ ascii-art
         +------+                               +-------------------+ +-------------------------+          
