@@ -117,7 +117,7 @@ Organizational Entity:
 : A Federation Entity represented by a legal entity, specifically referring to public or private organizations (excluding natural persons) recognized through a unique identifier. For the purposes of this specification, an Organizational Entity is also referred to as an Organization.
 
 Personal Device:
-: Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations.
+: Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations, or by End-Users on behalf of an Organization.
 
 Wallet Provider:
 : An Organizational Entity responsible for the development, publication, and management of a Wallet Solution.
@@ -135,7 +135,7 @@ Credential Verifier:
 : Entity that requests and verifies Digital Credentials presented by a Holder. 
 
 Credential Verifier Instance:
-: A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.
+: A software application that allows an individual using a Personal Device to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.
 
 ## Trust Models and Trust Frameworks
 
