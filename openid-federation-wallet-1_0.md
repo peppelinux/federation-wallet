@@ -213,7 +213,7 @@ Consequently, the End-User obtains and holds the Digital Credentials without dis
 +-------------------------------------------------------------------+
 |                          Trust Anchor                             |
 +-------------------------------------------------------------------+
-````
+~~~
 **Figure 2**: Representation acknowledging the roles of Authentic Sources and Wallet Providers in the ecosystem while maintaining the core structure of the Four-Party Model.
 
 
