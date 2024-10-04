@@ -1,5 +1,5 @@
 %%%
-title = "OpenID Federation Wallet Architectures 1.0 - draft 02"
+title = "OpenID Federation Wallet Architectures 1.0 - draft 03"
 abbrev = "openid-federation-wallet"
 ipr = "none"
 workgroup = "OpenID Connect A/B"
@@ -218,7 +218,7 @@ The Figure above illustrates at the center the Holder, who interacts directly wi
 
 # Wallet Instance Types
 
-There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organizational Entity, such as a legal person. These two types of End-Users may have different usage and functional requirements.
+There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organizational Entity. These two types of End-Users may have different usage and functional requirements.
 
 Below a non-exhaustive list of the different Wallet Instance types.
 
@@ -264,12 +264,6 @@ Since the Holder may not be an Organizational Entity and cannot be registered as
 
 Outside the Trust Chain, it is the Wallet Attestation, where the Wallet Provider that issued it is attestable through the Trust Chain, while the Wallet, such as the End-User's Native Mobile Application installed on the Personal Device, is attested through the Wallet Attestation and under the responsibility of its issuer, the Wallet Provider.
 
-# Establishing Trust with a Credential Verifier Instance
-
-A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem.
-
-To establish trust between a Holder's Wallet Instance and a Credential Verifier Instance, a mechanism using a verifiable attestation, such as the Wallet Instance Attestations, SHOULD be employed. This process ensures that the Credential Verifier Instance is legitimate and trustworthy.
-
 # Wallet Architecture Entity Types
 
 This section defines the Entity Types used by Organizational Entities in their Entity Configurations according to their roles in the Wallet ecosystem.
@@ -281,7 +275,7 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Wallet Provider       | `federation_entity`, `openid_wallet_provider`              | this specification                                  |
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
-| Credential Verifier   | `federation_entity`, `openid_credential_verifier`          | [@!OpenID.Federation], [@!OpenID4VP], this specification       |
+| Credential Verifier   | `federation_entity`, `openid_credential_verifier`          | [@!OpenID.Federation], [@!OpenID4VP], this specification |
 **Table 1**: Map of the Federation Entity Types and corresponding metadata types for the Wallet architectures.
 
 
@@ -390,6 +384,14 @@ Trust Marks SHOULD be defined within the trust framework. Trust Marks are assert
 # Federation Trust Discovery Use Cases
 
 The process of trust establishment in federated environments is illustrated in this section through specific use cases involving Wallet Instances, Credential Issuers (CIs), and Credential Verifiers (CVs).
+
+## Establishing Trust with a Credential Verifier Instance
+
+A Credential Verifier Instance is typically installed on a mobile device, personal computer, or embedded system. It enables an individual to perform Digital Credential verification tasks locally, often in proximity to the Holder, and without necessarily requiring a broadband connection. This instance engages in peer-to-peer exchanges with Holders, facilitating Credential verifications directly on the device. This approach represents a shift from traditional server-based verification to a more user-centric model within the Wallet ecosystem.
+
+To establish trust between a Holder's Wallet Instance and a Credential Verifier Instance, a mechanism using a verifiable attestation, such as the Wallet Instance Attestations, SHOULD be employed. This process ensures that the Credential Verifier Instance is legitimate and trustworthy.
+
+The mechanisms used to present the Wallet Instance Attestation to a Credential Verifier are out of scope for this specification, as they are related to Credential presentation flows. For implementation details on these presentation mechanisms, please refer to the OpenID for Verifiable Presentations (OpenID4VP) specification.  
 
 ## Wallet Checking the Non-Revocation of its Wallet Provider
 
@@ -519,12 +521,9 @@ The diagram below illustrates how a Wallet establishes trust with a Credential I
 
 ## Credential Issuers Establishing Trust in the Wallet Provider
 
-The evaluation of trust by the Credential Issuer towards the Wallet Provider is conducted exactly as other federation entities. This process can be achieved through Federation Entity Discovery, where the Trust Chain is constructed starting from the Entity Configuration of the Wallet Provider. Alternatively, trust can be established via a signed data object issued by Wallet Provider, which includes the `trust_chain` parameter. This parameter contains a pre-constructed and verifiable Trust Chain, which MUST be validated using one of the the public keys of the Trust Anchor.
+The evaluation of trust by the Credential Issuer towards the Wallet Provider is conducted exactly as other federation entities. This process can be achieved through Federation Entity Discovery, where the Trust Chain is constructed starting from the Entity Configuration of the Wallet Provider. The Credential Issuer retrieves the Entity Configuration of the Wallet Provider and follows the `authority_hints` to build the Trust Chain in the usual manner. 
 
-In the Federation Entity Discovery approach, the Credential Issuer retrieves the Entity Configuration of the Wallet Provider and follows the `authority_hints` to build the Trust Chain in the usual manner. 
-
-When using a signed data object, the Wallet Provider may include a `trust_chain` parameter within the object. This parameter holds a pre-constructed Trust Chain that the Credential Issuer validates. This method allows for a streamlined trust evaluation process, as the Trust Chain is provided directly by the Wallet Provider and can be quickly validated.
-
+Alternatively, trust can be established via a signed data object issued by Wallet Provider, which includes the `trust_chain` parameter, as defined in Section 4.3 of [@!OpenID.Federation]. This parameter contains a pre-constructed and verifiable Trust Chain, which MUST be validated using one of the the public keys of the Trust Anchor. This method allows for a streamlined trust evaluation process, as the Trust Chain is provided directly by the Wallet Provider and can be quickly validated.
 
 ## Credential Issuers Establishing Trust in the Wallet
 
@@ -614,7 +613,7 @@ The static Trust Chain parameter within the JWT headers, as defined in Section 4
 The Entity that issues a signed data object, including the `trust_chain` parameter, might be:
 
 - Wallet Providers in signed Wallet Attestations. The Wallet Instance obtains one or more Wallet Attestations from its Wallet Provider, each of them including a Trust Chain related to each Trust Anchor the Wallet Provider trusts;
-- Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request that includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the `wallet_metadata` parameter provided by the Wallet in the Request URI POST;
+- Credential Verifiers in signed request objects. The Wallet Instance obtains a presentation request that includes a Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the information obtained in the `wallet_metadata` parameter provided by the Wallet using the Request URI POST;
 - A Credential Issuer in a signed Digital Credential. The Wallet Instance obtains a Digital Credential from its Credential Issuer, which includes the Trust Chain using a Trust Anchor that the Credential Verifier has in common with the Wallet Provider, according to the Wallet Attestation used during the Issuance.
 
 The Entity that receives the data object including the JWT `trust_chain`, such as the Wallet Instance obtaining a signed request object, verifies the Trust Chain using the Trust Anchor's public keys and applies any metadata policies, without needing to have a working network connection for reaching the Federation API.
@@ -826,6 +825,15 @@ The technology described in this specification was made available from contribut
 
    [[ To be removed from the final specification ]]
 
+   -03
+   * Added section about Credential Issuers establishing trust with Wallet Solution
+   * Added sequence diagrams using ascii-arts
+   * Renamed Third-Party Trust Model to Trusted Third-Party Model
+   * Added legends to the figures
+   * Added section about Wallet Checking the Non-Revocation of its Wallet Provider
+   * Added implementation Considerations for Offline Flows
+   * Improved clarification about using metadata in Subordiante Statements
+   
    -02
 
    * Added non-normative example about using policies with metadata and trust marks
