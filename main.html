@@ -1862,42 +1862,49 @@ These modifications allow a federation authority, such as a Trust Anchor, to app
 <p id="section-8.3-2">In the process represented in the sequence diagram below, the Wallet Instance uses the Federation API to discover and collect all the Credential Issuers enabled within the federation.<a href="#section-8.3-2" class="pilcrow">¶</a></p>
 <div class="lang-ascii-art sourcecode" id="section-8.3-3">
 <pre>
-        +------+                                           +------------+ +------------+ +-----------------+
-        |Wallet|                                           |Trust Anchor| |Intermediate| |Credential Issuer|
-        +---+--+                                           +------+-----+ +------+-----+ +--------+--------+
-            |  Fetch the list of all Intermediates and CIs        |              |                |
-            |----------------------------------------------------&gt;|              |                |
-            |                                                     |              |                |
-+-----------+-----------------------------------------------------+--------------+------+         |
-| LOOP  |for each Intermediate                                    |              |      |         |
-|-------+   |                                                     |              |      |         |
-|           |                 Fetch listing of Subordinates/CIs   |              |      |         |
-|           |-------------------------------------------------------------------&gt;|      |         |
-+-----------+-----------------------------------------------------+--------------+------+         |
-            |                                                     |              |                |
-+-----------+-----------------------------------------------------+--------------+----------------+--------+
-| LOOP  |for each CI                                              |              |                |        |
-|-------+   |                                                     |              |                |        |
-|           |                          Fetch CI's Entity Configuration           |                |        |
-|           |------------------------------------------------------------------------------------&gt;|        |
-|           |                                                     |              |                |        |
-|           |         Fetch Subordinate Statement(s) for CI       |              |                |        |
-|           |-------------------------------------------------------------------&gt;|                |        |
-|           |                                                     |              |                |        |
-|           |  Fetch Subordinate Statement for Intermediate(s)    |              |                |        |
-|           |----------------------------------------------------&gt;|              |                |        |
-|           |----+                                                |              |                |        |
-|           |    | Validate Trust Chain for CI                    |              |                |        |
-|           |&lt;---+                                                |              |                |        |
-|           |                                                     |              |                |        |
-|           |----+                                                |              |                |        |
-|           |    | Include CI in Discovery Page                   |              |                |        |
-|           |    | with validated information and logo            |              |                |        |
-|           |&lt;---+                                                |              |                |        |
-+-----------+-----------------------------------------------------+--------------+----------------+--------+
-        +---+--+                                           +------+-----+ +------+-----+ +--------+--------+
-        |Wallet|                                           |Trust Anchor| |Intermediate| |Credential Issuer|
-        +------+                                           +------------+ +------------+ +-----------------+
+        +------+                        +------------+ +------------+ +-----------------+
+        |Wallet|                        |Trust Anchor| |Intermediate| |Credential Issuer|
+        +---+--+                        +------+-----+ +------+-----+ +--------+--------+
+            |  Fetch the list of all           |              |                |
+            |  Intermediates and CIs           |              |                |
+            |---------------------------------&gt;|              |                |
+            |                                  |              |                |
++-----------+----------------------------------+--------------+------+         |
+| LOOP  |for each Intermediate                 |              |      |         |
+|-------+   |                                  |              |      |         |
+|           | Fetch listing of                 |              |      |         |
+|           | Subordinates/CIs                 |              |      |         |
+|           |------------------------------------------------&gt;|      |         |
++-----------+----------------------------------+--------------+------+         |
+            |                                  |              |                |
++-----------+----------------------------------+--------------+----------------+--------+
+| LOOP  |for each CI                           |              |                |        |
+|-------+   |                                  |              |                |        |
+|           | Fetch CI's Entity Configuration  |              |                |        |
+|           |-----------------------------------------------------------------&gt;|        |
+|           |                                  |              |                |        |
+|           | Fetch Subordinate Statement(s)   |              |                |        |
+|           | for CI                           |              |                |        |
+|           |------------------------------------------------&gt;|                |        |
+|           |                                  |              |                |        |
+|           | Fetch Subordinate Statement      |              |                |        |
+|           | for Intermediate(s)              |              |                |        |
+|           |---------------------------------&gt;|              |                |        |
+|           |----+                             |              |                |        |
+|           |    | Validate Trust Chain        |              |                |        |
+|           |    | for CI                      |              |                |        |
+|           |&lt;---+                             |              |                |        |
+|           |                                  |              |                |        |
+|           |----+                             |              |                |        |
+|           |    | Include CI in               |              |                |        |
+|           |    | Discovery Page              |              |                |        |
+|           |    | with validated              |              |                |        |
+|           |    | information and logo        |              |                |        |
+|           |&lt;---+                             |              |                |        |
++-----------+----------------------------------+--------------+----------------+--------+
+        +---+--+                        +------+-----+ +------+-----+ +--------+--------+
+        |Wallet|                        |Trust Anchor| |Intermediate| |Credential Issuer|
+        +------+                        +------------+ +------------+ +-----------------+
 </pre><a href="#section-8.3-3" class="pilcrow">¶</a>
 </div>
 <p id="section-8.3-4"><strong>Figure 4</strong>: Federation Credential Issuer listing, the Wallet Instance browse the entire federation collecting all the Credential Issuers.<a href="#section-8.3-4" class="pilcrow">¶</a></p>
