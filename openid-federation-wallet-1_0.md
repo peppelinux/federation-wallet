@@ -833,6 +833,7 @@ The technology described in this specification was made available from contribut
    [[ To be removed from the final specification ]]
 
    -03
+   
    * Added section about Credential Issuers establishing trust with Wallet Solution
    * Added sequence diagrams using ascii-arts
    * Renamed Third-Party Trust Model to Trusted Third-Party Model
