@@ -113,28 +113,28 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 
 This specification also defines the following terms:
 
-Organizational Entity:
+**Organizational Entity**:
 : A Federation Entity represented by a legal entity, specifically referring to public or private organizations (excluding natural persons) recognized through a unique identifier. For the purposes of this specification, an Organizational Entity is also referred to as an Organization.
 
-Personal Device:
+**Personal Device**:
 : Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations, or by End-Users on behalf of an Organization.
 
-Wallet Provider:
+**Wallet Provider**:
 : An Organizational Entity responsible for the development, publication, and management of a Wallet Solution.
 
-Wallet Instance:
+**Wallet Instance**:
 : Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.
 
-Wallet Solution:
+**Wallet Solution**:
 : The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or another form of software application. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.
 
-Authentic Source:
+**Authentic Source**:
 : A protected Resource Server, not necessarily an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.
 
-Credential Verifier:
+**Credential Verifier**:
 : Entity that requests and verifies Digital Credentials presented by a Holder. 
 
-Credential Verifier Instance:
+**Credential Verifier Instance**:
 : A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.
 
 ## Trust Models and Trust Frameworks
@@ -222,15 +222,15 @@ There are many ways to technically implement Wallet Instances to manage Digital 
 
 Below a non-exhaustive list of the different Wallet Instance types.
 
-Mobile Wallet Native Application
+**Mobile Wallet Native Application**
 : Also known as Mobile Wallet only, is an application that runs natively on a Personal Device under the sole control of an End-User and provided through a platform vendor specific app-store, on behalf of the Wallet Solution. In some cases the End-User as natural person uses the Mobile Wallet representing a legal person.
 
-Web Wallet Native Application
+**Web Wallet Native Application**
 : Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organizational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:
     - **Custodial Web Wallet**: Cloud Wallets that have dependency on a cloud infrastructure, not necessarily hosted by the Wallet Provider, are typically classified as Custodial Web Wallets; in this case, the cryptographic keys used and the Digital Credentials are stored in the cloud infrastructure.
     - **Non-Custodial Web Wallet**: A Web Wallet where the cryptographic keys are stored and managed on a media in possession by the End-User and the Digital Credentials can only be used by the End-User, e.g. using a FIDO enabled security hardware token, no matter whether the Credentials are stored locally in a Personal Device or in cloud storage.
 
-Progressive Web Application Wallet (PWAW)
+**Progressive Web Application Wallet** (PWAW)
 : PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.
 
 ## Establishing Trust with the Holder
@@ -276,6 +276,7 @@ This section defines the Entity Types used by Organizational Entities in their E
 | Authorization Server  | `federation_entity`, `oauth_authorization_server`          | [@!OpenID4VCI], [@!RFC8414]                    |
 | Credential Issuer     | `federation_entity`, `openid_credential_issuer`, `oauth_authorization_server` | [@!OpenID4VCI], this specification |
 | Credential Verifier   | `federation_entity`, `openid_credential_verifier`          | [@!OpenID.Federation], [@!OpenID4VP], this specification |
+
 **Table 1**: Map of the Federation Entity Types and corresponding metadata types for the Wallet architectures.
 
 
