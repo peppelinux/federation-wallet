@@ -1224,7 +1224,7 @@ li > p:last-of-type:only-child {
 <dd class="workgroup">OpenID Connect A/B</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-10-05" class="published">5 October 2024</time>
+<time datetime="2024-10-16" class="published">16 October 2024</time>
     </dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
@@ -1444,35 +1444,43 @@ and "Trust Mark", "Federation Entity", "Trust Anchor",
 "Intermediate", and "Subordinate Statement" defined in <span>[<a href="#OpenID.Federation" class="cite xref">OpenID.Federation</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">This specification also defines the following terms:<a href="#section-3-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-3-3">
-        <dt id="section-3-3.1">Organizational Entity:</dt>
+        <dt id="section-3-3.1">
+<strong>Organizational Entity</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.2">A Federation Entity represented by a legal entity, specifically referring to public or private organizations (excluding natural persons) recognized through a unique identifier. For the purposes of this specification, an Organizational Entity is also referred to as an Organization.<a href="#section-3-3.2" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.3">Personal Device:</dt>
+<dt id="section-3-3.3">
+<strong>Personal Device</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.4">Any electronic device that is primarily used by an individual. This includes smartphones, tablets, laptops, personal computers, smart watches, and other wearable technologies. Personal Devices are owned and managed by End-Users as individuals, rather than by Organizations, or by End-Users on behalf of an Organization.<a href="#section-3-3.4" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.5">Wallet Provider:</dt>
+<dt id="section-3-3.5">
+<strong>Wallet Provider</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.6">An Organizational Entity responsible for the development, publication, and management of a Wallet Solution.<a href="#section-3-3.6" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.7">Wallet Instance:</dt>
+<dt id="section-3-3.7">
+<strong>Wallet Instance</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.8">Instance of a Wallet Solution belonging to and controlled by a person, be this natural or legal. It enables the request, storage, presentation, and management of Digital Credentials. It can be installed (instantiated) in a Personal Device or in a Remote Service.<a href="#section-3-3.8" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.9">Wallet Solution:</dt>
+<dt id="section-3-3.9">
+<strong>Wallet Solution</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.10">The Wallet Solution is a product offered by a Wallet Provider to enable End-Users to securely manage and use their Digital Credentials. It is delivered by the Wallet Provider in the form of mobile app or cloud service or another form of software application. It may also utilize services and web services for the exchange of data between its Wallet Provider and the Wallet Instances.<a href="#section-3-3.10" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.11">Authentic Source:</dt>
+<dt id="section-3-3.11">
+<strong>Authentic Source</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.12">A protected Resource Server, not necessarily an OAuth 2.0 Resource Server, utilized by the Credential Issuer to retrieve the data necessary for issuing a Credential related to a subject.<a href="#section-3-3.12" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.13">Credential Verifier:</dt>
+<dt id="section-3-3.13">
+<strong>Credential Verifier</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.14">Entity that requests and verifies Digital Credentials presented by a Holder.<a href="#section-3-3.14" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-3-3.15">Credential Verifier Instance:</dt>
+<dt id="section-3-3.15">
+<strong>Credential Verifier Instance</strong>:</dt>
         <dd style="margin-left: 1.5em" id="section-3-3.16">A software application that allows an individual to request to an Holder and receive from that Holder a Digital Credential, sometimes in a proximity flow, and then verify the received Digital Credential.<a href="#section-3-3.16" class="pilcrow">¶</a>
 </dd>
       <dd class="break"></dd>
@@ -1577,11 +1585,11 @@ This is an extension of the three-party Issuer-Holder-Verifier Model described i
 <p id="section-5-1">There are many ways to technically implement Wallet Instances to manage Digital Credentials. There are typically two types of Wallet End-Users: one is a natural person and another is an Organizational Entity. These two types of End-Users may have different usage and functional requirements.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">Below a non-exhaustive list of the different Wallet Instance types.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <span class="break"></span><dl class="dlCompact dlParallel" id="section-5-3">
-        <dt id="section-5-3.1">Mobile Wallet Native Application</dt>
+        <dt id="section-5-3.1"><strong>Mobile Wallet Native Application</strong></dt>
         <dd style="margin-left: 1.5em" id="section-5-3.2">Also known as Mobile Wallet only, is an application that runs natively on a Personal Device under the sole control of an End-User and provided through a platform vendor specific app-store, on behalf of the Wallet Solution. In some cases the End-User as natural person uses the Mobile Wallet representing a legal person.<a href="#section-5-3.2" class="pilcrow">¶</a>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-3.3">Web Wallet Native Application</dt>
+<dt id="section-5-3.3"><strong>Web Wallet Native Application</strong></dt>
         <dd style="margin-left: 1.5em" id="section-5-3.4">
           <p id="section-5-3.4.1">Also known as Cloud Wallet or Web Wallet only, is a Wallet that uses native web technologies for its components, such as UI components. Cloud Wallets are typically suited for Organizational Entities that requires automated Digital Credential operations (request, issuance, store, presentation, revocations) in unsupervised flows, therefore without any human control. Web Wallets are divided into two additional subtypes:<a href="#section-5-3.4.1" class="pilcrow">¶</a></p>
 <ul class="compact">
@@ -1594,7 +1602,8 @@ This is an extension of the three-party Issuer-Holder-Verifier Model described i
           </ul>
 </dd>
         <dd class="break"></dd>
-<dt id="section-5-3.5">Progressive Web Application Wallet (PWAW)</dt>
+<dt id="section-5-3.5">
+<strong>Progressive Web Application Wallet</strong> (PWAW)</dt>
         <dd style="margin-left: 1.5em" id="section-5-3.6">PWAW is a web application that looks like a native app. It can be installed on a Personal Device and not necessarily using the operative system specific app-store. The advantage with a PWAW is that it gives the End-User the same experience as a Mobile Native Wallet Application while also offering the benefits of a web application. PWAW can be Custodial or Non-Custodial.<a href="#section-5-3.6" class="pilcrow">¶</a>
 </dd>
       <dd class="break"></dd>
