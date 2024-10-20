@@ -184,7 +184,7 @@ The four Entities interact with each other as described below:
 |                          Trust Anchor                        |
 +--------------------------------------------------------------+
 ~~~
-**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model, where Authentic Sources and Wallet Providers figure such as extensions to be not considered in the core structure of the four parties.
+**Figure 1**: The relationships and interactions within a Wallet ecosystem using the Four-Party Model, where each entity uses the Trust Anchor to establish the trust with other entities.
 
 In the Wallet Ecosystem, the primary interaction resolves around asset management. Unlike an Identity Provider in OpenID Connect or SAML2, which authenticates the End-User's identity for third parties, the Credential Issuer in the Wallet ecosystem focuses on managing the issuance of Digital Credentials to the Holder.
 
